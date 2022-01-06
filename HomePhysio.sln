@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomePhysio", "HomePhysio.csproj", "{EA20E0DA-E32D-40E8-B12C-DDBF75BA4704}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA20E0DA-E32D-40E8-B12C-DDBF75BA4704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA20E0DA-E32D-40E8-B12C-DDBF75BA4704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA20E0DA-E32D-40E8-B12C-DDBF75BA4704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA20E0DA-E32D-40E8-B12C-DDBF75BA4704}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C31D8229-899D-4392-BF9B-0B76EB5643BE}
+	EndGlobalSection
+EndGlobal
