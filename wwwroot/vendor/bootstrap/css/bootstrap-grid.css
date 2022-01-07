@@ -1956,8 +1956,10 @@
 }
 
 .pb-3 {
-  margin-top:70px;
   padding-bottom: 1rem !important;
+}
+.pb-3{
+    top:70px;
 }
 
 .pb-4 {

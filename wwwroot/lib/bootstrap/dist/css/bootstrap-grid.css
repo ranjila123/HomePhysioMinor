@@ -2137,6 +2137,7 @@ html {
 
 .pb-3,
 .py-3 {
+    top:70px;
   padding-bottom: 1rem !important;
 }
 
