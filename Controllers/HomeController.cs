@@ -43,5 +43,9 @@ namespace HomePhysio.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult LearnMore()
+        {
+            return View();
+        }
     }
 }
