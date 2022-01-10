@@ -24,6 +24,31 @@
 
     <!-- Template Main CSS File -->
     <link href="~/css/style.css" rel="stylesheet">
+
+
+    <!--for login-->
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="imagesLogin/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fontsLogin/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fontsLogin/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/logincss/util.css">
+    <link rel="stylesheet" type="text/css" href="css/logincss/main.css">
+    <!--===============================================================================================-->
 </head>
 
 <body>
@@ -63,7 +88,7 @@
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-            <a href="#appointment" class="appointment-btn scrollto">Login</a>
+            <a asp-action="Login" class="appointment-btn scrollto">Login</a>
             <a href="#appointment" class="appointment-btn scrollto">Signup</a>
 
         </div>
@@ -155,6 +180,28 @@
     <script src="~/vendor/purecounter/purecounter.js"></script>
     <script src="~/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="~/js/main.js"></script>
+
+
+
+    <!--for login-->
+    <!--===============================================================================================-->
+    <script src="vendor/loginVendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/loginVendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/loginVendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/loginVendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/loginVendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/loginVendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/loginVendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/loginVendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/loginjs/main.js"></script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
