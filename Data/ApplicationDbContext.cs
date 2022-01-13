@@ -14,7 +14,5 @@ namespace HomePhysio.Data
 
         }
          
-        public DbSet<ThisistestModel> ThisistestModel { get; set; }
-
     }
 }
