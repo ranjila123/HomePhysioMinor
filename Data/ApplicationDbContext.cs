@@ -1,4 +1,5 @@
 ﻿using HomePhysio.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace HomePhysio.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base (options) 
         {
 
         }
-         
-        public DbSet<ThisistestModel> ThisistestModel { get; set; }
+        public DbSet<PhysiotherapistModel> PhysiotherapistModel { get; set; }
+        public DbSet<GenderModel> GenderModel { get; set; }
+        public DbSet<CategoryModel> CategoryModel { get; set; }
+
+
+
 
     }
 }
