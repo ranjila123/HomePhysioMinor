@@ -11,7 +11,7 @@ namespace HomePhysio.Models
     {
         [Key]
         [ForeignKey(nameof(ImageData))]
-        public int ImgID { get; set; }
+        public int ImgId { get; set; }
         public ImageTypeModel ImageData { get; set; }
 
    

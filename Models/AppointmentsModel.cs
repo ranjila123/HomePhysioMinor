@@ -27,8 +27,8 @@ namespace HomePhysio.Models
         public StatusModel StatusData { get; set; }
 
 
-        [ForeignKey(nameof(PStatusData))]
-        public string PStatusCode { get; set; }
-        public PStatusModel PStatusData { get; set; }
+        //[ForeignKey(nameof(PStatusData))]
+        //public string PStatusCode { get; set; }
+        //public PStatusModel PStatusData { get; set; }
     }
 }

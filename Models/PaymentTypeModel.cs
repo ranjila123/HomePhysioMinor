@@ -9,7 +9,7 @@ namespace HomePhysio.Models
     public class PaymentTypeModel
     {
         [Key]
-        public int PatientTypeId { get; set; }
-        public string Name { get; set; }
+        public int PaymentTypeId { get; set; }
+        public string PaymentTypeName { get; set; }
     }
 }

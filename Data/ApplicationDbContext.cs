@@ -21,14 +21,14 @@ namespace HomePhysio.Data
         public DbSet<ImageTypeModel> ImageTypeModel { get; set; }
 
         public DbSet<PhysioImage> PhysioImage { get; set; }
-        //public DbSet<AppointmentsModel> AppointmentsModel { get; set; }
-        public DbSet<StatusModel> StatuModel { get; set; }
-        public DbSet<PStatusModel> PStatuModel { get; set; }
+        public DbSet<AppointmentsModel> AppointmentsModel { get; set; }
+        public DbSet<StatusModel> StatusModel { get; set; }
+        public DbSet<PStatusModel> PStatusModel { get; set; }
 
-        //public DbSet<PhysioTimeSlotsModel> PhysioTimeSlotsModel { get; set; }
+        public DbSet<PhysioTimeSlotsModel> PhysioTimeSlotsModel { get; set; }
 
-       // public DbSet<PaymentTypeModel> PaymentTypeModel { get; set; }
-        public DbSet<PaymentsModel> PaymentsModel { get; set; }
+        public DbSet<PaymentTypeModel> PaymentTypeModel { get; set; }
+       // public DbSet<PaymentsModel> PaymentsModel { get; set; }
 
 
 

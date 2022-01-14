@@ -11,7 +11,7 @@ namespace HomePhysio.Models
     {
         [Key]
      
-        public string StatuCode { get; set; }
+        public string StatusCode { get; set; }
         public string StatusType { get; set; }
     }
 }

@@ -16,19 +16,17 @@ namespace HomePhysio.Models
            
 
 
-        [Key, ForeignKey(nameof(PaymentTypeData))]
+        [Key]
+        
         public int PaymentsId { get; set; }
+
+        [ForeignKey(nameof(AppointmentsData))]
+        public int AppointmentId { get; set; }
+        public AppointmentsModel AppointmentsData { get; set; }
+
+        [ForeignKey(nameof(PaymentTypeData))]
+        public int PaymentTypeId { get; set; }
         public PaymentTypeModel PaymentTypeData { get; set; }
-
-
-        [ForeignKey(nameof(PhysioTimeSlotsData))]
-        public int PhysioTimeSlotsId { get; set; }
-        public PhysioTimeSlotsModel PhysioTimeSlotsData { get; set; }
-
-
-        [ForeignKey(nameof(PatientData))]
-        public int PatientId { get; set; }
-        public PatientModel PatientData { get; set; }
 
         public int Amount { get; set; }
         public int DistanceAmount { get; set; }
@@ -36,6 +34,6 @@ namespace HomePhysio.Models
         [ForeignKey(nameof(PStatusData))]
         public string PStatusCode { get; set; }
 
-       // public PStatusModel PStatusData { get; set; }
+        public PStatusModel PStatusData { get; set; }
     }
 }
