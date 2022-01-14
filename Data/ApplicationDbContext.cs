@@ -24,6 +24,7 @@ namespace HomePhysio.Data
         //public DbSet<AppointmentsModel> AppointmentsModel { get; set; }
         public DbSet<StatusModel> StatuModel { get; set; }
         public DbSet<PStatusModel> PStatuModel { get; set; }
+
         //public DbSet<PhysioTimeSlotsModel> PhysioTimeSlotsModel { get; set; }
 
        // public DbSet<PaymentTypeModel> PaymentTypeModel { get; set; }
