@@ -9,7 +9,7 @@ namespace HomePhysio.Models
 {
     public class PaymentsModel
     {
-        //Startup garna aagadi update database agarera hera ani table haru aauxa hai maile banako wala 
+        //Startup garna aagadi update database garera hera ani table haru aauxa hai maile banako wala 
 
         //yeta update garna khojxada error aako k dai lai sodera gara la update aru sabai ko garisake 
         //   ApplicationDbContext ma dbset haru ni lekhisake hera la 
@@ -36,6 +36,6 @@ namespace HomePhysio.Models
         [ForeignKey(nameof(PStatusData))]
         public string PStatusCode { get; set; }
 
-        public PStatusModel PStatusData { get; set; }
+       // public PStatusModel PStatusData { get; set; }
     }
 }
