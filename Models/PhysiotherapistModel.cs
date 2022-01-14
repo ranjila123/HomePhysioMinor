@@ -17,7 +17,7 @@ namespace HomePhysio.Models
         public string Qualification { get; set; }
         public string ContactNo { get; set; }
         public string LicenseNo { get; set; }
-        [ForeignKey(nameof(GenderId))]
+        [ForeignKey(nameof(GenderData))]
         public int GenderId { get; set; }
         public GenderModel GenderData { get; set; }
     }

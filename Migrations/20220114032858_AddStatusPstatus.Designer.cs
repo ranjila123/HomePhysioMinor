@@ -4,14 +4,16 @@ using HomePhysio.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HomePhysio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220114032858_AddStatusPstatus")]
+    partial class AddStatusPstatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,29 +133,6 @@ namespace HomePhysio.Migrations
                     b.HasIndex("PhysiotherapistId");
 
                     b.ToTable("PhysioImage");
-                });
-
-            modelBuilder.Entity("HomePhysio.Models.PhysioTimeSlotsModel", b =>
-                {
-                    b.Property<int>("PhysioTimeSlotsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("Date")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PhysiotherapistId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TimeShift")
-                        .HasColumnType("int");
-
-                    b.HasKey("PhysioTimeSlotsId");
-
-                    b.HasIndex("PhysiotherapistId");
-
-                    b.ToTable("PhysioTimeSlotsModel");
                 });
 
             modelBuilder.Entity("HomePhysio.Models.PhysiotherapistModel", b =>
@@ -424,17 +403,6 @@ namespace HomePhysio.Migrations
                         .IsRequired();
 
                     b.Navigation("ImageData");
-
-                    b.Navigation("PhysiotherapistData");
-                });
-
-            modelBuilder.Entity("HomePhysio.Models.PhysioTimeSlotsModel", b =>
-                {
-                    b.HasOne("HomePhysio.Models.PhysiotherapistModel", "PhysiotherapistData")
-                        .WithMany()
-                        .HasForeignKey("PhysiotherapistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("PhysiotherapistData");
                 });

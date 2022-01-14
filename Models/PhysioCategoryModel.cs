@@ -7,5 +7,6 @@ namespace HomePhysio.Models
 {
     public class PhysioCategoryModel
     {
+
     }
 }

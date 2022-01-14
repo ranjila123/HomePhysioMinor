@@ -4,14 +4,16 @@ using HomePhysio.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HomePhysio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220114030520_AddcorrectImageType")]
+    partial class AddcorrectImageType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,19 +69,6 @@ namespace HomePhysio.Migrations
                     b.ToTable("ImageTypeModel");
                 });
 
-            modelBuilder.Entity("HomePhysio.Models.PStatusModel", b =>
-                {
-                    b.Property<string>("PStatuCode")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PStatusType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PStatuCode");
-
-                    b.ToTable("PStatuModel");
-                });
-
             modelBuilder.Entity("HomePhysio.Models.PatientModel", b =>
                 {
                     b.Property<int>("PatientId")
@@ -133,29 +122,6 @@ namespace HomePhysio.Migrations
                     b.ToTable("PhysioImage");
                 });
 
-            modelBuilder.Entity("HomePhysio.Models.PhysioTimeSlotsModel", b =>
-                {
-                    b.Property<int>("PhysioTimeSlotsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("Date")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PhysiotherapistId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TimeShift")
-                        .HasColumnType("int");
-
-                    b.HasKey("PhysioTimeSlotsId");
-
-                    b.HasIndex("PhysiotherapistId");
-
-                    b.ToTable("PhysioTimeSlotsModel");
-                });
-
             modelBuilder.Entity("HomePhysio.Models.PhysiotherapistModel", b =>
                 {
                     b.Property<int>("PhysiotherapistId")
@@ -187,19 +153,6 @@ namespace HomePhysio.Migrations
                     b.HasIndex("GenderId");
 
                     b.ToTable("PhysiotherapistModel");
-                });
-
-            modelBuilder.Entity("HomePhysio.Models.StatusModel", b =>
-                {
-                    b.Property<string>("StatuCode")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("StatusType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("StatuCode");
-
-                    b.ToTable("StatuModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -424,17 +377,6 @@ namespace HomePhysio.Migrations
                         .IsRequired();
 
                     b.Navigation("ImageData");
-
-                    b.Navigation("PhysiotherapistData");
-                });
-
-            modelBuilder.Entity("HomePhysio.Models.PhysioTimeSlotsModel", b =>
-                {
-                    b.HasOne("HomePhysio.Models.PhysiotherapistModel", "PhysiotherapistData")
-                        .WithMany()
-                        .HasForeignKey("PhysiotherapistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("PhysiotherapistData");
                 });

@@ -17,6 +17,19 @@ namespace HomePhysio.Data
         public DbSet<PhysiotherapistModel> PhysiotherapistModel { get; set; }
         public DbSet<GenderModel> GenderModel { get; set; }
         public DbSet<CategoryModel> CategoryModel { get; set; }
+        public DbSet<PatientModel> PatientModel { get; set; }
+        public DbSet<ImageTypeModel> ImageTypeModel { get; set; }
+
+        public DbSet<PhysioImage> PhysioImage { get; set; }
+        //public DbSet<AppointmentsModel> AppointmentsModel { get; set; }
+        public DbSet<StatusModel> StatuModel { get; set; }
+        public DbSet<PStatusModel> PStatuModel { get; set; }
+        //public DbSet<PhysioTimeSlotsModel> PhysioTimeSlotsModel { get; set; }
+
+       // public DbSet<PaymentTypeModel> PaymentTypeModel { get; set; }
+        public DbSet<PaymentsModel> PaymentsModel { get; set; }
+
+
 
 
 
