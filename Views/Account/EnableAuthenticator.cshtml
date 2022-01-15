@@ -1,0 +1,11 @@
+﻿@model HomePhysio.ViewModel.TwoFactorAuthenticationViewModel
+<p>
+    Please enter the code below in authenticator app.
+</p>
+<p>
+    @Model.Token
+</p>
+
+<form method="post">
+    <input hidden asp-for="Token" />
+    </form>
