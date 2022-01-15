@@ -11,7 +11,7 @@ namespace HomePhysio.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController>_logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -48,6 +48,24 @@ namespace HomePhysio.Controllers
             return View();
         }
 
+        public IActionResult Dropdown1()
+        {
+            return View();
+        }
+        public IActionResult Dropdown2()
+        {
+            return View();
+        }
+        public IActionResult Dropdown3()
+        {
+            return View();
+        }
+
+        public IActionResult Dropdown4()
+        {
+            return View();
+        }
+
         public IActionResult Login()
         {
             return View();
@@ -61,6 +79,10 @@ namespace HomePhysio.Controllers
             return View();
         }
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult Physio_info()
         {
             return View();
         }
