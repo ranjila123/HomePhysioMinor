@@ -79,16 +79,18 @@
                                     <li><a href="#">Deep Drop Down 5</a></li>
                                 </ul>
                             </li>
-                            <li><a asp-action= Dropdown2>Drop Down 2</a></li>
-                            <li><a asp-action= Dropdown3 >Drop Down 3</a></li>
-                            <li><a asp-action= Dropdown4>Drop Down 4</a></li>
+                            <li><a asp-action=Dropdown2>Drop Down 2</a></li>
+                            <li><a asp-action=Dropdown3>Drop Down 3</a></li>
+                            <li><a asp-action=Dropdown4>Drop Down 4</a></li>
                         </ul>
                     </li>
                 </ul>
+
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
-            <a asp-controller="Account" asp-action="Login" class="appointment-btn scrollto">Login</a>
-            <a asp-controller="Account" asp-action="Register" class="appointment-btn scrollto">Register</a>
+            <partial name="_LoginPartialCustom" />
+            @*   <a asp-controller="Account" asp-action="Login" class="appointment-btn scrollto">Login</a>*@
+            @*  <a asp-controller="Account" asp-action="Register" class="appointment-btn scrollto">Register</a>*@
 
         </div>
     </header><!-- End Header -->
