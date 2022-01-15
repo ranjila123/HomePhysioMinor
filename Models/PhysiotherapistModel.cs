@@ -20,5 +20,11 @@ namespace HomePhysio.Models
         [ForeignKey(nameof(GenderData))]
         public int GenderId { get; set; }
         public GenderModel GenderData { get; set; }
+
+        [ForeignKey(nameof(UserData))]
+        public string UserId { get; set; }
+        public ApplicationUser UserData { get; set; }
+
+
     }
 }

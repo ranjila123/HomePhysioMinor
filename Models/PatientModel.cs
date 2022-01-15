@@ -27,5 +27,9 @@ namespace HomePhysio.Models
         public string PhoneNo { get; set; }
         [Required]
         public string Address { get; set; }
+
+        [ForeignKey(nameof(UserData))]
+        public string UserId { get; set; }
+        public ApplicationUser UserData { get; set; }
     }
 }

@@ -15,6 +15,8 @@ namespace HomePhysio.Data
         {
 
         }
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<PhysiotherapistModel> PhysiotherapistModel { get; set; }
         public DbSet<GenderModel> GenderModel { get; set; }
         public DbSet<CategoryModel> CategoryModel { get; set; }
@@ -28,8 +30,10 @@ namespace HomePhysio.Data
 
         public DbSet<PhysioTimeSlotsModel> PhysioTimeSlotsModel { get; set; }
 
+        public DbSet<PhysioCategoryModel> PhysioCategoryModel { get; set; }
+
         public DbSet<PaymentTypeModel> PaymentTypeModel { get; set; }
-        // public DbSet<PaymentsModel> PaymentsModel { get; set; }
+        public DbSet<PaymentsModel> PaymentsModel { get; set; }
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    //Write Fluent API configurations here

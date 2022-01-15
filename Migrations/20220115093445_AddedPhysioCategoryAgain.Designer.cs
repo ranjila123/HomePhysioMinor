@@ -4,14 +4,16 @@ using HomePhysio.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HomePhysio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220115093445_AddedPhysioCategoryAgain")]
+    partial class AddedPhysioCategoryAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,39 +162,6 @@ namespace HomePhysio.Migrations
                     b.HasKey("PaymentTypeId");
 
                     b.ToTable("PaymentTypeModel");
-                });
-
-            modelBuilder.Entity("HomePhysio.Models.PaymentsModel", b =>
-                {
-                    b.Property<int>("PaymentsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AppointmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DistanceAmount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PStatusCode")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("PaymentTypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PaymentsId");
-
-                    b.HasIndex("AppointmentId");
-
-                    b.HasIndex("PStatusCode");
-
-                    b.HasIndex("PaymentTypeId");
-
-                    b.ToTable("PaymentsModel");
                 });
 
             modelBuilder.Entity("HomePhysio.Models.PhysioCategoryModel", b =>
@@ -555,31 +524,6 @@ namespace HomePhysio.Migrations
                     b.Navigation("GenderData");
 
                     b.Navigation("UserData");
-                });
-
-            modelBuilder.Entity("HomePhysio.Models.PaymentsModel", b =>
-                {
-                    b.HasOne("HomePhysio.Models.AppointmentsModel", "AppointmentsData")
-                        .WithMany()
-                        .HasForeignKey("AppointmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HomePhysio.Models.PStatusModel", "PStatusData")
-                        .WithMany()
-                        .HasForeignKey("PStatusCode");
-
-                    b.HasOne("HomePhysio.Models.PaymentTypeModel", "PaymentTypeData")
-                        .WithMany()
-                        .HasForeignKey("PaymentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppointmentsData");
-
-                    b.Navigation("PaymentTypeData");
-
-                    b.Navigation("PStatusData");
                 });
 
             modelBuilder.Entity("HomePhysio.Models.PhysioCategoryModel", b =>
