@@ -1,52 +1,81 @@
 ﻿@model HomePhysio.ViewModel.LoginViewModel
-<h1 class="text-info">Log in</h1>
-<div class="row">
-    <div class="col-md-8">
-        <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form">
-            <h4>Use a local account to login</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="col-md-2"></label>
-                <div class="col-md-10">
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-            </div>
 
-            <div class="form-group">
-                <label asp-for="Password" class="col-md-2"></label>
-                <div class="col-md-10">
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    <div class="custom-checkbox">
-                        <label asp-for="RememberMe">
-                            <input asp-for="RememberMe" />
-                            @Html.DisplayNameFor(m => m.RememberMe)
-                        </label>
+    <link href="~/css/logincss/util.css" rel="stylesheet" />
+    <link href="~/css/logincss/main.css" rel="stylesheet" />
+    <link href="~/fontsLogin/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/fontsLogin/Linearicons-Free-v1.0.0/icon-font.min.css" rel="stylesheet" />
+
+    <body style="background-color: #666666;">
+        <h1 class="text-info">Log in</h1>
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100">
+                    <div class="col-md-8">
+                        <form asp-controller="Home" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form" class="login100-form validate-form">
+                            <span class="login100-form-title p-b-43">
+                                Login
+                            </span>
+                            
+                            <hr />
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            
+                            <div class="form-group">
+                                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                                    <input class="input100" type="text" name="email">
+                                    <span class="focus-input100"></span>
+                                    <span class="label-input100">Email</span>
+                                </div>
+
+
+                                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                                    <input class="input100" type="password" name="pass">
+                                    <span class="focus-input100"></span>
+                                    <span class="label-input100">Password</span>
+                                </div>
+                                <label asp-for="Email" class="col-md-2"></label>
+                                <div class="col-md-10">
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Password" class="col-md-2"></label>
+                                <div class="col-md-10">
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <div class="custom-checkbox">
+                                        <label asp-for="RememberMe">
+                                            <input asp-for="RememberMe" />
+                                            @Html.DisplayNameFor(m => m.RememberMe)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-success form-control">Log in</button>
+                                </div>
+                            </div>
+                            <p>
+                                <a asp-action="Register">Register as a new user?</a>
+                            </p>
+                            <p>
+                                <a asp-action="ForgotPassword">Forgot your password?</a>
+                            </p>
+                        </form>
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-success form-control">Log in</button>
-                </div>
-            </div>
-            <p>
-                <a asp-action="Register">Register as a new user?</a>
-            </p>
-            <p>
-                <a asp-action="ForgotPassword">Forgot your password?</a>
-            </p>
-        </form>
-    </div>
-</div>
+                 </div>
 
+             </div>
+        </div>
+                <script src="~/js/loginjs/main.js"></script>
+    </body>
 
-@section scripts{
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section scripts{
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
