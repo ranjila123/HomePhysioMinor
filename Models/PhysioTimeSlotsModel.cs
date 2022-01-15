@@ -12,8 +12,8 @@ namespace HomePhysio.Models
         [Key]
         public int PhysioTimeSlotsId { get; set; }
         
-        public int Date { get; set; }
-        public int TimeShift { get; set; }
+        public DateTime DateTimeShift { get; set; }
+        //public int TimeShift { get; set; }
 
         [ForeignKey(nameof(PhysiotherapistData))]
         public int PhysiotherapistId { get; set; }

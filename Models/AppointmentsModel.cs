@@ -14,17 +14,17 @@ namespace HomePhysio.Models
 
         [ForeignKey(nameof(PhysioTimeSlotsData))]
         public int PhysioTimeSlotsId { get; set; }
-        public PhysioTimeSlotsModel PhysioTimeSlotsData { get; set; }
+        public virtual PhysioTimeSlotsModel PhysioTimeSlotsData { get; set; }
 
 
         [ForeignKey(nameof(PatientData))]
         public int PatientId { get; set; }
-        public PatientModel PatientData { get; set; }
+        public virtual PatientModel PatientData { get; set; }
 
 
         [ForeignKey(nameof(StatusData))]
         public string StatusCode { get; set; }
-        public StatusModel StatusData { get; set; }
+        public virtual StatusModel StatusData { get; set; }
 
 
         //[ForeignKey(nameof(PStatusData))]

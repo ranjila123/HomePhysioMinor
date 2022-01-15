@@ -4,14 +4,16 @@ using HomePhysio.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HomePhysio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220115064403_AddAppointmentModel")]
+    partial class AddAppointmentModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,17 +31,12 @@ namespace HomePhysio.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PhysioTimeSlotsId")
-                        .HasColumnType("int");
-
                     b.Property<string>("StatusCode")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("AppointmentId");
 
                     b.HasIndex("PatientId");
-
-                    b.HasIndex("PhysioTimeSlotsId");
 
                     b.HasIndex("StatusCode");
 
@@ -445,19 +442,11 @@ namespace HomePhysio.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HomePhysio.Models.PhysioTimeSlotsModel", "PhysioTimeSlotsData")
-                        .WithMany()
-                        .HasForeignKey("PhysioTimeSlotsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HomePhysio.Models.StatusModel", "StatusData")
                         .WithMany()
                         .HasForeignKey("StatusCode");
 
                     b.Navigation("PatientData");
-
-                    b.Navigation("PhysioTimeSlotsData");
 
                     b.Navigation("StatusData");
                 });

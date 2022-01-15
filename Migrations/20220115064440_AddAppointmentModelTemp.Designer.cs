@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomePhysio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220114182139_AddAppointmentModel")]
-    partial class AddAppointmentModel
+    [Migration("20220115064440_AddAppointmentModelTemp")]
+    partial class AddAppointmentModelTemp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,7 @@ namespace HomePhysio.Migrations
 
                     b.HasIndex("StatusCode");
 
-                    b.ToTable("AppointmentsModel");
+                    b.ToTable("AppointmentsModels");
                 });
 
             modelBuilder.Entity("HomePhysio.Models.CategoryModel", b =>
@@ -184,13 +184,10 @@ namespace HomePhysio.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("Date")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DateTimeShift")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PhysiotherapistId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TimeShift")
                         .HasColumnType("int");
 
                     b.HasKey("PhysioTimeSlotsId");

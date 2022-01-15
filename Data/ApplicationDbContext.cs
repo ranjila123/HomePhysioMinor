@@ -1,5 +1,6 @@
 ﻿using HomePhysio.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace HomePhysio.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base (options) 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
@@ -21,15 +22,21 @@ namespace HomePhysio.Data
         public DbSet<ImageTypeModel> ImageTypeModel { get; set; }
 
         public DbSet<PhysioImage> PhysioImage { get; set; }
-        public DbSet<AppointmentsModel> AppointmentsModel { get; set; }
+        public DbSet<AppointmentsModel> AppointmentsModels { get; set; }
         public DbSet<StatusModel> StatusModel { get; set; }
         public DbSet<PStatusModel> PStatusModel { get; set; }
 
         public DbSet<PhysioTimeSlotsModel> PhysioTimeSlotsModel { get; set; }
 
         public DbSet<PaymentTypeModel> PaymentTypeModel { get; set; }
-       // public DbSet<PaymentsModel> PaymentsModel { get; set; }
+        // public DbSet<PaymentsModel> PaymentsModel { get; set; }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    //Write Fluent API configurations here
 
+        //    //Property Configurations
+        //    //modelBuilder.Entity<AppointmentsModel>().HasForeignKey()
+        //}
 
 
 
