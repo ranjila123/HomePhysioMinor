@@ -31,12 +31,11 @@ namespace HomePhysio.ViewModel
 
         public int Age { get; set; }
 
-        [ForeignKey(nameof(GenderData))]
-        public string TypeName { get; set; }
-
-        public GenderModel GenderData { get; set; }
+        public int GenderId { get; set; }
 
         public string ContactNumber { get; set; }
+
+        public string Address { get; set; }
 
     }
     public class RegisterPhysioViewModel
