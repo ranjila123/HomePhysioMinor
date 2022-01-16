@@ -1,0 +1,57 @@
+﻿.btnRegister {
+    border-radius: 50px;
+}
+
+.dropbtn1 {
+    background-color: #1977CC;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+    .dropbtn1:hover, .dropbtn1:focus {
+        background-color: #0056B3;
+    }
+
+.dropdown1 {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content1 {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content1 a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+.dropdown1 a:hover {
+    background-color: #ddd;
+}
+
+.show1 {
+    display: block;
+}
+
+
+
+<div class="dropdown1" >
+<button onclick="myFunction()" class="dropbtn1 btnRegister" > Register</button >
+<div id="myDropdown" class="dropdown-content1" >
+<a href="#home" > As Patient</a >
+<a href="#about" > As Physiotherapy</a >
+
+</div >
+</div >
