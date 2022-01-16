@@ -37,6 +37,7 @@ namespace HomePhysio.ViewModel
         public GenderModel GenderData { get; set; }
 
         public string ContactNumber { get; set; }
+        public string Address { get; set; }
 
     }
     public class RegisterPhysioViewModel
@@ -57,17 +58,17 @@ namespace HomePhysio.ViewModel
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
         public string Name { get; set; }
 
-        public int Age { get; set; }
+        public int age { get; set; }
 
-        [ForeignKey(nameof(GenderData))]
-        public string TypeName { get; set; }
+        public int GenderId { get; set; }
         public GenderModel GenderData { get; set; }
 
-        public string ContactNumber { get; set; }
+        public string ContactNo { get; set; }
         public string Qualification { get; set; }
+
+        public string LicenseNo { get; set; }
 
         public int Experience { get; set; }
     }
