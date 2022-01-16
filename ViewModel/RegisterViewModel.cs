@@ -36,7 +36,6 @@ namespace HomePhysio.ViewModel
         public string ContactNumber { get; set; }
         public string Address { get; set; }
 
-        public string Address { get; set; }
 
     }
     public class RegisterPhysioViewModel
@@ -62,7 +61,6 @@ namespace HomePhysio.ViewModel
         public int age { get; set; }
 
         public int GenderId { get; set; }
-        public GenderModel GenderData { get; set; }
 
         public string ContactNo { get; set; }
         public string Qualification { get; set; }
