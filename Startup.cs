@@ -41,6 +41,8 @@ namespace HomePhysio
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(30);
                 opt.Lockout.MaxFailedAccessAttempts = 5;
             });
+
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
         }
 
