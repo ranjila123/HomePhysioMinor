@@ -1,4 +1,6 @@
-﻿using HomePhysio.Models;
+﻿using AutoMapper;
+using HomePhysio.Models;
+using HomePhysio.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,14 +14,20 @@ namespace HomePhysio.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController>_logger;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IMapper mapper)
         {
             _logger = logger;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
+            var test = new PatientViewModel();
+            test.Name1 = "Urja";
+            var test1= _mapper.Map<PatientModel>(test); // PatientModel is destination
+
             return View();
         }
         public IActionResult About()

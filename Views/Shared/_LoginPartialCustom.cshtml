@@ -4,9 +4,9 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
-    @if (SignInManager.IsSignedIn(User))
-    {
-        @*<li class="nav-item">
+@if (SignInManager.IsSignedIn(User))
+{
+    @*<li class="nav-item">
             <a class="nav-link" href="#">Hello @UserManager.GetUserName(User) </a>
         </li>
         <li class="nav-item">
@@ -14,22 +14,35 @@
                 <button type="submit" class="btn nav-link">LogOut</button>
             </form>
         </li>*@
-        <a href="#" class="appointment-btn scrollto">Hello @UserManager.GetUserName(User)</a>
+    <a href="#" class="appointment-btn scrollto">Hello @UserManager.GetUserName(User)</a>
 
-        <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
-            <button type="submit" class="btn nav-link btn-primary rounded-bottom">LogOut</button>
-        </form>
-    }
-    else
-    {
-        @*<li class="nav-item">
-                <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
-            </li>*@
-        <a asp-controller="Account" asp-action="Login" class="appointment-btn scrollto">Login</a>
+    <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
+        <button type="submit" class="btn nav-link btn-primary rounded-bottom">LogOut</button>
+    </form>
+}
+else
+{
+    @*<li class="nav-item">
+            <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+        </li>*@
+    <a asp-controller="Account" asp-action="Login" class="appointment-btn scrollto">Login</a>
+    <ul>
+        <li class="dropdown">
+            <a href="#" class="appointment-btn scrollto"><span>Register</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+                <li><a asp-controller="Account" asp-action="Register">As Patient</a></li>
 
-        <a asp-controller="Account" asp-action="Register" class="appointment-btn scrollto">Register</a>
+                <li><a asp-controller="Account" asp-action="RegisterPhysio">As Physiotherapist</a></li>
 
-    }
+            </ul>
+        </li>
+    </ul>
+
+  
+
+    //<a asp-controller="Account" asp-action="Register" class="appointment-btn scrollto">Register</a>
+
+}
