@@ -51,15 +51,15 @@ else
     <div class="dropdown1">
         <button onclick="myFunction()" class="dropbtn1 btnRegister"> Register</button>
         <div id="myDropdown" class="dropdown-content1">
-            <a href="#home"> As Patient</a>
-            <a href="#about"> As Physiotherapy</a>
+            <a asp-controller="Account" asp-action="Register">As Patient</a>
+            <a asp-controller="Account" asp-action="RegisterPhysio">As Physiotherapist</a>
         </div>
 
     </div>
 
 
-
-
+    <link href="~/ButtonCSS/Button.css" rel="stylesheet" />
+    <script src="~/ButtonCSS/Button.js"></script>
 
 
     //<a asp-controller="Account" asp-action="Register" class="appointment-btn scrollto">Register</a>
