@@ -12,7 +12,6 @@ namespace HomePhysio.Models
     {
         [Key]
         public int PatientId { get; set; }
-        [Required]
         public string Name { get; set; }
 
         public int Age { get; set; }
@@ -21,11 +20,8 @@ namespace HomePhysio.Models
         public int GenderId { get; set; }
         public GenderModel GenderData { get; set; }
 
-        [EmailAddress]
         public string Email { get; set; }
-        [Required]
         public string PhoneNo { get; set; }
-        [Required]
         public string Address { get; set; }
 
         [ForeignKey(nameof(UserData))]

@@ -13,7 +13,10 @@ namespace HomePhysio.Profiles
         public PatientProfile()
         {
            
-            CreateMap<PatientViewModel,PatientModel>().ForMember(dest=>dest.Name,opt => opt.MapFrom(src=>src.Name1)).ReverseMap();
+            //CreateMap<PatientViewModel,PatientModel>().ForMember(dest=>dest.Name,opt => opt.MapFrom(src=>src.Name1)).ReverseMap();
+            CreateMap<RegisterPatientViewModel,PatientModel>().ReverseMap();
+            CreateMap<PhysiotherapistViewModel,PhysiotherapistModel>().ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name1)).ReverseMap();
+
         }
     }
 }

@@ -32,7 +32,7 @@ namespace HomePhysio.ViewModel
         public int Age { get; set; }
 
         [ForeignKey(nameof(GenderData))]
-        public int Gender { get; set; }
+        public string TypeName { get; set; }
 
         public GenderModel GenderData { get; set; }
 
@@ -63,7 +63,7 @@ namespace HomePhysio.ViewModel
         public int Age { get; set; }
 
         [ForeignKey(nameof(GenderData))]
-        public int Gender { get; set; }
+        public string TypeName { get; set; }
         public GenderModel GenderData { get; set; }
 
         public string ContactNumber { get; set; }

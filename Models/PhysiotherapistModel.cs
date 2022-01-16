@@ -27,4 +27,19 @@ namespace HomePhysio.Models
 
 
     }
+    public class PhysiotherapistViewModel
+    {
+        public int PhysiotherapistId { get; set; }
+        [Required]
+        public string Name1 { get; set; }
+        public string Address { get; set; }
+        public string Qualification { get; set; }
+        public string ContactNo { get; set; }
+        public string LicenseNo { get; set; }
+        public int GenderId { get; set; }
+        public GenderModel GenderData { get; set; }
+
+        public string UserId { get; set; }
+        public ApplicationUser UserData { get; set; }
+    }
 }

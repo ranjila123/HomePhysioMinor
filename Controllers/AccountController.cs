@@ -1,4 +1,6 @@
-﻿using HomePhysio.Models;
+﻿using AutoMapper;
+using HomePhysio.Data;
+using HomePhysio.Models;
 using HomePhysio.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -13,15 +15,19 @@ namespace HomePhysio.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager; //usermanager depend on identity user
+        private readonly IMapper _mapper;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
+
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, ApplicationDbContext applicationDbContext,IMapper mapper)
         {
             _userManager = userManager;
-
+            _mapper = mapper;
             _emailSender = emailSender;
             _signInManager = signInManager;
+            _applicationDbContext = applicationDbContext;
         }
         public IActionResult Index()
         {
@@ -47,6 +53,14 @@ namespace HomePhysio.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var patient = _mapper.Map<PatientModel>(model);
+
+                    patient.UserId = user.Id;
+
+                    //add to patient table
+                    _applicationDbContext.PatientModel.Add(patient);
+                    await _applicationDbContext.SaveChangesAsync();
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
@@ -81,6 +95,7 @@ namespace HomePhysio.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //add to physiotherapist table
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
