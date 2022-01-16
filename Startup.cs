@@ -43,6 +43,12 @@ namespace HomePhysio
             });
 
             services.AddAutoMapper(typeof(Startup));
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "477850293766730";
+                options.AppSecret = "f4926f18111672a19fc81ef5c53e044f";
+            });
+
             services.AddControllersWithViews();
         }
 
