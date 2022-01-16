@@ -5,6 +5,7 @@ using HomePhysio.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,8 @@ namespace HomePhysio.Controllers
         {
             ViewData["ReturnUrl"] = returnurl;
             RegisterPatientViewModel registerViewModel = new RegisterPatientViewModel();//datatype variable =new object
+            ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId), nameof(GenderModel.TypeName));
+
             return View(registerViewModel);
         }
         [HttpPost]

@@ -30,6 +30,7 @@ namespace HomePhysio.ViewModel
         public string Name { get; set; }
 
         public int Age { get; set; }
+        [Display(Name = "Gender")]
 
         public int GenderId { get; set; }
 
