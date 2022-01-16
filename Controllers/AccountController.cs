@@ -31,12 +31,12 @@ namespace HomePhysio.Controllers
         public async Task<IActionResult> Register(string returnurl=null)
         {
             ViewData["ReturnUrl"] = returnurl;
-            RegisterViewModel registerViewModel = new RegisterViewModel();//datatype variable =new object
+            RegisterPatientViewModel registerViewModel = new RegisterPatientViewModel();//datatype variable =new object
             return View(registerViewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model,string returnurl=null)
+        public async Task<IActionResult> Register(RegisterPatientViewModel model,string returnurl=null)
         {
             ViewData["ReturnUrl"] = returnurl;
             returnurl = returnurl ?? Url.Content("~/");
@@ -60,6 +60,42 @@ namespace HomePhysio.Controllers
            // RegisterViewModel registerViewModel = new RegisterViewModel();//datatype variable =new object
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> RegisterPhysio(string returnurl = null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            RegisterPhysioViewModel registerViewModel = new RegisterPhysioViewModel();//datatype variable =new object
+            return View(registerViewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterPhysio(RegisterPhysioViewModel model, string returnurl = null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            returnurl = returnurl ?? Url.Content("~/");
+            if (ModelState.IsValid)
+            {
+                //server side validation
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
+                    await _emailSender.SendEmailAsync(model.Email, "Confirm your account - Identity Manager",
+                        "Please confirm your account by clicking here: <a href=\"" + callbackurl + "\">link</a>");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnurl);
+                }
+                AddErrors(result);
+            }
+            // RegisterViewModel registerViewModel = new RegisterViewModel();//datatype variable =new object
+            return View(model);
+        }
+
+
 
         [HttpGet]
         public async Task<IActionResult>ConfirmEmail(string userId,string code)
