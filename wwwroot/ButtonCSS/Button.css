@@ -5,10 +5,12 @@
 .dropbtn1 {
     background-color: #1977CC;
     color: white;
-    padding: 16px;
+    padding: 8px 15px 8px 15px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    font-family: Poppins-Regular;
+    margin-left: 5px;
 }
 
     .dropbtn1:hover, .dropbtn1:focus {
@@ -46,12 +48,3 @@
 }
 
 
-
-<div class="dropdown1" >
-<button onclick="myFunction()" class="dropbtn1 btnRegister" > Register</button >
-<div id="myDropdown" class="dropdown-content1" >
-<a href="#home" > As Patient</a >
-<a href="#about" > As Physiotherapy</a >
-
-</div >
-</div >
