@@ -13,6 +13,8 @@ namespace HomePhysio.Models
         public int PhysiotherapistId { get; set; }
         [Required]
         public string Name { get; set; }
+
+        public int age { get; set; }
         public string Address { get; set; }
         public string Qualification { get; set; }
         public string ContactNo { get; set; }

@@ -32,16 +32,16 @@ namespace HomePhysio.Controllers
             //test.Name1 = "Urja";
             //var test1= _mapper.Map<PatientModel>(test); // PatientModel is destination
 
-            var test = new PhysiotherapistViewModel(); // data input from form
-            test.Name1 = "Monika";
-            test.Address = "Lagan";
-            var test1 = _mapper.Map<PhysiotherapistModel>(test); // PatientModel is destination
+            //var test = new PhysiotherapistViewModel(); // data input from form
+            //test.Name1 = "Monika";
+            //test.Address = "Lagan";
+            //var test1 = _mapper.Map<PhysiotherapistModel>(test); // PatientModel is destination
             //var test1 = new PhysiotherapistModel { 
             // Name= test.Name1,
             // Address = test.Address
             //};
-            _applicationDbContext.PhysiotherapistModel.Add(test1);
-            ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId),nameof(GenderModel.TypeName));
+            //_applicationDbContext.PhysiotherapistModel.Add(test1);
+            //ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId),nameof(GenderModel.TypeName));
             //ViewBag.Urja = new {test = "a" };
             //ViewBag.Urja = "asd";
             //ViewBag.Urja = 0;

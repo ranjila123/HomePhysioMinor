@@ -83,6 +83,8 @@ namespace HomePhysio.Controllers
         {
             ViewData["ReturnUrl"] = returnurl;
             RegisterPhysioViewModel registerViewModel = new RegisterPhysioViewModel();//datatype variable =new object
+            ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId),nameof(GenderModel.TypeName));
+
             return View(registerViewModel);
         }
         [HttpPost]
@@ -98,6 +100,14 @@ namespace HomePhysio.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    var physio = _mapper.Map<PhysiotherapistModel>(model);
+                    physio.UserId = user.Id;
+
+                    //add to patient table
+                    _applicationDbContext.PhysiotherapistModel.Add(physio);
+                    await _applicationDbContext.SaveChangesAsync();
+
                     //add to physiotherapist table
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
@@ -110,6 +120,8 @@ namespace HomePhysio.Controllers
                 AddErrors(result);
             }
             // RegisterViewModel registerViewModel = new RegisterViewModel();//datatype variable =new object
+
+
             return View(model);
         }
 
