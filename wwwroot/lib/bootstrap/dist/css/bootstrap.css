@@ -2301,6 +2301,7 @@ textarea.form-control {
 }
 
 .form-inline {
+   
   display: -ms-flexbox;
   display: flex;
   -ms-flex-flow: row wrap;
@@ -2423,13 +2424,15 @@ fieldset:disabled a.btn {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
+  border-rounded:5px;
 }
 
-.btn-primary:hover {
-  color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
-}
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #0069d9;
+        border-color: #0062cc;
+        border-rounded: 5px;
+    }
 
 .btn-primary:focus, .btn-primary.focus {
   box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
