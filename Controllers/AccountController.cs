@@ -69,8 +69,10 @@ namespace HomePhysio.Controllers
 
                     await _emailSender.SendEmailAsync(model.Email, "Confirm your account - Identity Manager",
                         "Please confirm your account by clicking here: <a href=\"" + callbackurl + "\">link</a>");
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnurl);
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    //return LocalRedirect(returnurl);
+
+                    return View("ConfirmEmailConfirmation");
                 }
                 AddErrors(result);
             }
@@ -114,8 +116,11 @@ namespace HomePhysio.Controllers
 
                     await _emailSender.SendEmailAsync(model.Email, "Confirm your account - Identity Manager",
                         "Please confirm your account by clicking here: <a href=\"" + callbackurl + "\">link</a>");
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnurl);
+
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    //return LocalRedirect(returnurl);
+
+                    return View("ConfirmEmailConfirmation");
                 }
                 AddErrors(result);
             }
@@ -134,7 +139,9 @@ namespace HomePhysio.Controllers
             {
                 return View("Error");
             }
+
             var user = await _userManager.FindByIdAsync(userId);
+
             if (user == null)
             {
                 return View("Error");
