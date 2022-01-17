@@ -40,7 +40,6 @@ namespace HomePhysio.Controllers
             ViewData["ReturnUrl"] = returnurl;
             RegisterPatientViewModel registerViewModel = new RegisterPatientViewModel();//datatype variable =new object
             ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId), nameof(GenderModel.TypeName));
-            ViewBag.Category = new SelectList(_applicationDbContext.CategoryModel.ToList(), nameof(CategoryModel.CategoryId), nameof(CategoryModel.Name));
 
             return View(registerViewModel);
         }

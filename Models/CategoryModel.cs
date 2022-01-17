@@ -12,5 +12,7 @@ namespace HomePhysio.Models
         public int CategoryId { get; set; }
         public string Name { get; set; }
         public string CatInfo { get; set; }
+
+
     }
 }
