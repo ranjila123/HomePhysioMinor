@@ -14,10 +14,10 @@
                 <button type="submit" class="btn nav-link">LogOut</button>
             </form>
         </li>*@
-        <a href="#" class="appointment-btn scrollto">Hello @UserManager.GetUserName(User)</a>
+        <a asp-controller="Home" asp-action="Profile_Page" class="appointment-btn scrollto">Hello @UserManager.GetUserName(User)</a>
 
         <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
-            <button type="submit" class="btn nav-link btn-primary rounded-bottom">LogOut</button>
+            <button type="submit" class="btn nav-link btn-primary ">LogOut</button>
         </form>
     }
     else
