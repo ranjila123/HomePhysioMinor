@@ -52,14 +52,8 @@ namespace HomePhysio.Controllers
         {
             return View();
         }
-        public IActionResult NearMe()
-        {
-            return View();
-        }
-        public IActionResult Contact()
-        {
-            return View();
-        }
+       
+      
         public IActionResult Services()
         {
             return View();
@@ -82,15 +76,11 @@ namespace HomePhysio.Controllers
         {
             return View();
         }
-        public IActionResult Dropdown3()
+        public IActionResult FAQ()
         {
             return View();
         }
 
-        public IActionResult Dropdown4()
-        {
-            return View();
-        }
 
         public IActionResult Login()
         {
@@ -108,7 +98,17 @@ namespace HomePhysio.Controllers
         {
             return View();
         }
+
         public IActionResult Physio_info()
+        {
+            return View();
+        }
+
+        public IActionResult Book_appointment()
+        {
+            return View();
+        }
+        public IActionResult Profile_Page()
         {
             return View();
         }

@@ -2,6 +2,85 @@
 @{
     ViewData["Title"] = "Dropdown1";
 }
+<link href="~/css/site.css" rel="stylesheet" />
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
+<link href="~/lib/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />
 
-<h1>Dropdown1</h1>
+
+<!--filter-->
+<div class="filters_listing">
+    <div class="container">
+        <h2 class="text-primary">Filter by</h2>
+     
+
+                <div class="switch-field">
+
+                    <input type="radio" id="all" name="category_id" data-slug="all" class="category_filter" style="margin-left:20px" value="0" checked>
+                    <label for="all">All</label>
+
+                    <input type="radio" id="general" class="category_filter" name="category_id" data-slug="general" style="margin-left:20px" value="2">
+                    <label for="general">General</label>
+
+
+                    <input type="radio" id="pediatric" class="category_filter" name="category_id" data-slug="pediatric" style="margin-left:20px" value="1">
+                    <label for="pediatric">Pediatric</label>
+
+                    <input type="radio" id="geriatric" class="category_filter" name="category_id" data-slug="geriatric" style="margin-left:20px" value="3">
+                    <label for="geriatric">Geriatric</label>
+
+
+                    <input type="radio" id="neurological" class="category_filter" name="category_id" data-slug="neurological" style="margin-left:20px" value="4">
+                    <label for="neurological">Neurological</label>
+
+
+
+
+                    <input type="radio" id="orthopedic" class="category_filter" name="category_id" data-slug="othopedic" style="margin-left:20px" value="5">
+                    <label for="orthopedic">Orthopedic/Musculoskeletal</label>
+
+                    <input type="radio" id="cardiovascular" class="category_filter" name="category_id" data-slug="cardiovascular" style="margin-left:20px" value="6">
+                    <label for="cardiovascular">Cardiovascular/Pulmonary</label><br />
+
+                    <input type="radio" id="women" class="category_filter" name="category_id" data-slug="women" style="margin-left:20px" value="7">
+                    <label for="women">Women's Health</label>
+
+                    <input type="radio" id="surgery" class="category_filter" name="category_id" data-slug="surgery" style="margin-left:20px" value="8">
+                    <label for="surgery">Pre & Post Surgery Rehab</label>
+
+                    <input type="radio" id="sports" class="category_filter" name="category_id" data-slug="sports" style="margin-left:20px" value="9">
+                    <label for="sports">Sports</label>
+
+
+
+                </div>
+           
+    </div>
+
+</div>
+
+<!--info/media objs-->
+<div class=" jumbotron ">
+    <div class="container">
+        <div class="media">
+            <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
+            <div class="media-body">
+                <h5 class="mt-0">Dr. Ranjila Shrestha</h5>
+                <p>Specialization:Orthopedic</p>
+                <p>Experience:5yrs</p>
+                <p>Consultation fee:Rs.500</p>
+                <p>Ratings:4.5</p>
+                <a asp-controller="Home" asp-action="Physio_info" class="btn btn-primary">See profile</a>
+                <a asp-controller="Home" asp-action="Book_appointment" class="btn btn-primary">Book Appointment</a>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 
