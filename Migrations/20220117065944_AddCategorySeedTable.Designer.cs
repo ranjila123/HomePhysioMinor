@@ -4,14 +4,16 @@ using HomePhysio.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HomePhysio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220117065944_AddCategorySeedTable")]
+    partial class AddCategorySeedTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -262,9 +264,6 @@ namespace HomePhysio.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("CitizenshipNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -291,8 +290,6 @@ namespace HomePhysio.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("PhysiotherapistId");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("GenderId");
 
@@ -641,12 +638,6 @@ namespace HomePhysio.Migrations
 
             modelBuilder.Entity("HomePhysio.Models.PhysiotherapistModel", b =>
                 {
-                    b.HasOne("HomePhysio.Models.CategoryModel", "CategoryData")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HomePhysio.Models.GenderModel", "GenderData")
                         .WithMany("Physiotherapists")
                         .HasForeignKey("GenderId")
@@ -656,8 +647,6 @@ namespace HomePhysio.Migrations
                     b.HasOne("HomePhysio.Models.ApplicationUser", "UserData")
                         .WithMany()
                         .HasForeignKey("UserId");
-
-                    b.Navigation("CategoryData");
 
                     b.Navigation("GenderData");
 

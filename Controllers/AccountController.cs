@@ -40,6 +40,7 @@ namespace HomePhysio.Controllers
             ViewData["ReturnUrl"] = returnurl;
             RegisterPatientViewModel registerViewModel = new RegisterPatientViewModel();//datatype variable =new object
             ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId), nameof(GenderModel.TypeName));
+            ViewBag.Category = new SelectList(_applicationDbContext.CategoryModel.ToList(), nameof(CategoryModel.CategoryId), nameof(CategoryModel.Name));
 
             return View(registerViewModel);
         }
@@ -69,10 +70,10 @@ namespace HomePhysio.Controllers
 
                     await _emailSender.SendEmailAsync(model.Email, "Confirm your account - Identity Manager",
                         "Please confirm your account by clicking here: <a href=\"" + callbackurl + "\">link</a>");
-                    //await _signInManager.SignInAsync(user, isPersistent: false);
-                    //return LocalRedirect(returnurl);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnurl);
 
-                    return View("ConfirmEmailConfirmation");
+                    //return View("ConfirmEmailConfirmation");
                 }
                 AddErrors(result);
             }
