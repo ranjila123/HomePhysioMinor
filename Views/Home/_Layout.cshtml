@@ -52,13 +52,92 @@
 </head>
 
 <body>
-   
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <a href="index.html" class="logo me-auto"><img src="~/img/logo.png" alt="" class="img-fluid"></a>
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <!---<li><a class="nav-link scrollto" asp-controller="Home" asp-action="NearMe">Near Me</a></li>-->
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="About">About Us</a></li>
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="FAQ">FAQ</a></li>
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Book">Book Appoointment</a></li>
+                    <li class="dropdown">
+                        <a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a asp-action="Dropdown1">Physiotherapist</a></li>
+                            <li><a asp-action=Dropdown2>Symptoms</a></li>
+                           
+                        </ul>
+                    </li>
+                </ul>
+
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <partial name="_LoginPartialCustom" />
+               @*<a asp-controller="account" asp-action="login" class="appointment-btn scrollto">login</a>*@
+              @*<a asp-controller="account" asp-action="register" class="appointment-btn scrollto">register</a>*@
+
+        </div>
+    </header><!-- End Header -->
     <div class="container" id="pages-content">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-   
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>HomePhysio</h3>
+                        <p>
+                            9865005310 <br>
+                            Harishiddhi,Lalitpur<br>
+                           <br>                         
+                            <strong>Email:</strong> homephysio123@gmail.com<br>
+                        </p>
+                    </div>
+
+                    <div class="container-fluid col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                   <ul>
+                <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="About">About us</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index">Services</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Terms">Terms of service</a></li>
+                <li ><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Privacy">Privacy policy</a></li>
+            </ul>
+                            <!---<ul class="d-inline">
+        <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="About">About us</a></li>
+        <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index">Services</a></li>
+        <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Contact">Contact</a></li>
+        <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Terms">Terms of service</a></li>
+        <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Privacy">Privacy policy</a></li>
+    </ul>-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container d-md-flex py-4">
+
+            <div class="me-md-auto text-center text-md-start">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>HomePhysio</span></strong>. All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
 
     <script src="~/vendor/bootstrap/js/bootstrap.js"></script>
     <script src="~/vendor/glightbox/js/glightbox.js"></script>
