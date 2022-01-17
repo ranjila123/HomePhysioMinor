@@ -1,4 +1,7 @@
 ﻿@model HomePhysio.ViewModel.LoginViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> signInManager
+
 @{ Layout = null;}
 <link href="~/css/logincss/util.css" rel="stylesheet" />
 <link href="~/css/logincss/main.css" rel="stylesheet" />
@@ -6,7 +9,32 @@
 <link href="~/fontsLogin/Linearicons-Free-v1.0.0/icon-font.min.css" rel="stylesheet" />
 
 <body style="background-color: #666666;">
+    <div style="background-color: #1977cc; color: white; text-align: center; font-family: 'Times New Roman', Times, serif; ">
+        @{
+            var schemes = await signInManager.GetExternalAuthenticationSchemesAsync();// all the schemes in start-up Eg..facebook,microsoftaccount
+            var loginProivders = schemes.ToList();
+        }
+        @if (loginProivders.Count() > 0)
+        {
 
+        
+                <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" role="form">
+                    <div>
+                        <p>
+                            @foreach (var provider in loginProivders)
+                            {
+                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name"
+                                        title="Log in using your @provider.Name account">
+                                    Login using @provider.Name .
+                                </button>
+                            }
+                        </p>
+                    </div>
+                </form>
+         
+
+        }
+    </div>
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
@@ -15,7 +43,7 @@
                     <span class="login100-form-title p-b-43">
                         Login
                     </span>
-                        
+
                     <div asp-validation-summary="All" class="text-danger"></div>
 
                     <div class="form-group">
@@ -54,7 +82,7 @@
                     </div>
 
                     <div class="container-login100-form-btn">
-                        <button type="submit" class="btn btn-success form-control login100-form-btn">
+                        <button type="submit" class="btn btn-success form-control login100-form-btn " id="#loginbutton">
                             Login
                         </button>
                     </div>
@@ -64,7 +92,9 @@
                     </p>
 
                 </form>
-                <div class="login100-more" style="background-image: url(@Url.Content("~/imagesLogin/istockphoto.jpg"));"></div>
+
+                <div class="login100-more" style="background-image: url(@Url.Content("~/imagesLogin/istockphoto.jpg"));"> </div>
+
             </div>
 
 

@@ -1,8 +1,11 @@
-﻿using HomePhysio.Models;
+﻿using AutoMapper;
+using HomePhysio.Data;
+using HomePhysio.Models;
 using HomePhysio.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +16,19 @@ namespace HomePhysio.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager; //usermanager depend on identity user
+        private readonly IMapper _mapper;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
+
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, ApplicationDbContext applicationDbContext,IMapper mapper)
         {
             _userManager = userManager;
-
+            _mapper = mapper;
             _emailSender = emailSender;
             _signInManager = signInManager;
+            _applicationDbContext = applicationDbContext;
         }
         public IActionResult Index()
         {
@@ -31,12 +38,14 @@ namespace HomePhysio.Controllers
         public async Task<IActionResult> Register(string returnurl=null)
         {
             ViewData["ReturnUrl"] = returnurl;
-            RegisterViewModel registerViewModel = new RegisterViewModel();//datatype variable =new object
+            RegisterPatientViewModel registerViewModel = new RegisterPatientViewModel();//datatype variable =new object
+            ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId), nameof(GenderModel.TypeName));
+
             return View(registerViewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model,string returnurl=null)
+        public async Task<IActionResult> Register(RegisterPatientViewModel model,string returnurl=null)
         {
             ViewData["ReturnUrl"] = returnurl;
             returnurl = returnurl ?? Url.Content("~/");
@@ -47,6 +56,14 @@ namespace HomePhysio.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var patient = _mapper.Map<PatientModel>(model);
+
+                    patient.UserId = user.Id;
+
+                    //add to patient table
+                    _applicationDbContext.PatientModel.Add(patient);
+                    await _applicationDbContext.SaveChangesAsync();
+
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
@@ -60,6 +77,55 @@ namespace HomePhysio.Controllers
            // RegisterViewModel registerViewModel = new RegisterViewModel();//datatype variable =new object
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> RegisterPhysio(string returnurl = null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            RegisterPhysioViewModel registerViewModel = new RegisterPhysioViewModel();//datatype variable =new object
+            ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId),nameof(GenderModel.TypeName));
+
+            return View(registerViewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterPhysio(RegisterPhysioViewModel model, string returnurl = null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            returnurl = returnurl ?? Url.Content("~/");
+            if (ModelState.IsValid)
+            {
+                //server side validation
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+
+                    var physio = _mapper.Map<PhysiotherapistModel>(model);
+                    physio.UserId = user.Id;
+
+                    //add to patient table
+                    _applicationDbContext.PhysiotherapistModel.Add(physio);
+                    await _applicationDbContext.SaveChangesAsync();
+
+                    //add to physiotherapist table
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
+                    await _emailSender.SendEmailAsync(model.Email, "Confirm your account - Identity Manager",
+                        "Please confirm your account by clicking here: <a href=\"" + callbackurl + "\">link</a>");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnurl);
+                }
+                AddErrors(result);
+            }
+            // RegisterViewModel registerViewModel = new RegisterViewModel();//datatype variable =new object
+
+
+            return View(model);
+        }
+
+
 
         [HttpGet]
         public async Task<IActionResult>ConfirmEmail(string userId,string code)
