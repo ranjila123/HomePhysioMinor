@@ -4,56 +4,50 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
+
 @if (SignInManager.IsSignedIn(User))
-{
-    @*<li class="nav-item">
-            <a class="nav-link" href="#">Hello @UserManager.GetUserName(User) </a>
-        </li>
-        <li class="nav-item">
-            <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
-                <button type="submit" class="btn nav-link">LogOut</button>
-            </form>
-        </li>
-  <li class="nav-item">
-                <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
-            </li>*@
-        <a asp-controller="Account" asp-action="Login" class="appointment-btn scrollto">Login</a>
-        <!--<ul>
-            <li>
-                <div class="dropdown1">
-                <button onclick="myFunction()" class="dropbtn1 btnRegister"> Register</button>
-                <div id="myDropdown" class="dropdown-content1">
-                    <a href="#home"> As Patient</a>
-                    <a href="#about"> As Physiotherapy</a>
-                </div>-->
-        @*<a href="#" class="appointment-btn scrollto"><span>Register</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-                <li><a asp-controller="Account" asp-action="Register">As Patient</a></li>
+{@*<li class="nav-item">
+        <a class="nav-link" href="#">Hello @UserManager.GetUserName(User) </a>
+    </li>
+    <li class="nav-item">
+        <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
+            <button type="submit" class="btn nav-link">LogOut</button>
+        </form>
+    </li>*@
+                <a asp-controller="Home" asp-action="Profile_Page" class="appointment-btn scrollto">Hello @UserManager.GetUserName(User)</a>
+                                <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
+                                    <button type="submit" class="btn nav-link btn-primary classinbtn" style="border-radius: 50px; background-color: #1977cc; font-family: Poppins-Regular; margin-left: 5px;">LogOut</button>
+                                </form> }
+                                            else
+                                            { @*<li class="nav-item">
+                                        <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                                    </li>*@
+                                                            <a asp-controller="Account" asp-action="Login" class="appointment-btn scrollto">Login</a>
+                                                                            <!--<ul>
+                                                                                <li>
+                                                                                    <div class="dropdown1">
+                                                                                    <button onclick="myFunction()" class="dropbtn1 btnRegister"> Register</button>
+                                                                                    <div id="myDropdown" class="dropdown-content1">
+                                                                                        <a href="#home"> As Patient</a>
+                                                                                        <a href="#about"> As Physiotherapy</a>
+                                                                                    </div>--> @*<a href="#" class="appointment-btn scrollto"><span>Register</span> <i class="bi bi-chevron-down"></i></a>
+                                                                                                <ul>
+                                                                                                    <li><a asp-controller="Account" asp-action="Register">As Patient</a></li>
+                                                                                                                <li><a asp-controller="Account" asp-action="RegisterPhysio">As Physiotherapist</a></li>
 
-                <li><a asp-controller="Account" asp-action="RegisterPhysio">As Physiotherapist</a></li>
-
-            </ul>*@
-        <!--</div>
-            </li>
-        </ul>-->
-
-        <div class="dropdown1">
-            <button onclick="myFunction()" class="dropbtn1 btnRegister"> Register</button>
-            <div id="myDropdown" class="dropdown-content1">
-                <a asp-controller="Account" asp-action="Register">As Patient</a>
-                <a asp-controller="Account" asp-action="RegisterPhysio">As Physiotherapist</a>
-            </div>
-
-        </div>
-
-
-        <link href="~/ButtonCSS/Button.css" rel="stylesheet" />
-        <script src="~/ButtonCSS/Button.js"></script>
-
-
-        //<a asp-controller="Account" asp-action="Register" class="appointment-btn scrollto">Register</a>
-
-        }
+                                                                                                     </ul>*@
+                                                                                                    <!--</div>
+                                                                                                        </li>
+                                                                                                    </ul>-->
+                                                                                                                    <div class="dropdown1">
+                                                                                                                        <button onclick="myFunction()" class="dropbtn1 btnRegister"> Register</button>
+                                                                                                                        <div id="myDropdown" class="dropdown-content1">
+                                                                                                                            <a asp-controller="Account" asp-action="Register">As Patient</a>
+                                                                                                                            <a asp-controller="Account" asp-action="RegisterPhysio">As Physiotherapist</a>
+                                                                                                                        </div>
+                                                                                                                    </div>}
+<link href="~/ButtonCSS/Button.css" rel="stylesheet" />
+<script src="~/ButtonCSS/Button.js"></script>
