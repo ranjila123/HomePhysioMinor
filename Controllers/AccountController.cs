@@ -130,6 +130,10 @@ namespace HomePhysio.Controllers
             return View(model);
         }
 
+        public IActionResult RegisterOption()
+        {
+            return View();
+        }
 
 
         [HttpGet]
