@@ -108,10 +108,17 @@ namespace HomePhysio.Controllers
         {
             return View();
         }
+        public IActionResult Payment()
+        {
+            return View();
+        }
         public IActionResult Profile_Page()
         {
             return View();
         }
-
+        public IActionResult Patient_Profile_Page()
+        {
+            return View();
+        }
     }
 }
