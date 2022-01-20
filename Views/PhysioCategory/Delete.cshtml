@@ -1,26 +1,23 @@
 ﻿@model HomePhysio.Models.PhysioCategoryModel
-
-@{
-    ViewData["Title"] = "Edit";
-}
-
-<h1>Edit</h1>
+<h1>Delete</h1>
 
 <h4>PhysioCategoryModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Delete">
+            <input asp-for="Id" hidden />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
+
                 <select asp-items="@ViewBag.Category" asp-for="CategoryId"></select>
+
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
-           
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Delete" class="btn btn-primary" />
             </div>
         </form>
     </div>

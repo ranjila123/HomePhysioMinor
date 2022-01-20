@@ -35,8 +35,8 @@ namespace HomePhysio.Controllers
 
         public async Task<IActionResult> Index()
         {
-            
-            return View(await _applicationDbContext.PhysioCategoryModel.Include(x => x.Category).Include(x => x.Physiotherapist).ToListAsync());
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            return View(await _applicationDbContext.PhysioCategoryModel.Where(x => x.Physiotherapist.UserId == user.Id).Include(x => x.Category).Include(x => x.Physiotherapist).ToListAsync());
         }
 
         [HttpGet]
@@ -52,27 +52,88 @@ namespace HomePhysio.Controllers
             if (ModelState.IsValid)
             {
                 //this.User.Identity.Name;
-                var user=await _userManager.FindByNameAsync(this.User.Identity.Name);
+                var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
                 var physio = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
                 physioCategoryModel.PhysiotherapistId = physio.PhysiotherapistId;
-                _applicationDbContext.Add(physioCategoryModel);
-                await _applicationDbContext.SaveChangesAsync();
+                if (_applicationDbContext.PhysioCategoryModel.Where(x => x.PhysiotherapistId == physio.PhysiotherapistId && x.CategoryId == physioCategoryModel.CategoryId).Count() == 0)
+                {
+                    _applicationDbContext.Add(physioCategoryModel);
+                    await _applicationDbContext.SaveChangesAsync();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
 
             return View(physioCategoryModel);
-           
+
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var physioCategoryModel = await _applicationDbContext.PhysioCategoryModel.FindAsync(id);
+            if (physioCategoryModel == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Category = new SelectList(_applicationDbContext.CategoryModel.ToList(), nameof(CategoryModel.CategoryId), nameof(CategoryModel.Name));
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            var physio = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            var physioCategory = await _applicationDbContext.PhysioCategoryModel.SingleOrDefaultAsync(x => x.Id == id);
+
+            if (physio.PhysiotherapistId == physioCategory.PhysiotherapistId)
+            {
+                return View(physioCategoryModel);
+            }
+            return RedirectToAction(nameof(Index));
+
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(PhysioCategoryModel physioCategoryModel)
+        public async Task<IActionResult> Edit(int id, PhysioCategoryModel physioCategoryModel)
         {
-            return View();
+            if (id != physioCategoryModel.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+                var physio = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+                var physioCategory = await _applicationDbContext.PhysioCategoryModel.SingleOrDefaultAsync(x => x.Id == id);
+
+                if (physio.PhysiotherapistId == physioCategory.PhysiotherapistId)
+                {
+                    physioCategory.CategoryId = physioCategoryModel.CategoryId;
+                    await _applicationDbContext.SaveChangesAsync();
+                }
+
+                //physioCategoryModel.PhysiotherapistId = physio.PhysiotherapistId;
+                //try
+                //{
+                //_applicationDbContext.Update(physioCategoryModel);
+                //    await _applicationDbContext.SaveChangesAsync();
+                //}
+                //catch (DbUpdateConcurrencyException)
+                //{
+                //    if (!PhysioCategoryModelExists(physioCategoryModel.Id))
+                //    {
+                //        return NotFound();
+                //    }
+                //    else
+                //    {
+                //        throw;
+                //    }
+                //}
+                return RedirectToAction(nameof(Index));
+            }
+            return View(physioCategoryModel);
+
         }
         [HttpGet]
         public async Task<IActionResult> Details()
@@ -85,10 +146,19 @@ namespace HomePhysio.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Delete(PhysioCategoryModel physioCategoryModel)
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            var obj = _applicationDbContext.PhysioCategoryModel.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _applicationDbContext.PhysioCategoryModel.Remove(obj);
+            _applicationDbContext.SaveChanges();
+            return RedirectToAction("Index");
+            
         }
     }
 }
