@@ -4,9 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - physiotherapy</title>
+
     <!-- Favicons -->
-    <link href="~/img/favicon.png" rel="icon">
-    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="~/img/favicon-32x32.png" rel="icon">
+    <link href="~/img/apple-touch-icon HP.png" rel="icon">
+
 
     <link href="~/vendor/bootstrap/css/bootstrap-grid.css" rel="stylesheet" />
     <!-- Google Fonts -->
@@ -23,7 +25,7 @@
     <link href="~/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet" />
 
 
     <!--for login-->
@@ -57,32 +59,32 @@
         <div class="container d-flex align-items-center">
 
             <!-- Uncomment below if you prefer to use an image logo -->
-            <a href="index.html" class="logo me-auto"><img src="~/img/logo.png" alt="" class="img-fluid"></a>
+            <a asp-controller="Home" asp-action="Index" class="logo me-auto"><img src="~/img/logo.png" alt="" class="img-fluid"></a>
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Index">Home</a></li>
                     <!---<li><a class="nav-link scrollto" asp-controller="Home" asp-action="NearMe">Near Me</a></li>-->
                     <li><a class="nav-link scrollto" asp-controller="Home" asp-action="About">About Us</a></li>
-                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="FAQ">FAQ</a></li>
-                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Book">Book Appoointment</a></li>
-                    <li class="dropdown">
-                        <a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li><a asp-action="Dropdown1">Physiotherapist</a></li>
-                            <li><a asp-action=Dropdown2>Symptoms</a></li>
-                           
-                        </ul>
-                    </li>
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="FAQ" >FAQ</a></li>
+                    <!-- <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Book">Book Appoointment</a></li>-->
+            <li class="dropdown">
+                <a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    <li><a asp-action="Dropdown1">Physiotherapist</a></li>
+                    <li><a asp-action=Dropdown2>Symptoms</a></li>
+
                 </ul>
+            </li>
+        </ul>
 
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
-            <partial name="_LoginPartialCustom" />
-               @*<a asp-controller="account" asp-action="login" class="appointment-btn scrollto">login</a>*@
-              @*<a asp-controller="account" asp-action="register" class="appointment-btn scrollto">register</a>*@
+        <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+                    <partial name="_LoginPartialCustom" />
+                    @*<a asp-controller="account" asp-action="login" class="appointment-btn scrollto">login</a>*@
+                    @*<a asp-controller="account" asp-action="register" class="appointment-btn scrollto">register</a>*@
 
-        </div>
+</div>
     </header><!-- End Header -->
     <div class="container" id="pages-content">
         <main role="main" class="pb-3">
@@ -99,10 +101,10 @@
                     <div class="col-lg-3 col-md-6 footer-contact">
                         <h3>HomePhysio</h3>
                         <p>
-                            9865005310 <br>
-                            Harishiddhi,Lalitpur<br>
+                             <br>
+                            A project by students of NCE.<br>
                            <br>                         
-                            <strong>Email:</strong> homephysio123@gmail.com<br>
+                            <strong>Email:</strong> HomePhysio2022@gmail.com<br>
                         </p>
                     </div>
 
