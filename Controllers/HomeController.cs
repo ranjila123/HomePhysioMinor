@@ -2,8 +2,10 @@
 using HomePhysio.Data;
 using HomePhysio.Models;
 using HomePhysio.ViewModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -18,12 +20,15 @@ namespace HomePhysio.Controllers
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly ILogger<HomeController>_logger;
         private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> _userManager; //usermanager depend on identity user
 
-        public HomeController(ILogger<HomeController> logger,IMapper mapper, ApplicationDbContext applicationDbContext)
+
+        public HomeController(ILogger<HomeController> logger,IMapper mapper, ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager)
         {
             _applicationDbContext = applicationDbContext;
             _logger = logger;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -112,11 +117,24 @@ namespace HomePhysio.Controllers
         {
             return View();
         }
-        public IActionResult Profile_Page()
+        public async Task<IActionResult> Profile_Page()
+        {
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            var physio = await  _applicationDbContext.PhysiotherapistModel.AnyAsync(o=> o.UserId==user.Id );
+            if (physio == false)
+            {
+                return View(nameof(Patient_Profile_Page));
+            }
+            else
+            {
+                return View(nameof(Physio_Profile_Page));
+            }
+        }
+        public IActionResult Patient_Profile_Page()
         {
             return View();
         }
-        public IActionResult Patient_Profile_Page()
+        public IActionResult Physio_Profile_Page()
         {
             return View();
         }

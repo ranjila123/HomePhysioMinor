@@ -1,0 +1,68 @@
+﻿@model IEnumerable<HomePhysio.Models.PhysioTimeSlotsModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PhysioTimeSlotsId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeShift.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeShift.Month)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeShift.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeShift)
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.PhysiotherapistId)
+        </th>*@
+            <th>Changes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhysioTimeSlotsId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeShift.Year)
+                </td>  
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeShift.Month)
+                </td>  
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeShift.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeShift.TimeOfDay)
+                </td>
+
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.PhysiotherapistId)
+                    </td>*@
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PhysioTimeSlotsId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PhysioTimeSlotsId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PhysioTimeSlotsId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
