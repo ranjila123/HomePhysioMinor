@@ -113,23 +113,7 @@ namespace HomePhysio.Controllers
                     await _applicationDbContext.SaveChangesAsync();
                 }
 
-                //physioCategoryModel.PhysiotherapistId = physio.PhysiotherapistId;
-                //try
-                //{
-                //_applicationDbContext.Update(physioCategoryModel);
-                //    await _applicationDbContext.SaveChangesAsync();
-                //}
-                //catch (DbUpdateConcurrencyException)
-                //{
-                //    if (!PhysioCategoryModelExists(physioCategoryModel.Id))
-                //    {
-                //        return NotFound();
-                //    }
-                //    else
-                //    {
-                //        throw;
-                //    }
-                //}
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(physioCategoryModel);

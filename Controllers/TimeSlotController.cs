@@ -63,5 +63,69 @@ namespace HomePhysio.Controllers
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var physioTimeSlotsModel = await _applicationDbContext.PhysioTimeSlotsModel.FindAsync(id);
+            if (physioTimeSlotsModel == null)
+            {
+                return NotFound();
+            }
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            var physio = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            var physioTimeSlot = await _applicationDbContext.PhysioTimeSlotsModel.SingleOrDefaultAsync(x => x.PhysioTimeSlotsId == id);
+
+            if (physio.PhysiotherapistId == physioTimeSlot.PhysiotherapistId)
+            {
+                return View(physioTimeSlotsModel);
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, PhysioTimeSlotsModel physioTimeSlotsModel)
+        {
+            if (id != physioTimeSlotsModel.PhysioTimeSlotsId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+                var physio = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+                var physioTimeSlot = await _applicationDbContext.PhysioTimeSlotsModel.SingleOrDefaultAsync(x => x.PhysioTimeSlotsId == id);
+
+                if (physio.PhysiotherapistId == physioTimeSlot.PhysiotherapistId)
+                {
+                    physioTimeSlot.DateTimeShift = physioTimeSlotsModel.DateTimeShift;
+                    await _applicationDbContext.SaveChangesAsync();
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(physioTimeSlotsModel);
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var obj = _applicationDbContext.PhysioTimeSlotsModel.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _applicationDbContext.PhysioTimeSlotsModel.Remove(obj);
+            _applicationDbContext.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
     }
 }
