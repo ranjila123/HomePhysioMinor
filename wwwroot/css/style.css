@@ -18,6 +18,7 @@ a {
   text-decoration: none;
 }
 
+
 a:hover {
   color: #3291e6;
   text-decoration: none;
@@ -26,6 +27,12 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
     font-family: "Open Sans", sans-serif;
 }
+
+
+p{
+    text-align:justify;
+}
+
 
 /*--------------------------------------------------------------
 # Preloader
@@ -298,7 +305,7 @@ h1, h2, h3, h4, h5, h6 {
   visibility: visible;
 }
 
-@media (max-width: 1366px) {
+@media (max-width: 1366px){
   .navbar .dropdown .dropdown ul {
     left: -90%;
   }

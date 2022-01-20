@@ -50,6 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img - Copy\login\" />
     <Folder Include="wwwroot\img\login\" />
   </ItemGroup>
 
