@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HomePhysio.Data;
 using HomePhysio.Models;
-using System.Linq;
 using System.Linq.Dynamic.Core;
 
 namespace HomePhysio.Controllers
