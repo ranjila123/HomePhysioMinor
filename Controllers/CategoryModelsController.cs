@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HomePhysio.Data;
 using HomePhysio.Models;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 
 namespace HomePhysio.Controllers
 {
@@ -22,6 +24,16 @@ namespace HomePhysio.Controllers
         // GET: CategoryModels
         public async Task<IActionResult> Index()
         {
+            // int i;
+            //for (i = 0; i <= 1000; i++)
+            //{
+            //    _context.Add(new CategoryModel { 
+            //        Name=$"Sports{i}",  //string interpolation
+            //        CatInfo="For Sports"
+            //    });
+            //    _context.SaveChanges();
+            //}
+
             return View(await _context.CategoryModel.ToListAsync());
         }
 
@@ -148,6 +160,41 @@ namespace HomePhysio.Controllers
         private bool CategoryModelExists(int id)
         {
             return _context.CategoryModel.Any(e => e.CategoryId == id);
+        }
+
+        [HttpPost]
+        public JsonResult GetCategoryData()
+        {
+            try
+            {
+                var draw = Request.Form["draw"].FirstOrDefault();
+                var start = Request.Form["start"].FirstOrDefault();
+                var length = Request.Form["length"].FirstOrDefault();
+                var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+                var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+                var searchValue = Request.Form["search[value]"].FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int recordsTotal = 0;
+                var customerData = (from tempcustomer in _context.CategoryModel select tempcustomer);
+                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection)))
+                {
+                    customerData = customerData.OrderBy(sortColumn + " " + sortColumnDirection);
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    customerData = customerData.Where(m => m.Name.Contains(searchValue)
+                                                || m.CatInfo.Contains(searchValue));
+                }
+                recordsTotal = customerData.Count();
+                var data = customerData.Skip(skip).Take(pageSize).ToList();
+                var jsonData = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data };
+                return Json(jsonData);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

@@ -28,37 +28,47 @@
 
     <!--for login-->
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="imagesLogin/icons/favicon.ico" />
+    <link rel="icon" type="image/png" href="~/imagesLogin/icons/favicon.ico" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/loginVendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fontsLogin/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/fontsLogin/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="fontsLogin/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/fontsLogin/Linearicons-Free-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/loginVendor/animate/animate.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/loginVendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/loginVendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/loginVendor/select2/select2.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="vendor/loginVendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/vendor/loginVendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="css/logincss/util.css">
-    <link rel="stylesheet" type="text/css" href="css/logincss/main.css">
+    <link rel="stylesheet" type="text/css" href="~/css/logincss/util.css">
+    <link rel="stylesheet" type="text/css" href="~/css/logincss/main.css">
     <!--===============================================================================================-->
+
+    <!--Added DataTabbleJsFiles-->
+    <link rel="stylesheet" type="text/css" href="~/DataTables/DataTables-1.11.3/css/jquery.dataTables.css" />
+    <link rel="stylesheet" type="text/css" href="~/DataTables/Buttons-2.2.1/css/buttons.dataTables.css" />
+    <link rel="stylesheet" type="text/css" href="~/DataTables/ColReorder-1.5.5/css/colReorder.dataTables.css" />
+    <link rel="stylesheet" type="text/css" href="~/DataTables/FixedColumns-4.0.1/css/fixedColumns.dataTables.css" />
+    <link rel="stylesheet" type="text/css" href="~/DataTables/FixedHeader-3.2.1/css/fixedHeader.dataTables.css" />
+    <link rel="stylesheet" type="text/css" href="~/DataTables/KeyTable-2.6.4/css/keyTable.dataTables.css" />
+    <link rel="stylesheet" type="text/css" href="~/DataTables/Scroller-2.0.5/css/scroller.dataTables.css" />
+    <link rel="stylesheet" type="text/css" href="~/DataTables/SearchBuilder-1.3.0/css/searchBuilder.dataTables.css" />
 </head>
 
 <body>
-   
+
     <div class="container" id="pages-content">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-   
+
 
     <script src="~/vendor/bootstrap/js/bootstrap.js"></script>
     <script src="~/vendor/glightbox/js/glightbox.js"></script>
@@ -72,22 +82,36 @@
 
     <!--for login-->
     <!--===============================================================================================-->
-    <script src="vendor/loginVendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/vendor/loginVendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
-    <script src="vendor/loginVendor/animsition/js/animsition.min.js"></script>
+    <script src="~/vendor/loginVendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
-    <script src="vendor/loginVendor/bootstrap/js/popper.js"></script>
-    <script src="vendor/loginVendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/vendor/loginVendor/bootstrap/js/popper.js"></script>
+    <script src="~/vendor/loginVendor/bootstrap/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
-    <script src="vendor/loginVendor/select2/select2.min.js"></script>
+    <script src="~/vendor/loginVendor/select2/select2.min.js"></script>
     <!--===============================================================================================-->
-    <script src="vendor/loginVendor/daterangepicker/moment.min.js"></script>
-    <script src="vendor/loginVendor/daterangepicker/daterangepicker.js"></script>
+    <script src="~/vendor/loginVendor/daterangepicker/moment.min.js"></script>
+    <script src="~/vendor/loginVendor/daterangepicker/daterangepicker.js"></script>
     <!--===============================================================================================-->
-    <script src="vendor/loginVendor/countdowntime/countdowntime.js"></script>
+    <script src="~/vendor/loginVendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
-    <script src="js/loginjs/main.js"></script>
+    <script src="~/js/loginjs/main.js"></script>
 
+    <!--Added DataTAble scripts-->
+    <script type="text/javascript" src="~/DataTables/JSZip-2.5.0/jszip.js"></script>
+    <script type="text/javascript" src="~/DataTables/pdfmake-0.1.36/pdfmake.js"></script>
+    <script type="text/javascript" src="~/DataTables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="~/DataTables/DataTables-1.11.3/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="~/DataTables/Buttons-2.2.1/js/dataTables.buttons.js"></script>
+    <script type="text/javascript" src="~/DataTables/Buttons-2.2.1/js/buttons.html5.js"></script>
+    <script type="text/javascript" src="~/DataTables/Buttons-2.2.1/js/buttons.print.js"></script>
+    <script type="text/javascript" src="~/DataTables/ColReorder-1.5.5/js/dataTables.colReorder.js"></script>
+    <script type="text/javascript" src="~/DataTables/FixedColumns-4.0.1/js/dataTables.fixedColumns.js"></script>
+    <script type="text/javascript" src="~/DataTables/FixedHeader-3.2.1/js/dataTables.fixedHeader.js"></script>
+    <script type="text/javascript" src="~/DataTables/KeyTable-2.6.4/js/dataTables.keyTable.js"></script>
+    <script type="text/javascript" src="~/DataTables/Scroller-2.0.5/js/dataTables.scroller.js"></script>
+    <script type="text/javascript" src="~/DataTables/SearchBuilder-1.3.0/js/dataTables.searchBuilder.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
