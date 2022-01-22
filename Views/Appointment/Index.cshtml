@@ -1,0 +1,42 @@
+﻿@model IEnumerable<HomePhysio.Models.PhysiotherapistModel>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<div ng-controller="AppointmentController" ng-init="asd=@System.Text.Json.JsonSerializer.Serialize(Model)">
+    @Model.Count()
+    {{products}}
+    @*@foreach (var item in Model)
+        {
+            <div class=" jumbotron ">
+                <div class="container">
+                    <div class="media">
+                        <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
+                        <div class="media-body">
+                            <h5 class="mt-0"> @Html.DisplayFor(modelItem => item.PhysiotherapistId)</h5>
+                            <h5 class="mt-0">Dr. @Html.DisplayFor(modelItem => item.Name)</h5>
+
+                            <p class="p-0">Specialization: @item.</p>
+                            <p class="p-0">Experience:5yrs</p>
+                            <p class="p-0">Consultation fee:Rs.500</p>
+                            <p class="p-0">Ratings:4.5</p>
+                            <a asp-controller="Appointment" asp-action="Physio_info" class="btn btn-primary">See profile</a>
+                            <a asp-controller="Appointment" asp-action="Book_appointment" class="btn btn-primary">Book Appointment</a>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        < a asp - action = "Details" asp - route - id = "@item.Id" > Details </ a > |
+
+        < a asp - action = "Delete" asp - route - id = "@item.Id" > Delete </ a >*@
+
+</div>
+
+@section scripts{ 
+    <script src="~/AngularServices/Controller/AppointmentController.js"></script>
+}
