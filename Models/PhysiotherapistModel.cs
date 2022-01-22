@@ -30,6 +30,7 @@ namespace HomePhysio.Models
         public string UserId { get; set; }
         public ApplicationUser UserData { get; set; }
 
+        public IEnumerable<PhysioCategoryModel> physioCategoryModels { get; set; }//1 to many
 
     }
     //public class PhysiotherapistViewModel

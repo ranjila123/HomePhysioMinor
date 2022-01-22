@@ -18,5 +18,7 @@ namespace HomePhysio.Models
 
         public PhysiotherapistModel Physiotherapist { get; set; }
         public CategoryModel Category { get; set; }
+
+        public string Experience { get; set; }
     }
 }

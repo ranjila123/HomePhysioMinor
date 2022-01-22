@@ -202,6 +202,9 @@ namespace HomePhysio.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Experience")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PhysiotherapistId")
                         .HasColumnType("int");
 
@@ -594,7 +597,7 @@ namespace HomePhysio.Migrations
                         .IsRequired();
 
                     b.HasOne("HomePhysio.Models.PhysiotherapistModel", "Physiotherapist")
-                        .WithMany()
+                        .WithMany("physioCategoryModels")
                         .HasForeignKey("PhysiotherapistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -705,6 +708,11 @@ namespace HomePhysio.Migrations
             modelBuilder.Entity("HomePhysio.Models.GenderModel", b =>
                 {
                     b.Navigation("Physiotherapists");
+                });
+
+            modelBuilder.Entity("HomePhysio.Models.PhysiotherapistModel", b =>
+                {
+                    b.Navigation("physioCategoryModels");
                 });
 #pragma warning restore 612, 618
         }
