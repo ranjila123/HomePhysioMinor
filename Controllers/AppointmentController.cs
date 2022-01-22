@@ -1,7 +1,9 @@
 ﻿using HomePhysio.Data;
 using HomePhysio.Models;
 using HomePhysio.ViewModel;
+using HomePhysio.ViewModel.DataTablesVM;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,18 +17,19 @@ namespace HomePhysio.Controllers
     public class AppointmentController : Controller
     {
         private readonly ApplicationDbContext _applicationDbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AppointmentController(ApplicationDbContext applicationDbContext)
+        public AppointmentController(ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager)
         {
             _applicationDbContext = applicationDbContext;
+            _userManager = userManager;
         }
       
         public IActionResult Index()
         {
-            var physio = _applicationDbContext.PhysiotherapistModel.ToList();
             ViewBag.Categories =new SelectList( _applicationDbContext.CategoryModel.ToList(),nameof(CategoryModel.CategoryId),nameof(CategoryModel.Name));
             
-            return View(physio);
+            return View();
         }
         [Authorize]
         public async Task<IActionResult> Create()
@@ -47,7 +50,7 @@ namespace HomePhysio.Controllers
                 ContactNo = x.Physiotherapist.ContactNo,
                 Qualification=x.Physiotherapist.Qualification,
 
-            });
+            }).ToList();
             foreach (var item in physio)
             {
                 var catList = _applicationDbContext.PhysioCategoryModel.Where(x => x.PhysiotherapistId == item.PhysiotherapistId).Include(x => x.Category);
@@ -58,6 +61,43 @@ namespace HomePhysio.Controllers
             }
             return Json(new { a = physio });
 
+        }
+        [HttpPost]
+        public IActionResult GetPhysiotherapistTimeSlot(int physiotherapistId)
+        {
+            var physioTimeSlot = _applicationDbContext.PhysioTimeSlotsModel.Where(x => x.PhysiotherapistId == physiotherapistId).ToList().Select(x => new PhysioTimeSlotForAppointmentVM
+            {
+                PhysioTimeSlotsId = x.PhysioTimeSlotsId,
+                DateAndTime=x.DateTimeShift,
+                Date=x.DateTimeShift.Date.ToString("yyyy/MM/dd"),
+                Time = x.DateTimeShift.TimeOfDay.ToString()
+            });
+            
+            return Json(new { b = physioTimeSlot });
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetAppointmentInfo(int physioTimeSlotsId)
+        {
+            try
+            {
+                var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+                var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+                var app = new AppointmentsModel
+                {
+                    PhysioTimeSlotsId = physioTimeSlotsId,
+                    PatientId = patient.PatientId,
+                    StatusCode = "2"
+
+                };
+                _applicationDbContext.Add(app);
+                await _applicationDbContext.SaveChangesAsync();
+                return Json(new { response = true, msg = $"AppointentId:{app.AppointmentId}" });
+            }
+            catch
+            {
+                return Json(new { response = false, msg = "Response False" });
+
+            }
         }
     }
 }

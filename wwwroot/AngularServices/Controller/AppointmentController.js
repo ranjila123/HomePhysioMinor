@@ -16,6 +16,29 @@
 
                     });
             };
+
+            //$scope.url1 = `${document.location.origin}/Appointment/GetPhysiotherapistList`;
+            $scope.timeSlot = [];
+            $scope.AssignPhysiotherapist = function (id) {
+                $http({ method: 'post', url: `${document.location.origin}/Appointment/GetPhysiotherapistTimeSlot`, params: { physiotherapistId: id } }).
+                    then(function (response) {
+                        $scope.timeSlot = response.data.b;
+                    }, function (response) {
+
+                    });
+            };
+
+            
+            $scope.AppointmentBook = function (id) {
+                $http({ method: 'post', url: `${document.location.origin}/Appointment/GetAppointmentInfo`, params: { physioTimeSlotsId: id } }).
+                    then(function (response) {
+                       
+                    }, function (response) {
+
+                    });
+            };
+
             $scope.products = 'aa';
         }]);
+
 })();

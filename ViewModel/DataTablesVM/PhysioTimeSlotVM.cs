@@ -13,4 +13,13 @@ namespace HomePhysio.ViewModel.DataTablesVM
         public string Day { get; set; }
         public string Time { get; set; }
     }
+
+    public class PhysioTimeSlotForAppointmentVM
+    {
+        public int PhysioTimeSlotsId { get; set; }
+
+        public DateTime DateAndTime { get; set; }
+        public string Date { get;  set; }
+        public string Time { get; set; }
+    }
 }
