@@ -135,11 +135,6 @@ namespace HomePhysio.Controllers
         {
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(o => o.UserId == user.Id);
-            //var app = await _applicationDbContext.AppointmentsModels.Where(x => x.PatientId == patient.PatientId).Include(x => x.PatientData).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).ToList().Select(x => new PatientProfileVM
-            //{
-                
-            //});
-
             return View(patient);
         }
 
@@ -154,14 +149,14 @@ namespace HomePhysio.Controllers
             //}).ToList();
             //var user =await _userManager.FindByNameAsync(this.User.Identity.Name);
             //var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
-            var app = _applicationDbContext.AppointmentsModels.AsNoTracking().Where(x => x.PatientId == patientId).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).ToList().Select(x => new PatientProfileVM
+            var app = _applicationDbContext.AppointmentsModels.AsNoTracking().Where(x => x.PatientId == patientId).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).Include(x=>x.StatusData).ToList().Select(x => new PatientProfileVM
             {
                 DateAndTime = x.PhysioTimeSlotsData.DateTimeShift,
                 Date = x.PhysioTimeSlotsData.DateTimeShift.Date.ToString("yyyy/MM/dd"),
                 Time = x.PhysioTimeSlotsData.DateTimeShift.TimeOfDay.ToString(),
                 AppointmentId=x.AppointmentId,
                 Physiotherapist=x.PhysioTimeSlotsData.PhysiotherapistData.Name,
-              //  Status=x.StatusData.StatusType
+                Status=x.StatusData.StatusType
                 
             });
             return Json(new { ad =app});
