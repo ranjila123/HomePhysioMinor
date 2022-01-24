@@ -8,8 +8,7 @@ namespace HomePhysio.ViewModel
     public class PatientProfileVM
     {
         public int AppointmentId { get; set; }
-        public string TimeSlot { get; set; }
-
+        
         public DateTime DateAndTime { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
