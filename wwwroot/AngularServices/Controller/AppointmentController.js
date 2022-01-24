@@ -35,12 +35,25 @@
                     then(function (response) { //GetAppointmentInfo found successfully
                         console.log(response);
                         if (response.data.result)
+                           
                             alert(`Appointment Pending.${response.data.msg}`);
                         else
                             alert(response.data.msg);
 
                     }, function (response) {
                             alert('Server down.');
+
+                    });
+            };
+
+            $scope.url = `${document.location.origin}/Home/AppointmentList`;
+
+            $scope.appoint = [];
+            $scope.AppointmentList = function (id) {
+                $http({ method: 'post', url: $scope.url, params: { patientId: id } }).
+                    then(function (response) {
+                        $scope.appoint = response.data.ad;
+                    }, function (response) {
 
                     });
             };

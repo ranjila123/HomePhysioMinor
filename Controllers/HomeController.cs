@@ -123,17 +123,51 @@ namespace HomePhysio.Controllers
             var physio = await  _applicationDbContext.PhysiotherapistModel.AnyAsync(o=> o.UserId==user.Id );
             if (physio == false)
             {
-                return View(nameof(Patient_Profile_Page));
+                return RedirectToAction("Patient_Profile_Page");
             }
             else
             {
                 return View(nameof(Physio_Profile_Page));
             }
         }
-        public IActionResult Patient_Profile_Page()
+        [HttpGet]
+        public async Task<IActionResult> Patient_Profile_Page()
         {
-            return View();
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(o => o.UserId == user.Id);
+            //var app = await _applicationDbContext.AppointmentsModels.Where(x => x.PatientId == patient.PatientId).Include(x => x.PatientData).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).ToList().Select(x => new PatientProfileVM
+            //{
+                
+            //});
+
+            return View(patient);
         }
+
+        [HttpPost]
+        public IActionResult AppointmentList(int patientId)
+        {
+            //var app = await _applicationDbContext.AppointmentsModels.Where(x => x.PatientId == id).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).ToList().Select(x => new PatientProfileVM
+            //{
+            //    DateAndTime=x.PhysioTimeSlotsData.DateTimeShift,
+
+
+            //}).ToList();
+
+            var app = _applicationDbContext.AppointmentsModels.Where(x => x.PatientId == patientId).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).ToList().Select(x => new PatientProfileVM
+            {
+                DateAndTime = x.PhysioTimeSlotsData.DateTimeShift,
+                Date = x.PhysioTimeSlotsData.DateTimeShift.Date.ToString("yyyy/MM/dd"),
+                Time = x.PhysioTimeSlotsData.DateTimeShift.TimeOfDay.ToString(),
+                AppointmentId=x.AppointmentId,
+                Physiotherapist=x.PhysioTimeSlotsData.PhysiotherapistData.Name,
+              //  Status=x.StatusData.StatusType
+                
+            });
+            return Json(new { ad =app});
+
+        }
+
+
         public IActionResult Physio_Profile_Page()
         {
             return View();

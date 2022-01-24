@@ -3,11 +3,11 @@
 @{
     ViewData["Title"] = "Index";
 }
-
 <h1>Index</h1>
 <div ng-controller="AppointmentController">
     @*@Model.Count()*@
-    {{physiotherapits}}
+    @*{{physiotherapits}}*@
+    <p>Search for physiotherapist</p>
     <select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()"></select>
     <div class=" jumbotron " ng-repeat="x in physiotherapits">
         <div class="container">
@@ -96,6 +96,8 @@
     </div>
 </div>
 
-@section scripts{ 
+
+
+@section scripts{
     <script src="~/AngularServices/Controller/AppointmentController.js" asp-append-version="true"></script>
 }
