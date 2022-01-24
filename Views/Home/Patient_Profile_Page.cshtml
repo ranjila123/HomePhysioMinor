@@ -8,13 +8,6 @@
 <br />
 <br />
 
-<link href="~/css/site.css" rel="stylesheet" />
-<link href="~/css/style.css" rel="stylesheet" />
-<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-<link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
-<link href="~/lib/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />
-
-
 <h2 class="text-primary">My Profile</h2>
 
  profile pic of patient
@@ -73,7 +66,7 @@
 <br />
 <br />
 
-<div ng-controller="AppointmentController" >
+<div ng-controller="HomeController">
     <button type="button" class="btn btn-primary" ng-click="AppointmentList(@Model.PatientId)">
         My Appointments
     </button>
@@ -166,14 +159,16 @@
 
     -->
 @*<script src="~/js/site.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
-<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
 
 
 @section scripts{
-    <script src="~/AngularServices/Controller/AppointmentController.js" asp-append-version="true"></script>
+   
+
+    <script src="~/AngularServices/Controller/HomeController.js" asp-append-version="true"></script>
 }

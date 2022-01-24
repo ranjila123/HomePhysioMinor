@@ -152,8 +152,9 @@ namespace HomePhysio.Controllers
 
 
             //}).ToList();
-
-            var app = _applicationDbContext.AppointmentsModels.Where(x => x.PatientId == patientId).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).ToList().Select(x => new PatientProfileVM
+            //var user =await _userManager.FindByNameAsync(this.User.Identity.Name);
+            //var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            var app = _applicationDbContext.AppointmentsModels.AsNoTracking().Where(x => x.PatientId == patientId).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).ToList().Select(x => new PatientProfileVM
             {
                 DateAndTime = x.PhysioTimeSlotsData.DateTimeShift,
                 Date = x.PhysioTimeSlotsData.DateTimeShift.Date.ToString("yyyy/MM/dd"),

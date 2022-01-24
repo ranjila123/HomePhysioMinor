@@ -10,7 +10,7 @@
 
             $scope.appoint = [];
             $scope.AppointmentList = function (id) {
-                $http({ method: 'post', url: $scope.url, params: {patientId : id } }).
+                $http({ method: 'post', url: $scope.url, params: { patientId:id} }).
                     then(function (response) {
                         $scope.appoint = response.data.ad;
                     }, function (response) {
