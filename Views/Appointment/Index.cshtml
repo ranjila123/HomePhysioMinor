@@ -7,7 +7,7 @@
 <h1>Index</h1>
 <div ng-controller="AppointmentController">
     @*@Model.Count()*@
-    {{searchType}}
+    {{physiotherapits}}
     <select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()"></select>
     <div class=" jumbotron " ng-repeat="x in physiotherapits">
         <div class="container">
@@ -23,7 +23,7 @@
 
                     <a asp-controller="Home" asp-action="Physio_info" class="btn btn-primary">See profile</a>
                     @*<a asp-controller="Appointment" asp-action="TimeSlot" class="btn btn-primary">Book Appointment</a>*@
-                  
+
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
                         Book Appointment
                     </button>
@@ -70,22 +70,22 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                  <table>
-                      <thead>
-                          <tr>
-                              <th>Date</th>
-                              <th>Time</th>
-                              <th>Action</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr ng-repeat="x in timeSlot">
-                              <td>{{x.date}}</td>
-                              <td>{{x.time}}</td>
-                              <td><button class="btn btn-primary" ng-click="AppointmentBook(x.physioTimeSlotsId)" >Book</button></td>
-                          </tr>
-                      </tbody>
-                  </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in timeSlot">
+                                <td>{{x.date}}</td>
+                                <td>{{x.time}}</td>
+                                <td><button class="btn btn-primary" ng-click="AppointmentBook(x.physioTimeSlotsId)">Book</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -97,5 +97,5 @@
 </div>
 
 @section scripts{ 
-    <script src="~/AngularServices/Controller/AppointmentController.js"></script>
+    <script src="~/AngularServices/Controller/AppointmentController.js" asp-append-version="true"></script>
 }

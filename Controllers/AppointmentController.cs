@@ -89,13 +89,13 @@ namespace HomePhysio.Controllers
                     StatusCode = "2"
 
                 };
-                _applicationDbContext.Add(app);
+                _applicationDbContext.AppointmentsModels.Add(app);
                 await _applicationDbContext.SaveChangesAsync();
-                return Json(new { response = true, msg = $"AppointentId:{app.AppointmentId}" });
+                return Json(new { result = true, msg = $"AppointentId:{app.AppointmentId}" });
             }
             catch
             {
-                return Json(new { response = false, msg = "Response False" });
+                return Json(new { result = false, msg = "Response False" });
 
             }
         }

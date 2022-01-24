@@ -7,7 +7,8 @@
         .module('startapp')
         .controller('AppointmentController', ['$scope', '$http', function AppointmentController($scope, $http) {
             $scope.url = `${document.location.origin}/Appointment/GetPhysiotherapistList`;
-            $scope.physiotherapits = [];
+
+            //$scope.physiotherapits = [];
             $scope.CallHttpPost = function () {
                 $http({ method: 'post', url: $scope.url, params: { categoryId: $scope.searchType } }).
                     then(function (response) {
@@ -31,9 +32,15 @@
             
             $scope.AppointmentBook = function (id) {
                 $http({ method: 'post', url: `${document.location.origin}/Appointment/GetAppointmentInfo`, params: { physioTimeSlotsId: id } }).
-                    then(function (response) {
-                       
+                    then(function (response) { //GetAppointmentInfo found successfully
+                        console.log(response);
+                        if (response.data.result)
+                            alert(`Appointment Pending.${response.data.msg}`);
+                        else
+                            alert(response.data.msg);
+
                     }, function (response) {
+                            alert('Server down.');
 
                     });
             };

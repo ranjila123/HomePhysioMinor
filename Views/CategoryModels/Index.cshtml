@@ -59,9 +59,9 @@
                 { data: 'catInfo', name: "CatInfo" },
                 {
                     "render": function (data, full, type, row) {
-                        
-                        return `<a href='${window.location.href}/Edit/${type.categoryId}' class='btn btn-primary' >Edit</a>
-                                <a href='${window.location.href}/Delete/${type.categoryId}' class='btn btn-danger'>Delete</a>`;
+
+                        return `<a href='${document.location.origin}/CategoryModels/Edit/${type.categoryId}' class='btn btn-primary' >Edit</a>
+                                <a href='${document.location.origin}/CategoryModels/Delete/${type.categoryId}' class='btn btn-danger'>Delete</a>`;
 
                     }
                 }
