@@ -18,6 +18,16 @@
                     });
             };
 
+            $scope.Physioappoint = [];
+            $scope.PhysioAppointmentList = function (id) {
+                $http({ method: 'post', url: `${document.location.origin}/Home/PhysioAppointmentList`, params: { physiotherapistId: id } }).
+                    then(function (response) {
+                        $scope.Physioappoint = response.data.ap;
+                    }, function (response) {
+
+                    });
+            };
+
            
 
             $scope.products = 'aa';
