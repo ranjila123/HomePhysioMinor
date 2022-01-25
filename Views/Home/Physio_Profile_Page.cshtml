@@ -38,7 +38,7 @@
                 </tr>
                 <tr>
                     <td><strong>Gender</strong> </td>
-                    <td>@Model.GenderData</td>
+                    <td>@Model.GenderData.TypeName</td>
                 </tr>
                 <tr>
                     <td><strong>Address</strong> </td>
@@ -46,7 +46,7 @@
                 </tr>
                 <tr>
                     <td><strong>Email</strong> </td>
-                    <td></td>
+                    <td>@Model.UserData.Email</td>
                 </tr>
                 <tr>
                     <td><strong>ContactNo</strong> </td>
@@ -65,7 +65,7 @@
                                 <li>@item.Category.Name</li>
                             }
                         </ul>
-</td>
+                    </td>
                 </tr>
                 <tr>
                     <td><strong>Qualification</strong> </td>
@@ -73,7 +73,7 @@
                 </tr>
                 <tr>
                     <td><strong>Experience</strong></td>
-                    <td></td>
+                    <td>@Model.Experience</td>
 
                 </tr>
             </tbody>

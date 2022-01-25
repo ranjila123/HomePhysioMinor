@@ -167,7 +167,7 @@ namespace HomePhysio.Controllers
         public async Task<IActionResult> Physio_Profile_Page()
         {
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            var physio = await _applicationDbContext.PhysiotherapistModel.Include(x=>x.physioCategoryModels).ThenInclude(x=>x.Category).SingleOrDefaultAsync(o => o.UserId == user.Id);
+            var physio = await _applicationDbContext.PhysiotherapistModel.Include(x=>x.GenderData).Include(x=>x.UserData).Include(x=>x.physioCategoryModels).ThenInclude(x=>x.Category).SingleOrDefaultAsync(o => o.UserId == user.Id);
             return View(physio);
         }
 

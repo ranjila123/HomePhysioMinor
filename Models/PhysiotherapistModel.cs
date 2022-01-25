@@ -20,6 +20,8 @@ namespace HomePhysio.Models
         public string ContactNo { get; set; }
         public string LicenseNo { get; set; }
 
+        public int Experience { get; set; }
+
         public string CitizenshipNumber { get; set; }
 
         [ForeignKey(nameof(GenderData))]
