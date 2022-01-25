@@ -131,7 +131,7 @@ namespace HomePhysio.Controllers
 
         }
         [HttpPost]
-        public JsonResult GetTimeSlotsData()
+        public async Task<JsonResult> GetTimeSlotsData()
         {
             try
             {
@@ -144,7 +144,9 @@ namespace HomePhysio.Controllers
                 int pageSize = length != null ? Convert.ToInt32(length) : 0;
                 int skip = start != null ? Convert.ToInt32(start) : 0;
                 int recordsTotal = 0;
-                var customerData = (from tempcustomer in _applicationDbContext.PhysioTimeSlotsModel select tempcustomer);
+                var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+                var physio = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+                var customerData = (from tempcustomer in _applicationDbContext.PhysioTimeSlotsModel.Where(x=>x.PhysiotherapistId==physio.PhysiotherapistId) select tempcustomer);
                 
                 if (!string.IsNullOrEmpty(searchValue))
                 {
