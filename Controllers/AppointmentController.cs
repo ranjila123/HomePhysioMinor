@@ -63,35 +63,53 @@ namespace HomePhysio.Controllers
 
         }
         [HttpPost]
-        public IActionResult GetPhysiotherapistTimeSlot(int physiotherapistId)
+        public async Task<IActionResult> GetPhysiotherapistTimeSlot(int physiotherapistId)
         {
-            var physioTimeSlot = _applicationDbContext.PhysioTimeSlotsModel.Where(x => x.PhysiotherapistId == physiotherapistId).ToList().Select(x => new PhysioTimeSlotForAppointmentVM
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            var physioTimeSlot = _applicationDbContext.PhysioTimeSlotsModel.Include(x => x.appointmentsModels).Where(x => x.PhysiotherapistId == physiotherapistId && x.appointmentsModels.Count(y => y.StatusCode == "1") == 0).Select(x => new PhysioTimeSlotForAppointmentVM
             {
                 PhysioTimeSlotsId = x.PhysioTimeSlotsId,
-                DateAndTime=x.DateTimeShift,
-                Date=x.DateTimeShift.Date.ToString("yyyy/MM/dd"),
-                Time = x.DateTimeShift.TimeOfDay.ToString()
-            });
-            
+                DateAndTime = x.DateTimeShift,
+                Date = x.DateTimeShift.Date.ToString("yyyy/MM/dd"),
+                Time = x.DateTimeShift.TimeOfDay.ToString(),
+                StatusCode = x.appointmentsModels.Count(y=>y.PatientId== patient.PatientId && y.PhysioTimeSlotsId==x.PhysioTimeSlotsId)> 0 ? "2" : "0"
+            }).ToList();
+
+            //var appointment = _applicationDbContext.AppointmentsModels.ToList();
+            //foreach (var item in appointment) {
+               
+
+            //    //Where(x => x.PhysioTimeSlotsId == item.PhysioTimeSlotsId).
+            //}
+            //var a = _applicationDbContext.PhysioTimeSlotsModel.SingleOrDefault();
             return Json(new { b = physioTimeSlot });
         }
         [HttpPost]
-        public async Task<IActionResult> GetAppointmentInfo(int physioTimeSlotsId)
+        public async Task<IActionResult> SaveAppointmentInfo(int physioTimeSlotsId)
         {
             try
             {
-                var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-                var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
-                var app = new AppointmentsModel
+                if (_applicationDbContext.AppointmentsModels.Count(x => x.PhysioTimeSlotsId == physioTimeSlotsId && x.StatusCode == "1") == 0)
                 {
-                    PhysioTimeSlotsId = physioTimeSlotsId,
-                    PatientId = patient.PatientId,
-                    StatusCode = "2"
+                    var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+                    var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+                    var app = new AppointmentsModel
+                    {
+                        PhysioTimeSlotsId = physioTimeSlotsId,
+                        PatientId = patient.PatientId,
+                        StatusCode = "2"
 
-                };
-                _applicationDbContext.AppointmentsModels.Add(app);
-                await _applicationDbContext.SaveChangesAsync();
-                return Json(new { result = true, msg = $"AppointentId:{app.AppointmentId}" });
+                    };
+                    _applicationDbContext.AppointmentsModels.Add(app);
+                    await _applicationDbContext.SaveChangesAsync();
+                    return Json(new { result = true, msg = $"AppointentId:{app.AppointmentId}" });
+                }
+                else
+                {
+                    return Json(new { result = false, msg = $"Appoinment alread booked." });
+
+                }
             }
             catch
             {

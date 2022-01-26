@@ -82,7 +82,10 @@
                             <tr ng-repeat="x in timeSlot">
                                 <td>{{x.date}}</td>
                                 <td>{{x.time}}</td>
-                                <td><button class="btn btn-primary" ng-click="AppointmentBook(x.physioTimeSlotsId)">Book</button></td>
+                                <td>
+                                <button ng-show="x.statusCode!=='1' && x.statusCode!=='2'" class="btn btn-primary" ng-click="AppointmentBook(x.physioTimeSlotsId)" >Book</button>
+                                <button ng-show="x.statusCode==='2'" class="btn btn-secondary" disabled>Pending</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

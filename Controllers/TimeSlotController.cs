@@ -50,17 +50,26 @@ namespace HomePhysio.Controllers
         {
             if (ModelState.IsValid)
             {
-                //this.User.Identity.Name;
-                var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-                var physio = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
-                physioTimeSlotModel.PhysiotherapistId = physio.PhysiotherapistId;
-                if (_applicationDbContext.PhysioTimeSlotsModel.Where(x => x.PhysiotherapistId == physio.PhysiotherapistId && x.DateTimeShift == physioTimeSlotModel.DateTimeShift).Count() == 0)
+                if (physioTimeSlotModel.DateTimeShift > DateTime.Now.AddMinutes(10))
                 {
-                    _applicationDbContext.Add(physioTimeSlotModel);
-                    await _applicationDbContext.SaveChangesAsync();
+                    //this.User.Identity.Name;
+                    var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+                    var physio = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+                    physioTimeSlotModel.PhysiotherapistId = physio.PhysiotherapistId;
+                    if (_applicationDbContext.PhysioTimeSlotsModel.Where(x => x.PhysiotherapistId == physio.PhysiotherapistId && x.DateTimeShift == physioTimeSlotModel.DateTimeShift).Count() == 0)
+                    {
+
+                        _applicationDbContext.Add(physioTimeSlotModel);
+                        await _applicationDbContext.SaveChangesAsync();
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View(physioTimeSlotModel);
                 }
 
-                return RedirectToAction(nameof(Index));
+               
             }
 
             return View(physioTimeSlotModel);

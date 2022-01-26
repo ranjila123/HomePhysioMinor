@@ -31,11 +31,10 @@
 
             
             $scope.AppointmentBook = function (id) {
-                $http({ method: 'post', url: `${document.location.origin}/Appointment/GetAppointmentInfo`, params: { physioTimeSlotsId: id } }).
+                $http({ method: 'post', url: `${document.location.origin}/Appointment/SaveAppointmentInfo`, params: { physioTimeSlotsId: id } }).
                     then(function (response) { //GetAppointmentInfo found successfully
                         console.log(response);
                         if (response.data.result)
-                           
                             alert(`Appointment Pending.${response.data.msg}`);
                         else
                             alert(response.data.msg);
@@ -46,8 +45,7 @@
                     });
             };
 
-            
-
+         
             $scope.products = 'aa';
         }]);
 

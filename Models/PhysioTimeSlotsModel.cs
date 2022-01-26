@@ -19,5 +19,6 @@ namespace HomePhysio.Models
         public int PhysiotherapistId { get; set; }
 
         public PhysiotherapistModel PhysiotherapistData { get; set; }
+        public IEnumerable<AppointmentsModel> appointmentsModels { get; set; }
     }
 }
