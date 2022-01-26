@@ -51,15 +51,6 @@
     <link rel="stylesheet" type="text/css" href="~/css/logincss/main.css">
     <!--===============================================================================================-->
 
-    <!--Added DataTabbleJsFiles-->
-    <link rel="stylesheet" type="text/css" href="~/DataTables/DataTables-1.11.3/css/jquery.dataTables.css" />
-    <link rel="stylesheet" type="text/css" href="~/DataTables/Buttons-2.2.1/css/buttons.dataTables.css" />
-    <link rel="stylesheet" type="text/css" href="~/DataTables/ColReorder-1.5.5/css/colReorder.dataTables.css" />
-    <link rel="stylesheet" type="text/css" href="~/DataTables/FixedColumns-4.0.1/css/fixedColumns.dataTables.css" />
-    <link rel="stylesheet" type="text/css" href="~/DataTables/FixedHeader-3.2.1/css/fixedHeader.dataTables.css" />
-    <link rel="stylesheet" type="text/css" href="~/DataTables/KeyTable-2.6.4/css/keyTable.dataTables.css" />
-    <link rel="stylesheet" type="text/css" href="~/DataTables/Scroller-2.0.5/css/scroller.dataTables.css" />
-    <link rel="stylesheet" type="text/css" href="~/DataTables/SearchBuilder-1.3.0/css/searchBuilder.dataTables.css" />
 </head>
 
 <body ng-app="startapp">
@@ -71,7 +62,10 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                   
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <!---<li><a class="nav-link scrollto" asp-controller="Home" asp-action="NearMe">Near Me</a></li>-->
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="About">About Us</a></li>
+                    <li><a class="nav-link scrollto" asp-controller="Home" asp-action="FAQ">FAQ</a></li>
                     <li><a class="nav-link scrollto" asp-controller="Appointment" asp-action="Index">Book Apoointment</a></li>
                     <li class="dropdown">
                         <a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
@@ -97,6 +91,54 @@
             @RenderBody()
         </main>
     </div>
+    <footer id="footer">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>HomePhysio</h3>
+                        <p>
+                            <br>
+                            A project by students of NCE.<br>
+                            <br>
+                            <strong>Email:</strong> HomePhysio2022@gmail.com<br>
+                        </p>
+                    </div>
+
+                    <div class="container-fluid col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="About">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Terms">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Privacy">Privacy policy</a></li>
+                        </ul>
+                        <!---<ul class="d-inline">
+                            <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="About">About us</a></li>
+                            <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Index">Services</a></li>
+                            <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                            <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Terms">Terms of service</a></li>
+                            <li class="d-inline"><i class="bx bx-chevron-right"></i> <a asp-controller="Home" asp-action="Privacy">Privacy policy</a></li>
+                        </ul>-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container d-md-flex py-4">
+
+            <div class="me-md-auto text-center text-md-start">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>HomePhysio</span></strong>. All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
 
 
     <script src="~/vendor/bootstrap/js/bootstrap.js"></script>
@@ -128,19 +170,6 @@
     <script src="~/js/loginjs/main.js"></script>
 
     <!--Added DataTAble scripts-->
-    <script type="text/javascript" src="~/DataTables/JSZip-2.5.0/jszip.js"></script>
-    <script type="text/javascript" src="~/DataTables/pdfmake-0.1.36/pdfmake.js"></script>
-    <script type="text/javascript" src="~/DataTables/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="~/DataTables/DataTables-1.11.3/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="~/DataTables/Buttons-2.2.1/js/dataTables.buttons.js"></script>
-    <script type="text/javascript" src="~/DataTables/Buttons-2.2.1/js/buttons.html5.js"></script>
-    <script type="text/javascript" src="~/DataTables/Buttons-2.2.1/js/buttons.print.js"></script>
-    <script type="text/javascript" src="~/DataTables/ColReorder-1.5.5/js/dataTables.colReorder.js"></script>
-    <script type="text/javascript" src="~/DataTables/FixedColumns-4.0.1/js/dataTables.fixedColumns.js"></script>
-    <script type="text/javascript" src="~/DataTables/FixedHeader-3.2.1/js/dataTables.fixedHeader.js"></script>
-    <script type="text/javascript" src="~/DataTables/KeyTable-2.6.4/js/dataTables.keyTable.js"></script>
-    <script type="text/javascript" src="~/DataTables/Scroller-2.0.5/js/dataTables.scroller.js"></script>
-    <script type="text/javascript" src="~/DataTables/SearchBuilder-1.3.0/js/dataTables.searchBuilder.js"></script>
 
     <script src="~/js/angular.min.js"></script>
     <script src="~/AngularServices/Main.js"></script>
