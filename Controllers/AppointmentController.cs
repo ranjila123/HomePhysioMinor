@@ -25,10 +25,10 @@ namespace HomePhysio.Controllers
             _userManager = userManager;
         }
       
-        public IActionResult Index()
+        public IActionResult Index(int categoryId)
         {
             ViewBag.Categories =new SelectList( _applicationDbContext.CategoryModel.ToList(),nameof(CategoryModel.CategoryId),nameof(CategoryModel.Name));
-            
+            ViewBag.CategoryId = categoryId;
             return View();
         }
         [Authorize]
@@ -116,6 +116,32 @@ namespace HomePhysio.Controllers
                 return Json(new { result = false, msg = "Response False" });
 
             }
+
+           
+        }
+        [HttpPost]
+        public async Task<IActionResult> ConfirmAppointment(int appointmentId)
+        {
+           
+            try
+            {
+                if (appointmentId == null)
+                {
+                return Json(new { result = false, msg = "Response False" });
+                }
+                AppointmentsModel appointment = _applicationDbContext.AppointmentsModels.SingleOrDefault(x => x.AppointmentId == appointmentId);
+                appointment.StatusCode = "1";
+                _applicationDbContext.Update(appointment);
+                await _applicationDbContext.SaveChangesAsync();
+                return Json(new { result = true, msg = "Success" });
+
+             }
+            catch
+            {
+                return Json(new { result = false, msg = "Response False" });
+
+            }
+            
         }
     }
 }

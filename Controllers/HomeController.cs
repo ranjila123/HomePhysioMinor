@@ -79,6 +79,8 @@ namespace HomePhysio.Controllers
         }
         public IActionResult Dropdown2()
         {
+            ViewBag.categoryList = _applicationDbContext.CategoryModel.ToList();
+            
             return View();
         }
         public IActionResult FAQ()

@@ -28,6 +28,21 @@
                     });
             };
 
+
+            $scope.ConfirmAppointment = function (id, physiotherapistId) {
+                $scope.Physioappoint = [];
+
+                //$window.location.reload();
+                $http({ method: 'post', url: `${document.location.origin}/Appointment/ConfirmAppointment`, params: { appointmentId: id } }).
+                    then(function (response) {
+                        $scope.PhysioAppointmentList(physiotherapistId);
+                        
+                    }, function (response) {
+
+                    });
+            };
+
+
            
 
             $scope.products = 'aa';

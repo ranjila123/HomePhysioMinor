@@ -7,8 +7,10 @@
 <div ng-controller="AppointmentController">
     @*@Model.Count()*@
     @*{{physiotherapits}}*@
-    <p>Search for physiotherapist</p>
-    <select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()"></select>
+    <p >Search for physiotherapist</p>
+    
+    <select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()" ng-init="searchType='@ViewBag.CategoryId';CallHttpPost();"></select>
+
     <div class=" jumbotron " ng-repeat="x in physiotherapits">
         <div class="container">
             <div class="media">
@@ -33,6 +35,7 @@
             </div>
         </div>
     </div>
+
     @*@foreach (var item in Model)
         {
             <div class=" jumbotron ">
