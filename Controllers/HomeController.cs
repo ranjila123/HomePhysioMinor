@@ -30,49 +30,7 @@ namespace HomePhysio.Controllers
             _mapper = mapper;
             _userManager = userManager;
         }
-
-        public IActionResult Index()
-        {
-            //var test = new PatientViewModel();
-            //test.Name1 = "Urja";
-            //var test1= _mapper.Map<PatientModel>(test); // PatientModel is destination
-
-            //var test = new PhysiotherapistViewModel(); // data input from form
-            //test.Name1 = "Monika";
-            //test.Address = "Lagan";
-            //var test1 = _mapper.Map<PhysiotherapistModel>(test); // PatientModel is destination
-            //var test1 = new PhysiotherapistModel { 
-            // Name= test.Name1,
-            // Address = test.Address
-            //};
-            //_applicationDbContext.PhysiotherapistModel.Add(test1);
-            //ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId),nameof(GenderModel.TypeName));
-            //ViewBag.Urja = new {test = "a" };
-            //ViewBag.Urja = "asd";
-            //ViewBag.Urja = 0;
-
-            return View();
-        }
-        public IActionResult About()
-        {
-            return View();
-        }
        
-      
-        public IActionResult Services()
-        {
-            return View();
-        }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-        public IActionResult LearnMore()
-        {
-            return View();
-        }
-
         public IActionResult Dropdown1()
         {
             return View();
@@ -83,29 +41,12 @@ namespace HomePhysio.Controllers
             
             return View();
         }
-        public IActionResult FAQ()
-        {
-            return View();
-        }
-
 
         public IActionResult Login()
         {
             return View();
         }
-        public IActionResult SignUp()
-        {
-            return View();
-        }
-        public IActionResult Terms()
-        {
-            return View();
-        }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+       
         public IActionResult Physio_info()
         {
             return View();

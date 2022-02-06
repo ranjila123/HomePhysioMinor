@@ -263,7 +263,7 @@ namespace HomePhysio.Controllers
         public async Task<IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction(nameof(PublicController.Index), "Public");
         }
 
         [HttpGet]

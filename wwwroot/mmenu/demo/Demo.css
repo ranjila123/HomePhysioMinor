@@ -1,0 +1,104 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #fff;
+    font-family: Arial, Helvetica, Verdana;
+    font-size: 14px;
+    line-height: 22px;
+    color: #666;
+    position: relative;
+    -webkit-text-size-adjust: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+h1,
+h2,
+h3 {
+    font-size: 18px;
+}
+
+h4,
+h5,
+h6 {
+    font-size: 16px;
+}
+
+p {
+    margin: 0 0 10px 0;
+}
+
+a,
+a:link,
+a:active,
+a:visited,
+a:hover {
+    color: inherit;#page#header
+    text-decoration: underline;
+}
+
+nav:not(.mm-menu) {
+    display: none;
+}
+
+#header {
+    position: sticky;
+    height: 44px;
+    padding: 0 80px;
+    top: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 44px;
+    text-align: center;
+    background: #1977CC;
+}
+
+    #header a {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 80px;
+        height: 44px;
+        padding: 12px 25px;
+    }
+
+        #header a:before,
+        #header a:after {
+            content: "";
+            display: block;
+            background: #1977CC;
+            height: 2px;
+        }
+
+        #header a span {
+            background: #fff;
+            display: block;
+            height: 2px;
+            margin: 7px 0;
+        }
+#header div{
+    text-align:center;
+}    
+#content {
+    padding: 150px 50px 50px 50px;
+    text-align: center;
+}
