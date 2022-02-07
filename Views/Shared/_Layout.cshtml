@@ -8,6 +8,13 @@
     <link href="~/img/favicon-32x32.png" rel="icon">
     <link href="~/img/apple-touch-icon HP.png" rel="icon">
 
+    @*menu js*@
+    <link href="~/mmenu/demo/css/demo.css" rel="stylesheet" />
+    <link href="~/mmenu/dist/mmenu.css" rel="stylesheet" />
+    <link href="~/mmenu/dist/extensions/themes/mmenu.themes.css" rel="stylesheet" />
+    <link href="~/mmenu/dist/addons/navbars/mmenu.navbars.css" rel="stylesheet" />
+    <link href="~/mmenu/dist/addons/iconbar/mmenu.iconbar.css" rel="stylesheet" />
+    <link href="~/mmenu/dist/addons/sidebar/mmenu.sidebar.css" rel="stylesheet" />
 
     <link href="~/vendor/bootstrap/css/bootstrap-grid.css" rel="stylesheet" />
     <!-- Google Fonts -->
@@ -50,9 +57,6 @@
     <link rel="stylesheet" type="text/css" href="~/css/logincss/util.css">
     <link rel="stylesheet" type="text/css" href="~/css/logincss/main.css">
     <!--===============================================================================================-->
-    @*menu js*@
-    <link href="~/mmenu/demo/Demo.css" rel="stylesheet" />
-    <link href="~/mmenu/StyleSheet.css" rel="stylesheet" />
     <!--Added DataTabbleJsFiles-->
     <link rel="stylesheet" type="text/css" href="~/DataTables/DataTables-1.11.3/css/jquery.dataTables.css" />
     <link rel="stylesheet" type="text/css" href="~/DataTables/Buttons-2.2.1/css/buttons.dataTables.css" />
@@ -62,6 +66,80 @@
     <link rel="stylesheet" type="text/css" href="~/DataTables/KeyTable-2.6.4/css/keyTable.dataTables.css" />
     <link rel="stylesheet" type="text/css" href="~/DataTables/Scroller-2.0.5/css/scroller.dataTables.css" />
     <link rel="stylesheet" type="text/css" href="~/DataTables/SearchBuilder-1.3.0/css/searchBuilder.dataTables.css" />
+
+
+    <script src="~/mmenu/dist/mmenu.js"></script>
+
+    <script src="~/mmenu/dist/addons/navbars/mmenu.navbars.js"></script>
+    <script src="~/mmenu/dist/addons/iconbar/mmenu.iconbar.js"></script>
+    <script src="~/mmenu/dist/addons/iconbar/options.js"></script>
+    <script src="~/mmenu/dist/addons/sidebar/mmenu.sidebar.js"></script>
+    <script src="~/mmenu/dist/addons/sidebar/options.js"></script>
+    <script>
+        document.addEventListener(
+            "DOMContentLoaded", () => {
+                new Mmenu("#menu", {
+                    "slidingSubmenus": false,
+                    "extensions": ["theme-white"],
+                    sidebar: {
+                        collapsed: {
+                            use: "(min-width: 450px)"
+                        },
+                        expanded: {
+                            use: "(min-width: 992px)",
+                            initial: "closed"
+                        }
+                    },
+                    "navbars": [
+                        {
+                            "position": "bottom",
+                            "content": [
+                                "<a  href='#/'>Privacy</a>",
+                                "<a  href='#/'>Terms of Services</a>",
+
+                            ]
+                        }
+                    ],
+                    "iconbar": {
+                        "use": true,
+                        "top": [
+                            "<a href='#/'><i class='fa fa-home'></i></a>",
+                            "<a href='#/'><i class='fa fa-user'></i></a>"
+                        ]
+                    }
+                   
+                  
+                });
+            }
+        );
+    </script>
+
+    <script>
+
+
+        new Mmenu(document.querySelector("#menu"));
+
+
+        document.addEventListener("click", function (evnt) {
+            var anchor = evnt.target.closest('a[href="#/"]');
+            if (anchor) {
+                alert("Thank you for clicking, but that's a demo link.");
+                evnt.preventDefault();
+            }
+        });
+    </script>
+    @*<style>
+            :root {
+                --mm-sidebar-expanded-size: 300px;
+            }
+            .mm-wrapper--sidebar-expanded.mm-wrapper--opened #header a {
+                display: none;
+            }
+            .mm-navbar--tabs span {
+                display: inline-block;
+                margin-left: 8px;
+            }                          
+    </style>*@
 </head>
 
 <body ng-app="startapp">
@@ -71,45 +149,95 @@
             <a href="#menu" onclick="myFunction()"><span></span></a>
 
             <img src="~/img/logo.png" style='height: 100%; width: 100%; object-fit: contain' />
-               
+
         </div>
-        <div >
+        <div>
             <div class="container">
                 <main role="main" class="pb-3">
                     @RenderBody()
                 </main>
             </div>
         </div>
-        <nav id="menu">
-            <ul>
-                <li><a href="#/">Home</a></li>
-                <li>
-                    <span>About us</span>
+        <nav class="sidebar close" id="menu">
+
+           
                     <ul>
-                        <li><a href="#/">History</a></li>
                         <li>
-                            <span>The team</span>
+                            <a href="#/">
+                                <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+                                <span class="text-primary">My Profile</span>
+                            </a>
+
+                        </li>
+
+                        <li>
+                            <a href="#/">
+                                <i class="fa fa-calendar-check-o fa-2x" aria-hidden="true"></i>
+                                <span class="text-primary">Appointments</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#/">
+                                <i class="fa fa-bell fa-2x" aria-hidden="true"></i>
+                                <span class="text-primary">Notification</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#/">
+                                <i class="fa fa-plus-square fa-2x" aria-hidden="true"></i>
+                                <span class="text-primary">Services</span>
+                            </a>
+
                             <ul>
                                 <li>
-                                    <a href="#/">Management</a>
+                                    <a href="#/">
+                                        <span class="text-primary">Physiotherapist</span>
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#/">Sales</a>
+                                    <a href="#/">
+                                        <span class="text-primary">Symptoms</span>
+                                    </a>
                                 </li>
-                                <li>
-                                    <a href="#/">Development</a>
-                                </li>
+
                             </ul>
                         </li>
-                        <li><a href="#/">Our address</a></li>
-                    </ul>
-                </li>
-                <li><a href="#/">Contact</a></li>
 
-                <li class="Divider">Other demos</li>
-                <li><a href="advanced.html">Advanced demo</a></li>
-                <li><a href="onepage.html">One page demo</a></li>
-            </ul>
+                        <li>
+                            <a href="#/">
+                                <i class="fa fa-credit-card-alt fa-2x" aria-hidden="true"></i>
+                                <span class="text-primary">Payments</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#/">
+                                <i class="fa fa-user-md fa-2x" aria-hidden="true"></i>
+                                <span class="text-primary">About Physiotherapy</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#/">
+                                <i class="fa fa-briefcase fa-2x" aria-hidden="true"></i>
+                                <span class="text-primary">About Us</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/">
+                                <i class="fa fa-question-circle fa-2x" aria-hidden="true"></i>
+                                <span class="text-primary">FAQ</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/">
+                                <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
+                                <span class="text-primary">Logout</span>
+                            </a>
+                        </li>
+                    </ul>                
         </nav>
 
 
@@ -140,12 +268,12 @@
     @*<a asp-controller="account" asp-action="register" class="appointment-btn scrollto">register</a>*@
 
     @*</div>
-    </header>-->*@<!-- End Header -->
+        </header>-->*@<!-- End Header -->
     @*<div class="container" id="pages-content" style="margin-top:70px">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>*@
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>*@
 
 
     <script src="~/vendor/bootstrap/js/bootstrap.js"></script>
@@ -156,19 +284,19 @@
     <script src="~/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="~/js/main.js"></script>
     @*for login
-    ===============================================================================================*@
+        ===============================================================================================*@
     <script src="~/vendor/loginVendor/jquery/jquery-3.2.1.min.js"></script>
     @*===============================================================================================*@
     <script src="~/vendor/loginVendor/animsition/js/animsition.min.js"></script>
-   @* ===============================================================================================*@
+    @* ===============================================================================================*@
     <script src="~/vendor/loginVendor/bootstrap/js/popper.js"></script>
     <script src="~/vendor/loginVendor/bootstrap/js/bootstrap.min.js"></script>
-   @* ===============================================================================================*@
+    @* ===============================================================================================*@
     <script src="~/vendor/loginVendor/select2/select2.min.js"></script>
-   @* ===============================================================================================*@
+    @* ===============================================================================================*@
     <script src="~/vendor/loginVendor/daterangepicker/moment.min.js"></script>
     <script src="~/vendor/loginVendor/daterangepicker/daterangepicker.js"></script>
-   @* ===============================================================================================*@
+    @* ===============================================================================================*@
     <script src="~/vendor/loginVendor/countdowntime/countdowntime.js"></script>
     @*===============================================================================================*@
     <script src="~/js/loginjs/main.js"></script>
@@ -191,20 +319,6 @@
     <script src="~/AngularServices/Main.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-    <script src="~/mmenu/JavaScript.js"></script>
-    <script>
-
-
-        new Mmenu(document.querySelector("#menu"));
-
-
-        document.addEventListener("click", function (evnt) {
-            var anchor = evnt.target.closest('a[href="#/"]');
-            if (anchor) {
-                alert("Thank you for clicking, but that's a demo link.");
-                evnt.preventDefault();
-            }
-        });
-    </script>
+   
 </body>
 </html>

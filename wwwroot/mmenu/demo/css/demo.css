@@ -1,4 +1,4 @@
-﻿* {
+* {
     box-sizing: border-box;
 }
 
@@ -7,7 +7,6 @@ body {
     padding: 0;
     margin: 0;
 }
-
 body {
     background-color: #fff;
     font-family: Arial, Helvetica, Verdana;
@@ -17,7 +16,6 @@ body {
     position: relative;
     -webkit-text-size-adjust: none;
 }
-
 h1,
 h2,
 h3,
@@ -28,29 +26,25 @@ h6 {
     font-weight: bold;
     margin: 20px 0 10px 0;
 }
-
 h1,
 h2,
 h3 {
     font-size: 18px;
 }
-
 h4,
 h5,
 h6 {
     font-size: 16px;
 }
-
 p {
     margin: 0 0 10px 0;
 }
-
 a,
 a:link,
 a:active,
 a:visited,
 a:hover {
-    color: inherit;#page#header
+    color: inherit;
     text-decoration: underline;
 }
 
@@ -68,36 +62,32 @@ nav:not(.mm-menu) {
     color: #fff;
     line-height: 44px;
     text-align: center;
-    background: #1977CC;
+    background:#1977cc;
 }
-
-    #header a {
+#header a {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 44px;
+    padding: 12px 25px;
+    background: #1977cc;
+}
+    #header a:before,
+    #header a:after {
+        content: "";
         display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 80px;
-        height: 44px;
-        padding: 12px 25px;
+        background: #fff;
+        height: 2px;
+    }
+    #header a span {
+        background: #fff;
+        display: block;
+        height: 2px;
+        margin: 7px 0;
     }
 
-        #header a:before,
-        #header a:after {
-            content: "";
-            display: block;
-            background: #1977CC;
-            height: 2px;
-        }
-
-        #header a span {
-            background: #fff;
-            display: block;
-            height: 2px;
-            margin: 7px 0;
-        }
-#header div{
-    text-align:center;
-}    
 #content {
     padding: 150px 50px 50px 50px;
     text-align: center;
