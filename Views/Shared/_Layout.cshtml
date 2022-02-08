@@ -77,7 +77,24 @@
             "DOMContentLoaded", () => {
                 new Mmenu("#menu", {
                     "slidingSubmenus": false,
+
                     "extensions": ["theme-white"],
+                    counters: true,
+                    setSelected: true,
+                    sidebar: {
+                        collapsed: {
+                            use: '(min-width: 50px)',
+                            size: 40,
+                            hideNavbar: true
+                        },
+                        expanded: {
+                            use: false,
+                            size: 25
+                        }
+                    },
+                    //searchfield: {
+                    //    placeholder: 'Search menu items'
+                    //},
                     //sidebar: {
                     //    collapsed: {
                     //        use: "(min-width: 550px)",
@@ -89,6 +106,9 @@
                     //    }
                     //},
                     "navbars": [
+                        //{
+                        //    content: ['searchfield']
+                        //},
                         {
                             "position": "bottom",
                             "content": [
@@ -167,7 +187,7 @@
 
             <ul>
                 <li>
-                    <a href="#/">
+                    <a asp-controller="Home" asp-action="Physio_Profile_Page">
                         <i class='fa fa-user-circle fa-2x' aria-hidden='true'></i>
                         <span class="text-primary">My Profile</span>
                     </a>
