@@ -13,10 +13,10 @@
     <link href="~/mmenu/dist/mmenu.css" rel="stylesheet" />
     <link href="~/mmenu/dist/extensions/themes/mmenu.themes.css" rel="stylesheet" />
     <link href="~/mmenu/dist/addons/navbars/mmenu.navbars.css" rel="stylesheet" />
-    <link href="~/mmenu/dist/addons/iconbar/mmenu.iconbar.css" rel="stylesheet" />
-    <link href="~/mmenu/dist/addons/sidebar/mmenu.sidebar.css" rel="stylesheet" />
+    @*<link href="~/mmenu/dist/addons/iconbar/mmenu.iconbar.css" rel="stylesheet" />*@
+    @*<link href="~/mmenu/dist/addons/iconpanels/mmenu.iconpanels.css" rel="stylesheet" />*@
 
-    <link href="~/vendor/bootstrap/css/bootstrap-grid.css" rel="stylesheet" />
+
     <!-- Google Fonts -->
     <link href="~/font.css" rel="stylesheet" />
 
@@ -68,28 +68,26 @@
     <link rel="stylesheet" type="text/css" href="~/DataTables/SearchBuilder-1.3.0/css/searchBuilder.dataTables.css" />
 
 
-    <script src="~/mmenu/dist/mmenu.js"></script>
 
-    <script src="~/mmenu/dist/addons/navbars/mmenu.navbars.js"></script>
-    <script src="~/mmenu/dist/addons/iconbar/mmenu.iconbar.js"></script>
-    <script src="~/mmenu/dist/addons/iconbar/options.js"></script>
-    <script src="~/mmenu/dist/addons/sidebar/mmenu.sidebar.js"></script>
-    <script src="~/mmenu/dist/addons/sidebar/options.js"></script>
+
+
+    <script src="~/mmenu/dist/mmenu.js"></script>
     <script>
         document.addEventListener(
             "DOMContentLoaded", () => {
                 new Mmenu("#menu", {
                     "slidingSubmenus": false,
                     "extensions": ["theme-white"],
-                    sidebar: {
-                        collapsed: {
-                            use: "(min-width: 450px)"
-                        },
-                        expanded: {
-                            use: "(min-width: 992px)",
-                            initial: "closed"
-                        }
-                    },
+                    //sidebar: {
+                    //    collapsed: {
+                    //        use: "(min-width: 550px)",
+                          
+                    //    },
+                    //    expanded: {
+                    //        use: "(min-width: 550px)",
+                    //        initial: "closed"
+                    //    }
+                    //},
                     "navbars": [
                         {
                             "position": "bottom",
@@ -99,27 +97,17 @@
 
                             ]
                         }
-                    ],
-                    "iconbar": {
-                        "use": true,
-                        "top": [
-                            "<a href='#/'><i class='fa fa-home'></i></a>",
-                            "<a href='#/'><i class='fa fa-user'></i></a>"
-                        ]
-                    }
-                   
-                  
+                    ]
+
+
+
                 });
             }
         );
     </script>
 
     <script>
-
-
         new Mmenu(document.querySelector("#menu"));
-
-
         document.addEventListener("click", function (evnt) {
             var anchor = evnt.target.closest('a[href="#/"]');
             if (anchor) {
@@ -128,18 +116,35 @@
             }
         });
     </script>
+
+    <script src="~/mmenu/dist/addons/navbars/mmenu.navbars.js"></script>
+    <script src="~/mmenu/dist/addons/sidebar/mmenu.sidebar.js"></script>
+    <script src="~/mmenu/dist/addons/sidebar/options.js"></script>
+
     @*<style>
-            :root {
-                --mm-sidebar-expanded-size: 300px;
-            }
-            .mm-wrapper--sidebar-expanded.mm-wrapper--opened #header a {
-                display: none;
-            }
-            .mm-navbar--tabs span {
-                display: inline-block;
-                margin-left: 8px;
-            }                          
-    </style>*@
+                :root {
+                    --mm-sidebar-expanded-size: 300px;
+                }
+                .mm-wrapper--sidebar-expanded.mm-wrapper--opened #header a {
+                    display: none;
+                }
+                .mm-navbar--tabs span {
+                    display: inline-block;
+                    margin-left: 8px;
+                }
+        </style>*@
+    <style>
+
+        .fa {
+            font-size: 25px;
+            text-align: center;
+            line-height: 25px;
+            width: 40px;
+            margin-right: 40px;
+            float: left;
+            color: #1977cc;
+        }
+    </style>
 </head>
 
 <body ng-app="startapp">
@@ -160,84 +165,83 @@
         </div>
         <nav class="sidebar close" id="menu">
 
-           
+            <ul>
+                <li>
+                    <a href="#/">
+                        <i class='fa fa-user-circle fa-2x' aria-hidden='true'></i>
+                        <span class="text-primary">My Profile</span>
+                    </a>
+
+                </li>
+
+                <li>
+                    <a href="#/">
+                        <i class='fa fa-calendar-check-o fa-2x' aria-hidden='true'></i>
+                        <span class="text-primary">Appointments</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#/">
+                        <i class='fa fa-bell fa-2x' aria-hidden='true'></i>
+                        <span class="text-primary">Notification</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#/">
+                        <i class='fa fa-plus-square fa-2x' aria-hidden='true'></i>
+                        <span class="text-primary">Services</span>
+                    </a>
+
                     <ul>
                         <li>
                             <a href="#/">
-                                <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
-                                <span class="text-primary">My Profile</span>
-                            </a>
-
-                        </li>
-
-                        <li>
-                            <a href="#/">
-                                <i class="fa fa-calendar-check-o fa-2x" aria-hidden="true"></i>
-                                <span class="text-primary">Appointments</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#/">
-                                <i class="fa fa-bell fa-2x" aria-hidden="true"></i>
-                                <span class="text-primary">Notification</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#/">
-                                <i class="fa fa-plus-square fa-2x" aria-hidden="true"></i>
-                                <span class="text-primary">Services</span>
-                            </a>
-
-                            <ul>
-                                <li>
-                                    <a href="#/">
-                                        <span class="text-primary">Physiotherapist</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#/">
-                                        <span class="text-primary">Symptoms</span>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#/">
-                                <i class="fa fa-credit-card-alt fa-2x" aria-hidden="true"></i>
-                                <span class="text-primary">Payments</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#/">
-                                <i class="fa fa-user-md fa-2x" aria-hidden="true"></i>
-                                <span class="text-primary">About Physiotherapy</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#/">
-                                <i class="fa fa-briefcase fa-2x" aria-hidden="true"></i>
-                                <span class="text-primary">About Us</span>
+                                <span class="text-primary">Physiotherapist</span>
                             </a>
                         </li>
                         <li>
                             <a href="#/">
-                                <i class="fa fa-question-circle fa-2x" aria-hidden="true"></i>
-                                <span class="text-primary">FAQ</span>
+                                <span class="text-primary">Symptoms</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#/">
-                                <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
-                                <span class="text-primary">Logout</span>
-                            </a>
-                        </li>
-                    </ul>                
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#/">
+                        <i class='fa fa-credit-card-alt fa-2x' aria-hidden='true'></i>
+                        <span class="text-primary">Payments</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#/">
+                        <i class='fa fa-user-md fa-2x' aria-hidden='true'></i>
+                        <span class="text-primary">About Physiotherapy</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#/">
+                        <i class='fa fa-briefcase fa-2x' aria-hidden='true'></i>
+                        <span class="text-primary">About Us</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#/">
+                        <i class='fa fa-question-circle fa-2x' aria-hidden='true'></i>
+                        <span class="text-primary">FAQ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#/">
+                        <i class='fa fa-sign-out fa-2x' aria-hidden='true'></i>
+                        <span class="text-primary">Logout</span>
+                    </a>
+                </li>
+            </ul>
         </nav>
 
 
@@ -318,7 +322,8 @@
     <script src="~/js/angular.min.js"></script>
     <script src="~/AngularServices/Main.js"></script>
 
+
     @await RenderSectionAsync("Scripts", required: false)
-   
+
 </body>
 </html>
