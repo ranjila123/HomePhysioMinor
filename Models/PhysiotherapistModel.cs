@@ -34,6 +34,8 @@ namespace HomePhysio.Models
 
         public IEnumerable<PhysioCategoryModel> physioCategoryModels { get; set; }//1 to many
 
+        public string Longitude { get; set; }
+        public string Latitude { get; set; }
     }
     //public class PhysiotherapistViewModel
     //{

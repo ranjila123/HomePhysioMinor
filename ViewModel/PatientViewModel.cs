@@ -30,5 +30,8 @@ namespace HomePhysio.ViewModel
         
         public string UserId { get; set; }
         public ApplicationUser UserData { get; set; }
+
+        public string Longitude { get; set; }
+        public string Latitude { get; set; }
     }
 }

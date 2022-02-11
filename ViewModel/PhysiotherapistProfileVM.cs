@@ -16,6 +16,7 @@ namespace HomePhysio.ViewModel
         public string Status { get; set; }
         public string PatientName { get; set; }
 
-
+        public string Longitude { get; set; }
+        public string Latitude { get; set; }
     }
 }

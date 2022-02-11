@@ -16,6 +16,7 @@ namespace HomePhysio.ViewModel
         public string Qualification { get; set; }
         
         public string Category { get; set; }
-
+        public string Longitude { get; set; }
+        public string Latitude { get; set; }
     }
 }
