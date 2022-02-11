@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using HomePhysio.Data;
 using HomePhysio.Models;
+using HomePhysio.Services.FileUpload;
 using HomePhysio.ViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,14 +19,16 @@ namespace HomePhysio.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IFileUpload _fileUpload;
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly ILogger<HomeController>_logger;
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager; //usermanager depend on identity user
 
 
-        public HomeController(ILogger<HomeController> logger,IMapper mapper, ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager)
+        public HomeController(IFileUpload fileUpload, ILogger<HomeController> logger,IMapper mapper, ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager)
         {
+            _fileUpload = fileUpload;
             _applicationDbContext = applicationDbContext;
             _logger = logger;
             _mapper = mapper;
@@ -140,7 +144,12 @@ namespace HomePhysio.Controllers
             return Json(new { ap = Physioapp });
 
         }
-
+        [HttpPost]
+        public async Task<JsonResult> UploadPatientImage(IFormFile file)
+        {
+            var data = _fileUpload.ImageToByte(file);
+            return Json(new { });
+        }
 
         //public IActionResult Physio_Profile_Page()
         //{

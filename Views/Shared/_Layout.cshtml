@@ -1,4 +1,4 @@
-﻿    <!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,6 +29,7 @@
     <link href="~/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="~/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="~/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link asp-append-version="true" rel="stylesheet" href="~/lib/angular-confirm/css/angular-confirm.css" />
 
     <!-- Template Main CSS File -->
     <link href="~/css/style.css" rel="stylesheet" />
@@ -98,7 +99,7 @@
                     //sidebar: {
                     //    collapsed: {
                     //        use: "(min-width: 550px)",
-                          
+
                     //    },
                     //    expanded: {
                     //        use: "(min-width: 550px)",
@@ -306,7 +307,9 @@
     <script src="~/vendor/php-email-form/validate.js"></script>
     <script src="~/vendor/purecounter/purecounter.js"></script>
     <script src="~/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="~/js/main.js"></script>
+
+    <script src="~/js/main.js" asp-append-version="true"></script>
+
     @*for login
         ===============================================================================================*@
     <script src="~/vendor/loginVendor/jquery/jquery-3.2.1.min.js"></script>
@@ -340,8 +343,46 @@
     <script type="text/javascript" src="~/DataTables/SearchBuilder-1.3.0/js/dataTables.searchBuilder.js"></script>
 
     <script src="~/js/angular.min.js"></script>
-    <script src="~/AngularServices/Main.js"></script>
+    @*file upload*@
+    <script src="~/lib/angular/file/ng-file-upload.js" asp-append-version="true"></script>
+    <script src="~/lib/angular/file/ng-file-upload-shim.js" asp-append-version="true"></script>
+    <script src="~/lib/lobibox/lobibox.min.js" asp-append-version="true"></script>
+    <script src="~/lib/angular-confirm/dist/angular-confirm.min.js" asp-append-version="true"></script>
 
+    <script src="~/AngularServices/Main.js" asp-append-version="true"></script>
+
+    @*ladda spinner*@
+    @*<script src="~/lib/ladda/dist/spin.min.js" asp-append-version="true"></script>
+        <script src="~/lib/ladda/dist/ladda.min.js" asp-append-version="true"></script>
+        <script src="~/lib/ladda-angular/dist/angular-ladda.js" asp-append-version="true"></script>*@
+
+
+
+    <script>
+                            //function messageBox(type, message) {
+                            //    Lobibox.notify(type, {
+                            //        pauseDelayOnHover: true,
+                            //        continueDelayOnInactiveTab: false,
+                            //        msg: message,
+                            //        width: 550,
+                            //        closeOnClick: true,
+                            //        //iconSource: 'fontAwesome',
+                            //        delay: 20000 //In milliseconds
+
+                            //    });
+                            //}
+                            //function messageBoxStay(type, message) {
+                            //    Lobibox.notify(type, {
+                            //        msg: message,
+                            //        width: 550,
+                            //        closeOnClick: true,
+                            //        closeButton: true,
+                            //        //iconSource: 'fontAwesome',
+                            //        closeOnEsc: true,
+                            //        delay: false
+                            //    });
+                            //}
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 

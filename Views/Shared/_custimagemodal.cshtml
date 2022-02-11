@@ -1,0 +1,42 @@
+﻿<div class="imagesListCust">
+    <a data-toggle="modal" href="#custimagemodal" ng-click="LoadCustomerImages(cuscidno)"><i class="fa fa-id-card"> </i></a>
+</div>
+<div id="custimagemodal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Customer Images <img src="~/img/Profile pic/PP.png" style="height:50px;width:50px" id="previewimage" /></h4>
+
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            </div>
+            <div class="modal-body">
+                <div ng-show="!imageCustSelect" ng-init="imageSelect=false">
+                    <form ng-controller="FileUploadController" name="form">
+                        Single Image with validations
+                        <input type="file" ngf-select ng-model="file" name="file" ngf-max-size="150KB" ngf-pattern="'image/*'"
+                               ngf-accept="'image/*'"
+                               onchange="$('#previewimage')[0].src = window.URL.createObjectURL(this.files[0])" />
+                      
+                        <button type="submit" ng-click="CustSubmit(cuscidno)">Submit</button>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-4" ng-repeat="imag in ImageListCust">
+                            <div class="gal-detail thumb">
+                                <img ng-src="data:image/JPEG;base64,{{imag.img}}" class="thumb-img" alt="work-thumbnail">
+                                <div class="middle">
+                                    <button ng-click="ImageSelectCustomer(imag.img)">View</button>
+                                    <button ng-click="DeleteCustomerImage(imag.imagesId,imag.fromBackup,imag.cusCidNo)">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="imageCustSelect">
+                    <button ng-click="imageCustSelect=false">View Images</button>
+                    <img ng-src="data:image/JPEG;base64,{{imageCustSelected}}" style="width:100%" alt="work-thumbnail">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

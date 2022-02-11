@@ -1,3 +1,3 @@
-﻿angular.module('startapp', []);
+﻿angular.module('startapp', ['cp.ngConfirm', 'ngFileUpload']);
 
 

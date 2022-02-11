@@ -1,6 +1,7 @@
 using HomePhysio.Data;
 using HomePhysio.Models;
 using HomePhysio.Services;
+using HomePhysio.Services.FileUpload;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -48,6 +49,8 @@ namespace HomePhysio
                 options.AppId = "477850293766730";
                 options.AppSecret = "f4926f18111672a19fc81ef5c53e044f";
             });
+            //Adding Services
+            services.AddTransient<IFileUpload, FileUpload>();
 
             services.AddControllersWithViews();
         }

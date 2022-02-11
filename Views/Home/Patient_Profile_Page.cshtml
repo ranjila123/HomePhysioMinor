@@ -131,6 +131,35 @@
     </div>
 
     <br />
+    <br /> 
+    <!--Images checker -->
+    <h3 class="text-primary">Images <img src="~/img/Profile pic/PP.png" style="height:50px;width:50px" id="previewimage" /></h3>
+    <div class="container-fluid">
+        <div >
+            <form ng-controller="FileUploadController" name="form">
+                Single Image with validations
+                <input type="file" ngf-select ng-model="file" name="file" ngf-max-size="150KB" ngf-pattern="'image/*'"
+                       ngf-accept="'image/*'"
+                       onchange="$('#previewimage')[0].src = window.URL.createObjectURL(this.files[0])" />
+
+                <button type="button" ng-click="PatientImgSubmit()" class="btn btn-primary">Submit</button>
+            </form>
+            @*<div class="row">
+                <div class="col-md-4" ng-repeat="imag in ImageListCust">
+                    <div class="gal-detail thumb">
+                        <img ng-src="data:image/JPEG;base64,{{imag.img}}" class="thumb-img" alt="work-thumbnail">
+                        <div class="middle">
+                            <button ng-click="ImageSelectCustomer(imag.img)">View</button>
+                            <button ng-click="DeleteCustomerImage(imag.imagesId,imag.fromBackup,imag.cusCidNo)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+
+    </div>
+
+    <br />
     <br />
     <!--Patients history-->
     <!--<h3 class="text-primary">My Therapists</h3>
@@ -178,4 +207,5 @@
    
 
     <script src="~/AngularServices/Controller/HomeController.js" asp-append-version="true"></script>
+    <script src="~/AngularServices/Controller/FileUploadController.js" asp-append-version="true"></script>
 }
