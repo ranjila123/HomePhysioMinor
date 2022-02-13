@@ -1,0 +1,53 @@
+﻿@model HomePhysio.Models.PhysiotherapistModel
+
+<div ng-controller="HomeController" ng-init="PhysioAppointmentList(@Model.PhysiotherapistId)">
+
+    <!--Appointment list viewed by physio-->
+    <div clss="container-fluid">
+
+        <h3>Appointments</h3>
+        <input asp-for="PhysiotherapistId" hidden />
+        <table class="table table-striped table-bordered">
+
+
+            <thead>
+                <tr>
+                    <th>Name of patient</th>
+                    @*<th>Address</th>
+                        <th>Contact no.</th>
+                        <th>Email</th>
+                        <th>Total Charge</th>
+                        <th>Response</th>*@
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in Physioappoint">
+
+                    <td>{{x.patientName}}</td>
+                    <td>{{x.date}}</td>
+                    <td>{{x.time}}</td>
+                    <td>
+                        {{x.status}}
+
+                    </td>
+                    <td>
+
+                        @*<button onclick="window.location.reload();">Reload Page</button>*@
+                        <button ng-click="ConfirmAppointment(x.appointmentId,@Model.PhysiotherapistId)" class="btn btn-success btn-sm">Confirm</button>  <button class="btn btn-danger btn-sm">Cancel</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+@section scripts{
+
+
+    <script src="~/AngularServices/Controller/HomeController.js" asp-append-version="true"></script>
+}
+

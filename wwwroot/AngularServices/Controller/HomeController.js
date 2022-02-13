@@ -66,6 +66,17 @@
             };
 
 
+            $scope.url1 = `${document.location.origin}/Home/DropDown1`;
+            //$scope.physiotherapits = [];
+            $scope.CallPlist = function () {
+                $http({ method: 'get', url: $scope.url1, params: { } }).
+                    then(function (response) {
+                        $scope.AllPhysioList = response.data.pList;
+                    }, function (response) {
+
+                    });
+            };
+
            
 
             $scope.products = 'aa';

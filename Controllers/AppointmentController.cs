@@ -85,6 +85,7 @@ namespace HomePhysio.Controllers
             //var a = _applicationDbContext.PhysioTimeSlotsModel.SingleOrDefault();
             return Json(new { b = physioTimeSlot });
         }
+
         [HttpPost]
         public async Task<IActionResult> SaveAppointmentInfo(int physioTimeSlotsId)
         {

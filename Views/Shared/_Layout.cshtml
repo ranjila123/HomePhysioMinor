@@ -204,7 +204,7 @@
                 </li>
 
                 <li>
-                    <a href="#/">
+                    <a asp-controller="Home" asp-action="PhysioAppointmentTable">
                         <i class='fa fa-calendar-check-o fa-2x' aria-hidden='true'></i>
                         <span class="text-primary">Appointments</span>
                     </a>
@@ -218,7 +218,8 @@
                 </li>
 
                 <li>
-                    <a href="#/">                       
+                    <!--Time slots from Physio_Profile_Page-->
+                    <a asp-controller="TimeSlot" asp-action="Index">
                         <i class='fa fa-calendar fa-2x' aria-hidden='true'></i>
                         <span class="text-primary">Manage Schedule</span>
                     </a>
@@ -247,11 +248,28 @@
                 </li>
 
                 <li>
+                    <a asp-controller="PhysioCategory" asp-action="Index">
+                        <i class="fa fa-camera-retro fa-2x"></i>
+                        @*<i class='fa fa-credit-card-alt fa-2x' aria-hidden='true'></i>*@
+                        <span class="text-primary">MyCategories</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="CategoryModels" asp-action="Index">
+                        <i class="fa fa-camera-retro fa-2x"></i>
+                        @*<i class='fa fa-credit-card-alt fa-2x' aria-hidden='true'></i>*@
+                        <span class="text-primary">Manage Category</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="#/">
                         <i class='fa fa-credit-card-alt fa-2x' aria-hidden='true'></i>
                         <span class="text-primary">Payments</span>
                     </a>
                 </li>
+
 
                 <li>
                     <a asp-controller="Home" asp-action="About">
@@ -268,11 +286,17 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="Account" asp-action="LogOff">
+                    <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
+                        <button type="submit" style="font-size: 14px; font-family: sans-serif; line-height: 1.7; margin: 0px; padding: 14px 12px 14px 20px; font-weight: bold;">
+                            <i class='fa fa-sign-out fa-2x' aria-hidden='true'></i>
+                            <span class="text-primary">Logout</span>
+                        </button>
+                    </form>
+                    @*  <a asp-controller="Account" asp-action="LogOff">
 
-                        <i class='fa fa-sign-out fa-2x' aria-hidden='true'></i>
-                        <span class="text-primary">Logout</span>
-                    </a>
+            @*<i class='fa fa-sign-out fa-2x' aria-hidden='true'></i>
+            <span class="text-primary">Logout</span>
+            </a>*@
                 </li>
             </ul>
         </nav>

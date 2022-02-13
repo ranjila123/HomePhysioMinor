@@ -3,6 +3,7 @@ using HomePhysio.Data;
 using HomePhysio.Models;
 using HomePhysio.Services.FileUpload;
 using HomePhysio.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -35,10 +36,31 @@ namespace HomePhysio.Controllers
             _userManager = userManager;
         }
        
+        [HttpPost]
         public IActionResult Dropdown1()
         {
-            return View();
+            var physio = _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).ToList().Select(x => new PhysiotherapistVM
+            {
+                PhysiotherapistId = x.PhysiotherapistId,
+                Name = x.Name,
+                Address = x.Address,
+                //GenderTypeName=new GenderModel { TypeName = x.Physiotherapist.GenderData.TypeName },
+                GenderTypeName = x.GenderData.TypeName,
+                ContactNo = x.ContactNo,
+                Qualification = x.Qualification,
+            }).ToList();
+            foreach (var item in physio)
+            {
+                var catList = _applicationDbContext.PhysioCategoryModel.Where(x => x.PhysiotherapistId == item.PhysiotherapistId).Include(x => x.Category);
+                foreach (var catItem in catList)
+                {
+                    item.Category = item.Category + $", {catItem.Category.Name} {catItem.Experience}";
+                }
+            }
+            return Json(new { pList = physio });
         }
+
+        [Authorize]
         public IActionResult Dropdown2()
         {
             ViewBag.categoryList = _applicationDbContext.CategoryModel.ToList();
@@ -56,9 +78,11 @@ namespace HomePhysio.Controllers
             return View();
         }
 
-        public IActionResult Book_appointment()
+        public async Task <IActionResult> PhysioAppointmentTable()
         {
-            return View();
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            var physio = await _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Include(x => x.UserData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).SingleOrDefaultAsync(o => o.UserId == user.Id);
+            return View(physio);
         }
         public IActionResult Payment()
         {
@@ -142,8 +166,8 @@ namespace HomePhysio.Controllers
 
             });
             return Json(new { ap = Physioapp });
-
         }
+
         [HttpPost]
         public async Task<JsonResult> UploadPatientImage(IFormFile file)
         {
