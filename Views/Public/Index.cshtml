@@ -1,18 +1,58 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+
+
+
+
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="hero d-flex align-items-center">
-    <div class="container">
-        <h1 class="header-font">Welcome to HomePhysio</h1>
-        <h3>Nepal's fastest growing home physiotherapy service provider</h3>
+@*<section id="hero" class="hero d-flex align-items-center">*@
+<section id="hero" class="carousel slide" data-ride="carousel">
+
+    <!-- The slideshow -->
+    <div class="carousel-inner ">
+        <div class="carousel-item active" style="background-image: url(@Url.Content("~/img/carousel/pic2.jpg")">           
+            <div class="carousel-caption">
+                <h1 class="header-font">Welcome to HomePhysio</h1>
+                <h3>Nepal's fastest growing home physiotherapy service provider</h3>
+            </div>
+        </div>
+
+        <div class="carousel-item" style="background-image: url(@Url.Content("~/img/carousel/slidepic.jpg")">
+            <div class="carousel-caption">
+                <h3>You're in the hands of  professionals </h3>
+            </div>
+        </div>
+
+        <div class="carousel-item" style="background-image: url(@Url.Content("~/img/Physiotherapy/geriatric.jpg" )">
+            <div class="carousel-caption">
+                <h3>Better service in the comfort of your own home</h3>
+            </div>
+        </div>
     </div>
-</section><!-- End Hero -->
+
+    @*Left and right controls*@
+    <a class="carousel-control-prev" href="#hero" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon bi bi-arrow-left" aria-hidden="true"> </span>
+    </a>
+
+    <a class="carousel-control-next" href="#hero" role="button" data-slide="next">
+        <span class="carousel-control-next-icon bi bi-arrow-right" aria-hidden="true"> </span>
+    </a>
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        <li data-target="#hero" data-slide-to="0" class="active"></li>
+        <li data-target="#hero" data-slide-to="1"></li>
+        <li data-target="#hero" data-slide-to="2"></li>
+    </ul>
+</section>
+<!--</section>--><!-- End Hero -->
 
 <main id="main">
 
-    <!-- ======= Why Us Section ======= -->
+     @*======= Why Us Section =======*@ 
     <section id="why-us" class="why-us">
+        <div class="jumbotron">
         <div class="container">
 
             <div class="row">
@@ -24,7 +64,7 @@
 
 
                             <div class="text-center">
-                                <a asp-action="LearnMore" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a><!--learn more button-->
+                                <a asp-action="LearnMore" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
                             </div>
                     </div>
                 </div>
@@ -53,13 +93,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div><!-- End .content-->
+                    </div>
                 </div>
             </div>
-
         </div>
-    </section><!-- End Why Us Section -->
-    <!-- ======= Process Section ======= -->
+    </div>
+    </section> @*End Why Us Section*@ 
+     @*======= Process Section =======*@ 
     <section id="counts" class="counts">
         <div class="container">
             <div class="section-title">
@@ -80,7 +120,7 @@
                     <div class="count-box">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
                         <h4>Select time</h4>
-                        <h6>Select the time suitable for you and your therapist.</h6>
+                        <h6>Select the time suitable for both you and your therapist.</h6>
                     </div>
                 </div>
 
@@ -102,7 +142,7 @@
                     </div>
                 </div>
 
-                <!--   <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                   @*<div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
                         <div class="count-box">
                             <i class="fa fa-medkit" aria-hidden="true"></i>
                             <h3>Therapy</h3>
@@ -116,12 +156,13 @@
                             <h3>Monitoring</h3>
                             <h6>Our physiotherapist will measures improvement over time and recommends next steps if any.</h6>
                         </div>
-                    </div>-->
+                    </div>*@
 
             </div>
 
         </div>
-    </section><!-- End Process Section -->
+    </section> @*End Process Section*@ 
+
     <!-- ======= Package Section ======= -->
     <section id="services" class="services">
         <div class="container">
