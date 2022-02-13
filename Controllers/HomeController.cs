@@ -84,6 +84,15 @@ namespace HomePhysio.Controllers
             var physio = await _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Include(x => x.UserData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).SingleOrDefaultAsync(o => o.UserId == user.Id);
             return View(physio);
         }
+
+        public async Task<IActionResult> PatientAppointmentTable()
+        {
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            var patient = await _applicationDbContext.PatientModel.Include(x => x.GenderData).Include(x => x.UserData).SingleOrDefaultAsync(o => o.UserId == user.Id);
+            return View(patient);
+           
+        }
+
         public IActionResult Payment()
         {
             return View();
