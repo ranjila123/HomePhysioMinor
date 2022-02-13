@@ -105,7 +105,7 @@ namespace HomePhysio.Controllers
         public async Task<IActionResult> Patient_Profile_Page()
         {
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(o => o.UserId == user.Id);
+            var patient = await _applicationDbContext.PatientModel.Include(x=>x.GenderData).SingleOrDefaultAsync(o => o.UserId == user.Id);
             return View(patient);
         }
 
