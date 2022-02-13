@@ -151,9 +151,14 @@ namespace HomePhysio.Controllers
             return Json(new { });
         }
 
-        //public IActionResult Physio_Profile_Page()
-        //{
-        //    return View();
-        //}
+        public IActionResult About()
+        {
+            return View("~/Views/Public/About.cshtml");
+        }
+        
+        public IActionResult FAQ()
+        {
+            return View("~/Views/Public/FAQ.cshtml");
+        }
     }
 }

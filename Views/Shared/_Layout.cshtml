@@ -189,14 +189,14 @@
             <ul>
 
                 <li>
-                    <a href="#/">
+                    <a asp-controller="Public" asp-action="Index">
                         <i class="fa fa-home fa-2x" aria-hidden="true"></i>
                         <span class="text-primary">Home</span>
                     </a>
                 </li>
 
                 <li>
-                    <a asp-controller="Home" asp-action="Physio_Profile_Page">
+                    <a asp-controller="Home" asp-action="Profile_Page">
                         <i class='fa fa-user-circle fa-2x' aria-hidden='true'></i>
                         <span class="text-primary">My Profile</span>
                     </a>
@@ -232,12 +232,13 @@
 
                     <ul>
                         <li>
-                            <a href="#/">
+                            <a asp-controller="Appointment" asp-action="Index">
                                 <span class="text-primary">Physiotherapist</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#/">
+                            <a asp-controller="Home" asp-action="Dropdown2">
+
                                 <span class="text-primary">Symptoms</span>
                             </a>
                         </li>
@@ -253,19 +254,22 @@
                 </li>
 
                 <li>
-                    <a href="#/">
+                    <a asp-controller="Home" asp-action="About">
+
                         <i class='fa fa-briefcase fa-2x' aria-hidden='true'></i>
                         <span class="text-primary">About Us</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#/">
+                    <a asp-controller="Home" asp-action="FAQ">
+
                         <i class='fa fa-question-circle fa-2x' aria-hidden='true'></i>
                         <span class="text-primary">FAQ</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#/">
+                    <a asp-controller="Account" asp-action="LogOff">
+
                         <i class='fa fa-sign-out fa-2x' aria-hidden='true'></i>
                         <span class="text-primary">Logout</span>
                     </a>
