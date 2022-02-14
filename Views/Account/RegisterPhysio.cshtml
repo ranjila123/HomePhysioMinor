@@ -1,7 +1,7 @@
 ﻿@model HomePhysio.ViewModel.RegisterPhysioViewModel
 <h1 class="text-info">RegisterPhysio</h1>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6" >
         <form asp-controller="Account" asp-action="RegisterPhysio" method="post" role="form">
             <h4>Create a new account</h4>
             <hr />
@@ -11,8 +11,6 @@
                 <div class="col-md-10">
                     <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
-                    <input id="latitude" type="text" asp-for="Latitude" class="form-control" hidden />
-                    <input id="longitude" type="text" asp-for="Longitude" class="form-control" hidden />
                 </div>
             </div>
             <div class="form-group">
@@ -35,6 +33,15 @@
                 <div class="col-md-10">
                     <select asp-for="GenderId" class="form-control" asp-items="@ViewBag.Gender"></select>
                     <span asp-validation-for="GenderId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="col-md-2"></label>
+                <div class="col-md-10">
+                    <input asp-for="Address" class="form-control" />
+                    <input id="latitude" type="text" asp-for="Latitude" class="form-control" hidden />
+                    <input id="longitude" type="text" asp-for="Longitude" class="form-control" hidden />
+                    <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
             </div>
 
@@ -95,7 +102,7 @@
             </div>
         </form>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
         <strong>Please place the marker in your currrent location!</strong>
         <button onclick="getLocation()">Marker Please</button>
         <p id="demo" hidden></p>
