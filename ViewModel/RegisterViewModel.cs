@@ -28,10 +28,10 @@ namespace HomePhysio.ViewModel
 
         [Required]
         public string Name { get; set; }
-
+        
         public int Age { get; set; }
-        [Display(Name = "Gender")]
 
+        [Display(Name = "Gender")]
         public int GenderId { get; set; }
 
         public string ContactNumber { get; set; }
@@ -64,10 +64,13 @@ namespace HomePhysio.ViewModel
 
         public int age { get; set; }
 
+        [Display(Name = "Gender")]
         public int GenderId { get; set; }
+
         public int CategoryId { get; set; }
 
         public string ContactNo { get; set; }
+
         public string Qualification { get; set; }
 
         public string LicenseNo { get; set; }

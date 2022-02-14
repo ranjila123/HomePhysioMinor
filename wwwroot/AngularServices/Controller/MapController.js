@@ -17,6 +17,16 @@
                     });
             };
 
+            $scope.url1 = `${document.location.origin}/Home/Physio_info`;
+            $scope.GetPhysioList = function (id) {
+                $http({ method: 'post', url: $scope.url, params: { physiotherapistId : id} }).
+                    then(function (response) {
+                        $scope.physio = response.data.pinfo;
+                        $scope.PhysioInfo($scope.physio);
+                    }, function (response) {
+
+                    });
+            };
                    
 
         }]);

@@ -1,5 +1,6 @@
 ﻿using HomePhysio.Data;
 using HomePhysio.Models;
+using HomePhysio.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -45,16 +46,39 @@ namespace HomePhysio.Controllers
         {
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
-            var physio = await _applicationDbContext.PhysiotherapistModel.ToListAsync();
-            List<PhysiotherapistModel> physioList = new List<PhysiotherapistModel>();
-            foreach(var item in physio)
+           // var physio = await _applicationDbContext.PhysiotherapistModel.ToListAsync();
+            List<PhysiotherapistVM> physioList = new List<PhysiotherapistVM>();
+            var physio = _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).ToList().Select(x => new PhysiotherapistVM
             {
-               var distance= calcCrow(double.Parse(patient.Latitude), double.Parse(patient.Longitude), double.Parse(item.Latitude), double.Parse(item.Longitude));
+                PhysiotherapistId = x.PhysiotherapistId,
+                Name = x.Name,
+                Address = x.Address,
+                //GenderTypeName=new GenderModel { TypeName = x.Physiotherapist.GenderData.TypeName },
+                GenderTypeName = x.GenderData.TypeName,
+                ContactNo = x.ContactNo,
+                Qualification = x.Qualification,
+                Latitude = x.Latitude,
+                Longitude = x.Longitude,
+            }).ToList();
+            foreach (var item1 in physio)
+            {
+                var distance = calcCrow(double.Parse(patient.Latitude), double.Parse(patient.Longitude), double.Parse(item1.Latitude), double.Parse(item1.Longitude));
                 if (distance < 5)
                 {
-                    physioList.Add(item);
+                    physioList.Add(item1);
                 }
             }
+
+            foreach (var item in physioList)
+            {
+                var catList = _applicationDbContext.PhysioCategoryModel.Where(x => x.PhysiotherapistId == item.PhysiotherapistId).Include(x => x.Category);
+                foreach (var catItem in catList)
+                {
+                    item.Category = item.Category + $", {catItem.Category.Name} {catItem.Experience}";
+                }
+            }
+
+            
             return Json(new { p = physioList });
 
         }

@@ -72,10 +72,12 @@ namespace HomePhysio.Controllers
         {
             return View();
         }
-       
-        public IActionResult Physio_info()
+
+        [HttpPost]
+        public async Task<IActionResult> Physio_info(int id)
         {
-            return View();
+            var physio = await _applicationDbContext.PhysiotherapistModel.Where(x => x.PhysiotherapistId ==id).Include(x => x.GenderData).Include(x => x.UserData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).SingleOrDefaultAsync();
+            return Json(new { pinfo = physio });
         }
 
         public async Task <IActionResult> PhysioAppointmentTable()
