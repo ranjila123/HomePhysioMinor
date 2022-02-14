@@ -74,9 +74,9 @@ namespace HomePhysio.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Physio_info(int id)
+        public IActionResult Physio_info(int physiotherapistId)
         {
-            var physio = await _applicationDbContext.PhysiotherapistModel.Where(x => x.PhysiotherapistId ==id).Include(x => x.GenderData).Include(x => x.UserData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).SingleOrDefaultAsync();
+            var physio =_applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Include(x => x.UserData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).SingleOrDefault(o => o.PhysiotherapistId == physiotherapistId);
             return Json(new { pinfo = physio });
         }
 
