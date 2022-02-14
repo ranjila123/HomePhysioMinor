@@ -36,8 +36,14 @@ namespace HomePhysio.Controllers
             _userManager = userManager;
         }
        
-        [HttpPost]
+        [HttpGet]
         public IActionResult Dropdown1()
+        {
+           
+            return View();
+        }
+        
+        public IActionResult DropDown1Test()
         {
             var physio = _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).ToList().Select(x => new PhysiotherapistVM
             {
@@ -59,7 +65,6 @@ namespace HomePhysio.Controllers
             }
             return Json(new { pList = physio });
         }
-
         [Authorize]
         public IActionResult Dropdown2()
         {
@@ -73,11 +78,19 @@ namespace HomePhysio.Controllers
             return View();
         }
 
-        [HttpPost]
         public IActionResult Physio_info(int physiotherapistId)
         {
-            var physio =_applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Include(x => x.UserData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).SingleOrDefault(o => o.PhysiotherapistId == physiotherapistId);
-            return Json(new { pinfo = physio });
+            var physio = _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Select(x => new PhysiotherapistVM
+            {
+                PhysiotherapistId = x.PhysiotherapistId,
+                Name = x.Name,
+                Address = x.Address,
+                //GenderTypeName=new GenderModel { TypeName = x.Physiotherapist.GenderData.TypeName },
+                GenderTypeName = x.GenderData.TypeName,
+                ContactNo = x.ContactNo,
+                Qualification = x.Qualification,
+            }).SingleOrDefault(o=>o.PhysiotherapistId== physiotherapistId);
+            return View(physio);
         }
 
         public async Task <IActionResult> PhysioAppointmentTable()
@@ -129,7 +142,7 @@ namespace HomePhysio.Controllers
 
 
             //}).ToList();
-            //var user =await _userManager.FindByNameAsync(this.User.Identity.Name);
+            //var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             //var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
             var app = _applicationDbContext.AppointmentsModels.AsNoTracking().Where(x => x.PatientId == patientId).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).Include(x=>x.StatusData).ToList().Select(x => new PatientProfileVM
             {
@@ -183,6 +196,17 @@ namespace HomePhysio.Controllers
         public async Task<JsonResult> UploadPatientImage(IFormFile file)
         {
             var data = _fileUpload.ImageToByte(file);
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            var imageModel = new PatientImage
+            {
+                PatientId = patient.PatientId,
+                ImgId = 1,
+                Image = data,
+            };
+
+            _applicationDbContext.PatientImage.Add(imageModel);
+            await _applicationDbContext.SaveChangesAsync();
             return Json(new { });
         }
 

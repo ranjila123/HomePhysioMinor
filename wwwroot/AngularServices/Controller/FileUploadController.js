@@ -5,7 +5,6 @@
         .module('startapp')
         .controller('FileUploadController', ['$scope', 'Upload',function FileUploadController($scope, Upload) {
             $scope.PatientImgSubmit = function () {
-                console.log('submit');
                 if ($scope.form.file.$valid && $scope.file) {
                     $scope.PatientImgUpload($scope.file);
                 }

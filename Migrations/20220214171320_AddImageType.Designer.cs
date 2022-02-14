@@ -4,14 +4,16 @@ using HomePhysio.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HomePhysio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220214171320_AddImageType")]
+    partial class AddImageType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,24 +107,6 @@ namespace HomePhysio.Migrations
                     b.HasKey("PStatuCode");
 
                     b.ToTable("PStatusModel");
-                });
-
-            modelBuilder.Entity("HomePhysio.Models.PatientImage", b =>
-                {
-                    b.Property<int>("ImgId")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ImgId");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("PatientImage");
                 });
 
             modelBuilder.Entity("HomePhysio.Models.PatientModel", b =>
@@ -577,25 +561,6 @@ namespace HomePhysio.Migrations
                     b.Navigation("PhysioTimeSlotsData");
 
                     b.Navigation("StatusData");
-                });
-
-            modelBuilder.Entity("HomePhysio.Models.PatientImage", b =>
-                {
-                    b.HasOne("HomePhysio.Models.ImageTypeModel", "ImageData")
-                        .WithMany()
-                        .HasForeignKey("ImgId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HomePhysio.Models.PatientModel", "PatientData")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ImageData");
-
-                    b.Navigation("PatientData");
                 });
 
             modelBuilder.Entity("HomePhysio.Models.PatientModel", b =>

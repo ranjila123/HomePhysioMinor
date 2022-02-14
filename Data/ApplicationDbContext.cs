@@ -24,6 +24,7 @@ namespace HomePhysio.Data
         public DbSet<ImageTypeModel> ImageTypeModel { get; set; }
 
         public DbSet<PhysioImage> PhysioImage { get; set; }
+        public DbSet<PatientImage> PatientImage { get; set; }
         public DbSet<AppointmentsModel> AppointmentsModels { get; set; }
         public DbSet<StatusModel> StatusModel { get; set; }
         public DbSet<PStatusModel> PStatusModel { get; set; }

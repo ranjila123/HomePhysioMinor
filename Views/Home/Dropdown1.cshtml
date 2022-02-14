@@ -4,14 +4,14 @@
 }
 <h1>Index</h1>
 
-<div ng-controller="HomeController"  >
+<div ng-controller="HomeController as home"  >
     @*@Model.Count()*@
    
     <p>Search for physiotherapist</p>
 
     @*<select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()" ng-init="searchType='@ViewBag.CategoryId';CallHttpPost();"></select>*@
 <div ng-init="CallPlist()">
-    <div class="jumbotron"  ng-repeat="x in AllPhysioList">
+    <div class="jumbotron" ng-repeat="x in AllPhysioList">
         <div class="container">
             <div class="media">
                 <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
@@ -23,19 +23,24 @@
                     <p class="p-0">Categories: {{x.category}}</p>
                     <p class="p-0">Qualifications: {{x.qualification}}</p>
 
-                    <a asp-controller="Home" asp-action="Physio_info" class="btn btn-primary">See profile</a>
+                    <button ng-click="PhysioProfile(x.physiotherapistId)" class="btn btn-primary">See profile</button>
                     @*<a asp-controller="Appointment" asp-action="TimeSlot" class="btn btn-primary">Book Appointment</a>*@
-
-                    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
-                            Book Appointment
-                        </button>*@
+                    
+                <div ng-controller="AppointmentController as appointment">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
+                        Book Appointment
+                    </button>
+                </div>
 
                     <br />
                 </div>
             </div>
         </div>
     </div>
+    <div ng-controller="AppointmentController as appointment">
+        <partial name="_bookAppointmentModal" />
 
+    </div>
 </div>
     </div>
  
@@ -44,6 +49,7 @@
 
 @section scripts{
     <script src="~/AngularServices/Controller/HomeController.js" asp-append-version="true"></script>
+    <script src="~/AngularServices/Controller/AppointmentController.js" asp-append-version="true"></script>
 }
 
 

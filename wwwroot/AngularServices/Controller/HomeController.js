@@ -66,17 +66,20 @@
             };
 
 
-            $scope.url1 = `${document.location.origin}/Home/DropDown1`;
+            $scope.url1 = `${document.location.origin}/Home/DropDown1Test`;
             //$scope.physiotherapits = [];
             $scope.CallPlist = function () {
-                $http({ method: 'get', url: $scope.url1, params: { } }).
+                $http({ method: 'get', url: $scope.url1 }).
                     then(function (response) {
                         $scope.AllPhysioList = response.data.pList;
+                        console.log($scope.AllPhysioList);
                     }, function (response) {
 
                     });
             };
-
+            $scope.PhysioProfile = function (physioId) {
+                window.location = `${document.location.origin}/Home/Physio_info/physiotherapistId=${physioId}`;
+            };
            
 
             $scope.products = 'aa';

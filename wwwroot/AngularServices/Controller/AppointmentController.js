@@ -21,6 +21,8 @@
             //$scope.url1 = `${document.location.origin}/Appointment/GetPhysiotherapistList`;
             $scope.timeSlot = [];
             $scope.AssignPhysiotherapist = function (id) {
+                window.scrollTo(0, 0);
+
                 $http({ method: 'post', url: `${document.location.origin}/Appointment/GetPhysiotherapistTimeSlot`, params: { physiotherapistId: id } }).
                     then(function (response) {
                         $scope.timeSlot = response.data.b;
