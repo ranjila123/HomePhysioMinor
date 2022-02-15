@@ -18,22 +18,111 @@ namespace HomePhysio.Controllers
         private readonly UserManager<ApplicationUser> _userManager; //usermanager depend on identity user
         private readonly IMapper _mapper;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _applicationDbContext;
 
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, ApplicationDbContext applicationDbContext,IMapper mapper)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, ApplicationDbContext applicationDbContext,IMapper mapper, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _mapper = mapper;
             _emailSender = emailSender;
             _signInManager = signInManager;
             _applicationDbContext = applicationDbContext;
+            _roleManager = roleManager;
         }
         public IActionResult Index()
         {
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> AdminRegister(string returnurl = null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            RegisterAdminViewModel registerAdminViewModel = new RegisterAdminViewModel();//datatype variable =new object
+
+            return View(registerAdminViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdminRegister(RegisterAdminViewModel model, string returnurl = null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            returnurl = returnurl ?? Url.Content("~/");
+            //server side validation
+            if (ModelState.IsValid)
+            {
+                
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
+                //will assign the incoming data from form into the user object data
+                //creating a user
+                var result = await _userManager.CreateAsync(user, model.Password);//directly hash the password
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Admin");
+                    //for confirming user email
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                  
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+
+                   
+                    return LocalRedirect(returnurl);
+                   
+                }
+                AddErrors(result);
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult AdminLogin(string returnurl = null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            return View();
+        }
+
+        //to login the user if already an account exists
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdminLogin(LoginAdminViewModel model, string returnurl = null)
+        {
+            ViewData["ReturnUrl"] = returnurl;
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
+                if (result.Succeeded)
+                {
+
+                    if (returnurl == null)
+                    {
+                        return RedirectToAction("Index", "Public");
+                    }
+                    else
+                    {
+                        return LocalRedirect(returnurl);
+                    }
+
+                }
+                if (result.IsLockedOut)
+                {
+                    return View("Lockout");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid Login Attepmt.");
+                    return View(model);
+                }
+
+            }
+            return View(model);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Register(string returnurl=null)
         {
@@ -56,6 +145,8 @@ namespace HomePhysio.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Patient");
+
                     var patient = _mapper.Map<PatientModel>(model);
 
                     patient.UserId = user.Id;
@@ -103,6 +194,7 @@ namespace HomePhysio.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Physiotherapist");
 
                     var physio = _mapper.Map<PhysiotherapistModel>(model);
                     physio.UserId = user.Id;
