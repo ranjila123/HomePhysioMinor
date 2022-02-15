@@ -144,6 +144,31 @@ namespace HomePhysio.Controllers
 
             }
             
+        } 
+
+        [HttpPost]
+        public async Task<IActionResult> CancelAppointment(int appointmentId)
+        {
+           
+            try
+            {
+                if (appointmentId == null)
+                {
+                return Json(new { result = false, msg = "Response False" });
+                }
+                AppointmentsModel appointment = _applicationDbContext.AppointmentsModels.SingleOrDefault(x => x.AppointmentId == appointmentId);
+                appointment.StatusCode = "3";
+                _applicationDbContext.Update(appointment);
+                await _applicationDbContext.SaveChangesAsync();
+                return Json(new { result = true, msg = "Success" });
+
+             }
+            catch
+            {
+                return Json(new { result = false, msg = "Response False" });
+
+            }
+            
         }
     }
 }

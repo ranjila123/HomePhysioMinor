@@ -61,10 +61,79 @@
                         }
                     }
                 });
-
-                
+                           
+                               
             };
 
+            $scope.CancelAppointment = function (id, physiotherapistId) {
+                $ngConfirm({
+                    title: 'Appointment',
+                    content: '<strong>Are you sure to cancel this appointment?</strong>',
+                    scope: $scope,
+                    type: 'red',
+                    buttons: {
+                        yes: {
+                            text: 'Ok',
+                            keys: ['enter'],
+                            btnClass: 'btn-red',
+                            action: function (scope, button) {
+                                $scope.Physioappoint = [];
+                                //$window.location.reload();
+                                $http({ method: 'post', url: `${document.location.origin}/Appointment/CancelAppointment`, params: { appointmentId: id } }).
+                                    then(function (response) {
+                                        $scope.PhysioAppointmentList(physiotherapistId);
+
+                                    }, function (response) {
+
+                                    });
+                            }
+                        },
+                        cancel: {
+                            text: 'Cancel',
+                            keys: ['esc'],
+                            btnClass: 'btn-blue',
+                            action: function (scope, button) {
+                            }
+                        }
+                    }
+
+                });
+            };
+
+            $scope.CancelAppointmentByPatient = function (id, patientId) {
+                $ngConfirm({
+                    title: 'Appointment',
+                    content: '<strong>Are you sure to cancel this appointment?</strong>',
+                    scope: $scope,
+                    type: 'red',
+                    buttons: {
+                        yes: {
+                            text: 'Ok',
+                            keys: ['enter'],
+                            btnClass: 'btn-red',
+                            action: function (scope, button) {
+                                $scope.Physioappoint = [];
+                                //$window.location.reload();
+                                $http({ method: 'post', url: `${document.location.origin}/Appointment/CancelAppointment`, params: { appointmentId: id } }).
+                                    then(function (response) {
+                                        $scope.AppointmentList(patientId);
+
+                                    }, function (response) {
+
+                                    });
+                            }
+                        },
+                        cancel: {
+                            text: 'Cancel',
+                            keys: ['esc'],
+                            btnClass: 'btn-blue',
+                            action: function (scope, button) {
+                            }
+                        }
+                    }
+
+                });
+            };
 
             $scope.url1 = `${document.location.origin}/Home/DropDown1Test`;
             //$scope.physiotherapits = [];

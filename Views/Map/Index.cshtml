@@ -36,22 +36,32 @@
                         See Profile
                     </button>
 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0)"  ng-click="AssignPhysiotherapist(x.physiotherapistId)">
-                        Book Appointment
-                    </button>
+                    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0)"  ng-click="AssignPhysiotherapist(x.physiotherapistId)">
+                            Book Appointment
+                        </button>*@
+
+                    <div ng-controller="AppointmentController as appointment">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0)" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
+                            Book Appointment
+                        </button>
+                    </div>
 
                     <br />
                 </div>
             </div>
         </div>
     </div>
+    <div ng-controller="AppointmentController as appointment">
+        <partial name="_bookAppointmentModal" />
 
-    <partial name="_bookAppointmentModal" />
-
+    </div>
 </div>
+   
+
 
 
 
 @section scripts{
-    <script src="~/AngularServices/Controller/MapController.js" asp-append-version="true"></script>
+    <script src="~/AngularServices/Controller/HomeController.js" asp-append-version="true"></script>
+    <script src="~/AngularServices/Controller/AppointmentController.js" asp-append-version="true"></script>
 }
