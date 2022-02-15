@@ -28,15 +28,21 @@ namespace HomePhysio.ViewModel
 
         [Required]
         public string Name { get; set; }
-        
+
+        [Required]
         public int Age { get; set; }
 
+
+        [Required]
         [Display(Name = "Gender")]
         public int GenderId { get; set; }
-
+        [Required]
+        [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string ContactNumber { get; set; }
+        [Required]
         public string Address { get; set; }
 
+       [Required(ErrorMessage= "Place the marker in your location!")]
         public string Longitude { get; set; }
         public string Latitude { get; set; }
 
@@ -60,26 +66,31 @@ namespace HomePhysio.ViewModel
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
         public string Name { get; set; }
-
+        [Required]
         public int age { get; set; }
 
         [Display(Name = "Gender")]
         public int GenderId { get; set; }
 
         public int CategoryId { get; set; }
-
+        [Required]
         public string ContactNo { get; set; }
-
+        [Required]
         public string Qualification { get; set; }
-
+        [Required]
         public string LicenseNo { get; set; }
-
+        [Required]
         public string CitizenshipNumber { get; set; }
-
+        [Required]
         public int Experience { get; set; }
+        [Required(ErrorMessage = "Place the marker in your location!")]
+
         public string Longitude { get; set; }
+
         public string Latitude { get; set; }
+        [Required]
         public string Address { get; set; }
 
 

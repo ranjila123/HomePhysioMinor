@@ -5,7 +5,7 @@
         <form asp-controller="Account" asp-action="Register" method="post" role="form">
             <h3 class="text-primary">Create a new account</h3>
             <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
+           @* <div asp-validation-summary="All" class="text-danger"></div>*@
 
             <div class="form-group">
                 <label asp-for="Name" class="col-md-6">Name*</label>
@@ -85,6 +85,8 @@
 
     <div class="col-md-6">
         <br /><br />
+        <span asp-validation-for="Longitude" class="text-danger"></span>
+        <br/>
         <strong>Please place the marker in your currrent location!</strong>
         <br />
         <button onclick="getLocation()">Place Marker</button>
