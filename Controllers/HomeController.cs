@@ -35,7 +35,8 @@ namespace HomePhysio.Controllers
             _mapper = mapper;
             _userManager = userManager;
         }
-       
+
+        [Authorize(Roles = "Patient")]
         [HttpGet]
         public IActionResult Dropdown1()
         {
@@ -65,7 +66,8 @@ namespace HomePhysio.Controllers
             }
             return Json(new { pList = physio });
         }
-        [Authorize]
+
+        [Authorize(Roles = "Patient")]
         public IActionResult Dropdown2()
         {
             ViewBag.categoryList = _applicationDbContext.CategoryModel.ToList();
@@ -218,6 +220,10 @@ namespace HomePhysio.Controllers
         public IActionResult FAQ()
         {
             return View("~/Views/Public/FAQ.cshtml");
+        }
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

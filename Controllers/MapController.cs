@@ -1,6 +1,7 @@
 ﻿using HomePhysio.Data;
 using HomePhysio.Models;
 using HomePhysio.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -82,6 +83,9 @@ namespace HomePhysio.Controllers
             return Json(new { p = physioList });
 
         }
+
+        [Authorize(Roles = "Patient")]
+
         public IActionResult Index()
         {
             return View();
