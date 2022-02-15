@@ -27,10 +27,10 @@
                     @*<a class="btn btn-primary" ng-click="GetPhysioList({{x.physiotherapistId}})">See profile</a>*@
 
                     @*<form id="logoutForm" method="post" class="form-inline" asp-controller="Home" asp-action="Physio_info">
-            <input type="hidden" asp-for="PhysiotherapistId" />
-            <button type="submit" class="btn btn-primary">See Profile</button>
+                            <input type="hidden" asp-for="PhysiotherapistId" />
+                            <button type="submit" class="btn btn-primary">See Profile</button>
 
-        </form>*@
+                        </form>*@
 
                     <button type="button" class="btn btn-primary" ng-click="GetPhysioList(x.physiotherapistId)">
                         See Profile
@@ -46,7 +46,8 @@
         </div>
     </div>
 
-   
+    <partial name="_bookAppointmentModal" />
+
 </div>
 
 
