@@ -73,7 +73,7 @@ namespace HomePhysio.Controllers
                 PhysioTimeSlotsId = x.PhysioTimeSlotsId,
                 DateAndTime = x.DateTimeShift,
                 Date = x.DateTimeShift.Date.ToString("yyyy/MM/dd"),
-                Time = x.DateTimeShift.TimeOfDay.ToString(),
+                Time = x.DateTimeShift.ToShortTimeString(),
                 StatusCode = x.appointmentsModels.Count(y=>y.PatientId== patient.PatientId && y.PhysioTimeSlotsId==x.PhysioTimeSlotsId)> 0 ? "2" : "0"
             }).ToList();
 

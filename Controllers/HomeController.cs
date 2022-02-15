@@ -143,7 +143,7 @@ namespace HomePhysio.Controllers
                 PhoneNo = x.PhoneNo,
                 Address = x.Address
             }).SingleOrDefault(x => x.UserId == user.Id);
-            patient.PImg = _applicationDbContext.PatientImage.FirstOrDefault(x => x.ImgId == 1 && x.PatientId==patient.PatientId).Image;
+           // patient.PImg = _applicationDbContext.PatientImage.FirstOrDefault(x => x.ImgId == 1 && x.PatientId == patient.PatientId).Image;
             return View(patient);
         }
 
