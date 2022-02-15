@@ -9,7 +9,7 @@ namespace HomePhysio.Models
 {
     public class PatientImage
     {
-        [Key]
+        public int PatientImageId { get; set; }
         [ForeignKey(nameof(ImageData))]
         public int ImgId { get; set; }
         public ImageTypeModel ImageData { get; set; }
