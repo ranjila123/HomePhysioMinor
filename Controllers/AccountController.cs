@@ -136,8 +136,8 @@ namespace HomePhysio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterPatientViewModel model,string returnurl=null)
         {
-            ViewData["ReturnUrl"] = returnurl;
-            returnurl = returnurl ?? Url.Content("~/");
+            //ViewData["ReturnUrl"] = returnurl;
+            //returnurl = returnurl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
                 //server side validation
@@ -161,7 +161,9 @@ namespace HomePhysio.Controllers
                     //await _emailSender.SendEmailAsync(model.Email, "Confirm your account - Identity Manager",
                         //"Please confirm your account by clicking here: <a href=\"" + callbackurl + "\">link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnurl);
+                    //return LocalRedirect(returnurl);
+                    return RedirectToAction(nameof(HomeController.Profile_Page), "Home");
+
 
                     //return View("ConfirmEmailConfirmation");
                 }
@@ -211,7 +213,8 @@ namespace HomePhysio.Controllers
                     //    "Please confirm your account by clicking here: <a href=\"" + callbackurl + "\">link</a>");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(returnurl);
+                    //return LocalRedirect(returnurl);
+                    return RedirectToAction(nameof(HomeController.Profile_Page), "Home");
 
                     //return View("ConfirmEmailConfirmation");
                 }
@@ -258,14 +261,16 @@ namespace HomePhysio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnurl=null)
         {
-            ViewData["ReturnUrl"] = returnurl;
-            returnurl = returnurl ?? Url.Content("~/");
+           // ViewData["ReturnUrl"] = returnurl;
+           // returnurl = returnurl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    return LocalRedirect(returnurl);
+                    //return LocalRedirect(returnurl);
+                    return RedirectToAction(nameof(HomeController.Profile_Page), "Home");
+
                 }
                 if (result.IsLockedOut)
                 {
