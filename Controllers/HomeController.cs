@@ -179,8 +179,27 @@ namespace HomePhysio.Controllers
         [HttpGet]
         public async Task<IActionResult> Physio_Profile_Page()
         {
+            //var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            //var physio = await _applicationDbContext.PhysiotherapistModel.Include(x=>x.GenderData).Include(x=>x.UserData).Include(x=>x.physioCategoryModels).ThenInclude(x=>x.Category).SingleOrDefaultAsync(o => o.UserId == user.Id);
+            //return View(physio);
+
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            var physio = await _applicationDbContext.PhysiotherapistModel.Include(x=>x.GenderData).Include(x=>x.UserData).Include(x=>x.physioCategoryModels).ThenInclude(x=>x.Category).SingleOrDefaultAsync(o => o.UserId == user.Id);
+
+            //var pa = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            var physio = await _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Select(x => new PhysiotherapistVM
+            {
+                UserId=x.UserId,
+                PhysiotherapistId = x.PhysiotherapistId,
+                Name = x.Name,
+                GenderTypeName = x.GenderData.TypeName,
+                ContactNo = x.ContactNo,
+                Address = x.Address
+            }).SingleOrDefault(x => x.UserId == user.Id);
+            var physioImg = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 1 && x.PhysiotherapistId == physio.PhysiotherapistId);
+            if (physioImg != null)
+                physio.PImg = physioImg.Image;
+
+
             return View(physio);
         }
 

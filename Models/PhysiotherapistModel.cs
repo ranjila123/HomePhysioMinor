@@ -36,6 +36,8 @@ namespace HomePhysio.Models
 
         public string Longitude { get; set; }
         public string Latitude { get; set; }
+        public IEnumerable<ImageTypeModel> imageTypeModel { get; set; }//1 to many
+
     }
     //public class PhysiotherapistViewModel
     //{
