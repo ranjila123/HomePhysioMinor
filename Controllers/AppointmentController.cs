@@ -24,7 +24,8 @@ namespace HomePhysio.Controllers
             _applicationDbContext = applicationDbContext;
             _userManager = userManager;
         }
-      
+
+        [Authorize(Roles = "Patient")]
         public IActionResult Index(int categoryId)
         {
             ViewBag.Categories =new SelectList( _applicationDbContext.CategoryModel.ToList(),nameof(CategoryModel.CategoryId),nameof(CategoryModel.Name));

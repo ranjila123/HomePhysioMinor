@@ -2,10 +2,7 @@
 
 @inject UserManager<ApplicationUser> UserManager
 
-@*@if (UserManager.IsInRoleAsync(this.User.Identity, "Patient").Result)
-{
 
-}*@
 <nav class="sidebar close" id="menu">
 
     <ul>
@@ -17,34 +14,98 @@
             </a>
         </li>
 
-        <li>
-            <a asp-controller="Home" asp-action="Profile_Page">
-                <i class='fa fa-user-circle fa-2x' aria-hidden='true'></i>
-                <span class="text-primary">My Profile</span>
-            </a>
 
-        </li>
+        @if (User.IsInRole("Physiotherapist"))
+        {
+            <li>
+                <a asp-controller="Home" asp-action="Profile_Page">
+                    <i class='fa fa-user-circle fa-2x' aria-hidden='true'></i>
+                    <span class="text-primary">My Profile</span>
+                </a>
 
-        <li>
-            <a asp-controller="Home" asp-action="PhysioAppointmentTable">
-                <i class='fa fa-calendar-check-o fa-2x' aria-hidden='true'></i>
-                <span class="text-primary">Appointments</span>
-            </a>
-        </li>
-        <i class="fa-solid fa-map-location-dot"></i>
-        <li>
-            <a asp-controller="Home" asp-action="PatientAppointmentTable">
-                <i class='fa fa-calendar-check-o fa-2x' aria-hidden='true'></i>
-                <span class="text-primary">Appointments(ForPatient)</span>
-            </a>
-        </li>
-        <li>
-            <a asp-controller="Map" asp-action="Index">
+            </li>
+            <li>
+                <a asp-controller="Home" asp-action="PhysioAppointmentTable">
+                    <i class='fa fa-calendar-check-o fa-2x' aria-hidden='true'></i>
+                    <span class="text-primary">Appointments</span>
+                </a>
+            </li>
+            <li>
+                <!--Time slots from Physio_Profile_Page-->
+                <a asp-controller="TimeSlot" asp-action="Index">
+                    <i class='fa fa-calendar fa-2x' aria-hidden='true'></i>
+                    <span class="text-primary">Manage Schedule</span>
+                </a>
+            </li>
 
-                <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-                <span class="text-primary">Maps</span>
-            </a>
-        </li>
+
+            <li>
+                <a asp-controller="PhysioCategory" asp-action="Index">
+                    <i class="fa fa-camera-retro fa-2x"></i>
+                    @*<i class='fa fa-credit-card-alt fa-2x' aria-hidden='true'></i>*@
+                    <span class="text-primary">MyCategories</span>
+                </a>
+            </li>
+            <li>
+                <a href="#/">
+                    <i class='fa fa-credit-card-alt fa-2x' aria-hidden='true'></i>
+                    <span class="text-primary">Payments</span>
+                </a>
+            </li>
+        }
+
+        @if (User.IsInRole("Patient"))
+        {
+            <li>
+                <a asp-controller="Home" asp-action="Profile_Page">
+                    <i class='fa fa-user-circle fa-2x' aria-hidden='true'></i>
+                    <span class="text-primary">My Profile</span>
+                </a>
+
+            </li>
+            <li>
+                <a asp-controller="Home" asp-action="PatientAppointmentTable">
+                    <i class='fa fa-calendar-check-o fa-2x' aria-hidden='true'></i>
+                    <span class="text-primary">Appointments</span>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Map" asp-action="Index">
+
+                    <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+                    <span class="text-primary">Maps</span>
+                </a>
+            </li>
+            <li>
+                <a href="#/">
+                    <i class='fa fa-plus-square fa-2x' aria-hidden='true'></i>
+                    <span class="text-primary">Services</span>
+                </a>
+
+                <ul>
+                    <li>
+                        <a asp-controller="Appointment" asp-action="Index">
+                            <span class="text-primary">Physiotherapist</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Home" asp-action="Dropdown2">
+
+                            <span class="text-primary">Symptoms</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="#/">
+                    <i class='fa fa-credit-card-alt fa-2x' aria-hidden='true'></i>
+                    <span class="text-primary">Payments</span>
+                </a>
+            </li>
+
+        }
+
         <li>
             <a href="#/">
                 <i class='fa fa-bell fa-2x' aria-hidden='true'></i>
@@ -52,59 +113,23 @@
             </a>
         </li>
 
-        <li>
-            <!--Time slots from Physio_Profile_Page-->
-            <a asp-controller="TimeSlot" asp-action="Index">
-                <i class='fa fa-calendar fa-2x' aria-hidden='true'></i>
-                <span class="text-primary">Manage Schedule</span>
-            </a>
-        </li>
 
-        <li>
-            <a href="#/">
-                <i class='fa fa-plus-square fa-2x' aria-hidden='true'></i>
-                <span class="text-primary">Services</span>
-            </a>
-
-            <ul>
-                <li>
-                    <a asp-controller="Appointment" asp-action="Index">
-                        <span class="text-primary">Physiotherapist</span>
-                    </a>
-                </li>
-                <li>
-                    <a asp-controller="Home" asp-action="Dropdown2">
-
-                        <span class="text-primary">Symptoms</span>
-                    </a>
-                </li>
-
-            </ul>
-        </li>
-
-        <li>
-            <a asp-controller="PhysioCategory" asp-action="Index">
-                <i class="fa fa-camera-retro fa-2x"></i>
-                @*<i class='fa fa-credit-card-alt fa-2x' aria-hidden='true'></i>*@
-                <span class="text-primary">MyCategories</span>
-            </a>
-        </li>
-
-        <li>
-            <a asp-controller="CategoryModels" asp-action="Index">
-                <i class="fa fa-camera-retro fa-2x"></i>
-                @*<i class='fa fa-credit-card-alt fa-2x' aria-hidden='true'></i>*@
-                <span class="text-primary">Manage Category</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="#/">
-                <i class='fa fa-credit-card-alt fa-2x' aria-hidden='true'></i>
-                <span class="text-primary">Payments</span>
-            </a>
-        </li>
-
+        @if (User.IsInRole("Admin"))
+        {
+            <li>
+                <a asp-controller="CategoryModels" asp-action="Index">
+                    <i class="fa fa-camera-retro fa-2x"></i>
+                    @*<i class='fa fa-credit-card-alt fa-2x' aria-hidden='true'></i>*@
+                    <span class="text-primary">Manage Category</span>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Home" asp-action="PhysioAppointmentTable">
+                    <i class='fa fa-calendar-check-o fa-2x' aria-hidden='true'></i>
+                    <span class="text-primary">Appointments</span>
+                </a>
+            </li>
+        }
 
         <li>
             <a asp-controller="Home" asp-action="About">
@@ -129,9 +154,9 @@
             </form>
             @*  <a asp-controller="Account" asp-action="LogOff">
 
-                @*<i class='fa fa-sign-out fa-2x' aria-hidden='true'></i>
-                <span class="text-primary">Logout</span>
-                </a>*@
+            @*<i class='fa fa-sign-out fa-2x' aria-hidden='true'></i>
+            <span class="text-primary">Logout</span>
+            </a>*@
         </li>
     </ul>
 </nav>
