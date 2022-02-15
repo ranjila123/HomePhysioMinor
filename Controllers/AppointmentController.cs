@@ -25,7 +25,7 @@ namespace HomePhysio.Controllers
             _userManager = userManager;
         }
 
-        [Authorize(Roles = "Patient")]
+        //[Authorize(Roles = "Patient")]
         public IActionResult Index(int categoryId)
         {
             ViewBag.Categories =new SelectList( _applicationDbContext.CategoryModel.ToList(),nameof(CategoryModel.CategoryId),nameof(CategoryModel.Name));
