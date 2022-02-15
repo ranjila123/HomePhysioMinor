@@ -131,7 +131,19 @@ namespace HomePhysio.Controllers
         public async Task<IActionResult> Patient_Profile_Page()
         {
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            var patient = await _applicationDbContext.PatientModel.Include(x=>x.GenderData).SingleOrDefaultAsync(o => o.UserId == user.Id);
+            //var pa = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            var patient = _applicationDbContext.PatientModel.Include(x => x.GenderData).Select(x => new PatientViewModel
+            {
+                UserId = x.UserId,
+                PatientId = x.PatientId,
+                Name1 = x.Name,
+                Age = x.Age,
+                GenderTypeName = x.GenderData.TypeName,
+                Email = x.Email,
+                PhoneNo = x.PhoneNo,
+                Address = x.Address
+            }).SingleOrDefault(x => x.UserId == user.Id);
+            patient.PImg = _applicationDbContext.PatientImage.FirstOrDefault(x => x.ImgId == 1 && x.PatientId==patient.PatientId).Image;
             return View(patient);
         }
 

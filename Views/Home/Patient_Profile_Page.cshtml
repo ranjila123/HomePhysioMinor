@@ -1,4 +1,4 @@
-﻿@model HomePhysio.Models.PatientModel
+﻿@model HomePhysio.ViewModel.PatientViewModel
 
 
 @{
@@ -39,7 +39,7 @@
                                 <h6 class="mb-0">Full Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                @Model.Name
+                                @Model.Name1
                             </div>
                         </div>
                         <hr>
@@ -57,7 +57,7 @@
                                 <h6 class="mb-0">Gender</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-             @Model.GenderData.TypeName
+             @Model.GenderTypeName
             </div>
                         </div>
                         <hr>
@@ -130,7 +130,7 @@
                 <tbody>
                     <tr>
                         <td><strong>Name</strong> </td>
-                        <td>@Model.Name</td>
+                        <td>@Model.Name1</td>
                     </tr>
 
                     <tr>
@@ -236,7 +236,7 @@
 
                 <button type="button" ng-click="PatientImgSubmit()" class="btn btn-primary">Submit</button>
             </form>
-            @*<div class="row">
+            <div class="row">
                 <div class="col-md-4" ng-repeat="imag in ImageListCust">
                     <div class="gal-detail thumb">
                         <img ng-src="data:image/JPEG;base64,{{imag.img}}" class="thumb-img" alt="work-thumbnail">
@@ -246,7 +246,7 @@
                         </div>
                     </div>
                 </div>
-            </div>*@
+            </div>
         </div>
 
     </div>
