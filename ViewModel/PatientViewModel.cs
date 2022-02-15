@@ -18,7 +18,7 @@ namespace HomePhysio.ViewModel
         public int Age { get; set; }
 
         public int GenderId { get; set; }
-        public GenderModel GenderData { get; set; }
+        public string GenderTypeName { get; set; }
 
         [EmailAddress]
         public string Email { get; set; }
@@ -33,5 +33,6 @@ namespace HomePhysio.ViewModel
 
         public string Longitude { get; set; }
         public string Latitude { get; set; }
+        public byte[] PImg { get; set; }
     }
 }
