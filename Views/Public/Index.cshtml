@@ -6,100 +6,64 @@
 
 
 <!-- ======= Hero Section ======= -->
-@*<section id="hero" class="hero d-flex align-items-center">*@
-<section id="hero" class="carousel slide" data-ride="carousel">
-
-    <!-- The slideshow -->
-    <div class="carousel-inner ">
-        <div class="carousel-item active" style="background-image: url(@Url.Content("~/img/carousel/pic2.jpg")">           
-            <div class="carousel-caption">
-                <h1 class="header-font">Welcome to HomePhysio</h1>
-                <h3>Nepal's fastest growing home physiotherapy service provider</h3>
-            </div>
-        </div>
-
-        <div class="carousel-item" style="background-image: url(@Url.Content("~/img/carousel/slidepic.jpg")">
-            <div class="carousel-caption">
-                <h3>You're in the hands of  professionals </h3>
-            </div>
-        </div>
-
-        <div class="carousel-item" style="background-image: url(@Url.Content("~/img/Physiotherapy/geriatric.jpg" )">
-            <div class="carousel-caption">
-                <h3>Better service in the comfort of your own home</h3>
-            </div>
-        </div>
+<section id="hero" class="d-flex align-items-center">
+    <div class="container">
+        <h1 class="header-font">Welcome to HomePhysio</h1>
+        <h3>Nepal's fastest growing home physiotherapy service provider</h3>
     </div>
-
-    @*Left and right controls*@
-    <a class="carousel-control-prev" href="#hero" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon bi bi-arrow-left" aria-hidden="true"> </span>
-    </a>
-
-    <a class="carousel-control-next" href="#hero" role="button" data-slide="next">
-        <span class="carousel-control-next-icon bi bi-arrow-right" aria-hidden="true"> </span>
-    </a>
-    <!-- Indicators -->
-    <ul class="carousel-indicators">
-        <li data-target="#hero" data-slide-to="0" class="active"></li>
-        <li data-target="#hero" data-slide-to="1"></li>
-        <li data-target="#hero" data-slide-to="2"></li>
-    </ul>
-</section>
-<!--</section>--><!-- End Hero -->
+</section><!-- End Hero -->
 
 <main id="main">
 
-     @*======= Why Us Section =======*@ 
+    @*======= Why Us Section =======*@
     <section id="why-us" class="why-us">
-        <div class="jumbotron">
-        <div class="container">
+            <div class="container">
 
-            <div class="row">
-                <div class="col-lg-4 d-flex align-items-stretch">
-                    <div class="content">
-                        <h3>Why get Physiotherapy At Home</h3>
-                        <p class="text-white font-weight-light">
-                            Often Physiotherapy is seen as something that can only be accessed if people can make it to the clinic. Well, that is partly true. However, today, most physiotherapy services can be easily carried out at a person’s home.Our website aims to provide an easy access for home physiotherapy services to our users.
+                <div class="row">
+                    <div class="col-lg-4 d-flex align-items-stretch">
+                        <div class="content">
+                            <h3>Why get Physiotherapy At Home</h3>
+                            <p class="text-white font-weight-light">
+                                Often Physiotherapy is seen as something that can only be accessed if people can make it to the clinic. Well, that is partly true. However, today, most physiotherapy services can be easily carried out at a person’s home.Our website aims to provide an easy access for home physiotherapy services to our users.
 
 
-                            <div class="text-center">
-                                <a asp-action="LearnMore" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
-                            </div>
+                                <div class="text-center">
+                                    <a asp-action="LearnMore" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+                                </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-8 d-flex align-items-stretch">
-                    <div class="icon-boxes d-flex flex-column justify-content-center">
-                        <div class="row">
-                            <div class="col-xl-4 d-flex align-items-stretch">
-                                <div class="icon-box mt-4 mt-xl-0">
-                                    <i class="bx bx-receipt"></i>
-                                    <h4>Corporis voluptates sit</h4>
-                                    <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                    <div class="col-lg-8 d-flex align-items-stretch">
+                        <div class="icon-boxes d-flex flex-column justify-content-center">
+                            <div class="row">
+                                <div class="col-xl-4 d-flex align-items-stretch">
+                                    <div class="icon-box mt-4 mt-xl-0">
+                                        <i class="bx bx-receipt"></i>
+                                        <h4>Corporis voluptates sit</h4>
+                                        <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xl-4 d-flex align-items-stretch">
-                                <div class="icon-box mt-4 mt-xl-0">
-                                    <i class="bx bx-cube-alt"></i>
-                                    <h4>Ullamco laboris ladore pan</h4>
-                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                                <div class="col-xl-4 d-flex align-items-stretch">
+                                    <div class="icon-box mt-4 mt-xl-0">
+                                        <i class="bx bx-cube-alt"></i>
+                                        <h4>Ullamco laboris ladore pan</h4>
+                                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xl-4 d-flex align-items-stretch">
-                                <div class="icon-box mt-4 mt-xl-0">
-                                    <i class="bx bx-images"></i>
-                                    <h4>Labore consequatur</h4>
-                                    <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                                <div class="col-xl-4 d-flex align-items-stretch">
+                                    <div class="icon-box mt-4 mt-xl-0">
+                                        <i class="bx bx-images"></i>
+                                        <h4>Labore consequatur</h4>
+                                        <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    </section> @*End Why Us Section*@ 
-     @*======= Process Section =======*@ 
+        
+    </section> @*End Why Us Section*@
+    @*======= Process Section =======*@
     <section id="counts" class="counts">
         <div class="container">
             <div class="section-title">
@@ -142,7 +106,7 @@
                     </div>
                 </div>
 
-                   @*<div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                @*<div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
                         <div class="count-box">
                             <i class="fa fa-medkit" aria-hidden="true"></i>
                             <h3>Therapy</h3>
@@ -161,10 +125,10 @@
             </div>
 
         </div>
-    </section> @*End Process Section*@ 
+    </section> @*End Process Section*@
 
     <!-- ======= Package Section ======= -->
-    <section id="services" class="services">
+    @*<section id="services" class="services">
         <div class="container">
 
             <div class="section-title">
@@ -203,7 +167,9 @@
             </div>
 
         </div>
-    </section><!-- End Services Section -->
+    </section>*@<!-- End Services Section -->
+   
+    
     <!-- =======About Physiotherapy Section ======= -->
     <section class="departments">
         <div class="container">
