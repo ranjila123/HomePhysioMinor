@@ -179,27 +179,30 @@ namespace HomePhysio.Controllers
         [HttpGet]
         public async Task<IActionResult> Physio_Profile_Page()
         {
-            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            var physio = await _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Include(x => x.UserData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).SingleOrDefaultAsync(o => o.UserId == user.Id);
-            return View(physio);
-
             //var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            //var physio = await _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Select(x => new PhysiotherapistVM
-            //{
-            //    UserId = user.Id,
-            //    PhysiotherapistId = x.PhysiotherapistId,
-            //    GenderTypeName = x.GenderData.TypeName,
-            //    Name = x.Name,
-            //    Age = x.age,
-            //    ContactNo = x.ContactNo,
-            //    Address = x.Address,
-            //}).SingleOrDefaultAsync(x => x.UserId == user.Id);
+            //var physio = await _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Include(x => x.UserData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).SingleOrDefaultAsync(o => o.UserId == user.Id);
+            //return View(physio);
+
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            var physio = await _applicationDbContext.PhysiotherapistModel.Where(x => x.UserId == user.Id).Include(x => x.GenderData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).Select(x => new PhysiotherapistVM
+            {
+                UserId = user.Id,
+                PhysiotherapistId = x.PhysiotherapistId,
+                GenderTypeName = x.GenderData.TypeName,
+                Name = x.Name,
+                Age = x.age,
+                ContactNo = x.ContactNo,
+                Address = x.Address,
+                Qualification = x.Qualification,
+                //Category=x.physioCategoryModels.ToList()
+
+            }).SingleOrDefaultAsync();
             //var physioImg = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 1 && x.PhysiotherapistId == physio.PhysiotherapistId);
             //if (physio != null)
             //{
             //    physio.PImg = physioImg.Image;
             //}
-            //return View(physio);
+            return View(physio);
         }
 
         [HttpPost]

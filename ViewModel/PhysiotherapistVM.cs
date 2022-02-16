@@ -15,7 +15,7 @@ namespace HomePhysio.ViewModel
         public string GenderTypeName { get; set; }
 
         public int Age { get; set; }
-    
+
         //public string Email { get; set; }
         public string UserId { get; set; }
         public ApplicationUser UserData { get; set; }
