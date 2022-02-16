@@ -194,14 +194,14 @@ namespace HomePhysio.Controllers
                 ContactNo = x.ContactNo,
                 Address = x.Address,
                 Qualification = x.Qualification,
-                //Category=x.physioCategoryModels.ToList()
+                CategoryList=x.physioCategoryModels.ToList()
 
             }).SingleOrDefaultAsync();
-            //var physioImg = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 1 && x.PhysiotherapistId == physio.PhysiotherapistId);
-            //if (physio != null)
-            //{
-            //    physio.PImg = physioImg.Image;
-            //}
+            var physioImg = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 1 && x.PhysiotherapistId == physio.PhysiotherapistId);
+            if (physio != null)
+            {
+                physio.PImg = physioImg.Image;
+            }
             return View(physio);
         }
 

@@ -21,4 +21,18 @@ namespace HomePhysio.Models
 
          public byte[] Image { get; set; }
     }
+    public class PatientImages
+    {
+        public int PatientImagesId { get; set; }
+        [ForeignKey(nameof(ImageData))]
+        public int ImgId { get; set; }
+        public ImageTypeModel ImageData { get; set; }
+
+
+        [ForeignKey(nameof(PatientData))]
+        public int PatientId { get; set; }
+        public PatientModel PatientData { get; set; }
+
+        public byte[] Image { get; set; }
+    }
 }
