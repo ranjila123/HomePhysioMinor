@@ -35,6 +35,7 @@ namespace HomePhysio.Data
 
         public DbSet<PaymentTypeModel> PaymentTypeModel { get; set; }
         public DbSet<PaymentsModel> PaymentsModel { get; set; }
+
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    //Write Fluent API configurations here

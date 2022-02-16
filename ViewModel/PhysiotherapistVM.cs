@@ -15,7 +15,7 @@ namespace HomePhysio.ViewModel
         public string GenderTypeName { get; set; }
 
         public int Age { get; set; }
-    
+
         //public string Email { get; set; }
         public string UserId { get; set; }
         public ApplicationUser UserData { get; set; }
@@ -24,6 +24,7 @@ namespace HomePhysio.ViewModel
         public string Qualification { get; set; }
         
         public string Category { get; set; }
+        public IEnumerable<PhysioCategoryModel> CategoryList { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
         public byte[] PImg { get; set; }
