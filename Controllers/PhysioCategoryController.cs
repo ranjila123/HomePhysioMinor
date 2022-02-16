@@ -81,10 +81,11 @@ namespace HomePhysio.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Category = new SelectList(_applicationDbContext.CategoryModel.ToList(), nameof(CategoryModel.CategoryId), nameof(CategoryModel.Name));
+
+            //ViewBag.Category = new SelectList(_applicationDbContext.CategoryModel.ToList(), nameof(CategoryModel.CategoryId), nameof(CategoryModel.Name));
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             var physio = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
-            var physioCategory = await _applicationDbContext.PhysioCategoryModel.SingleOrDefaultAsync(x => x.Id == id);
+            var physioCategory = await _applicationDbContext.PhysioCategoryModel.Include(x=>x.Category).SingleOrDefaultAsync(x => x.Id == id);
 
             if (physio.PhysiotherapistId == physioCategory.PhysiotherapistId)
             {
@@ -109,7 +110,8 @@ namespace HomePhysio.Controllers
 
                 if (physio.PhysiotherapistId == physioCategory.PhysiotherapistId)
                 {
-                    physioCategory.CategoryId = physioCategoryModel.CategoryId;
+                    physioCategory.Experience = physioCategoryModel.Experience;
+
                     await _applicationDbContext.SaveChangesAsync();
                 }
 

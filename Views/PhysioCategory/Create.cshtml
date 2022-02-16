@@ -16,7 +16,13 @@
 
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Experience" class="control-label"><strong class="text-primary">Write Your Experience</strong></label>
 
+                <input asp-for="Experience" type="Text" class="form-control" />
+
+                <span asp-validation-for="Experience" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Select" class="btn btn-primary btn-sm" />
             </div>

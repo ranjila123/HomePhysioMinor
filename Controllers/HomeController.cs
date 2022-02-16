@@ -198,7 +198,7 @@ namespace HomePhysio.Controllers
 
             }).SingleOrDefaultAsync();
             var physioImg = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 1 && x.PhysiotherapistId == physio.PhysiotherapistId);
-            if (physio != null)
+            if (physioImg != null)
             {
                 physio.PImg = physioImg.Image;
             }
