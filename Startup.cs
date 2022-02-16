@@ -56,6 +56,7 @@ namespace HomePhysio
                 options.AppSecret = "f4926f18111672a19fc81ef5c53e044f";
             });
             //Adding Services
+            services.AddAntiforgery(o => o.SuppressXFrameOptionsHeader = true);
             services.AddTransient<IFileUpload, FileUpload>();
             services.AddControllersWithViews();
             //         services.AddControllersWithViews().AddJsonOptions(x =>

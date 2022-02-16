@@ -1,5 +1,5 @@
 ﻿@model HomePhysio.Models.PatientModel
-
+  
 
 <div ng-controller="HomeController" data-ng-init="AppointmentList(@Model.PatientId)">
     <h3 class="text-primary">My appointments</h3>
@@ -13,7 +13,6 @@
                     <th>Time</th>
                     <th>Response</th>
                     <th>Cancel</th>
-                    <th>Payment</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,19 +24,62 @@
                         {{x.status}}
                         <!--if (== "Pending"){-->
                         @*<strong class="text-success">Confirmed</strong>
-                            <strong class="text-danger">Denied</strong>*@
+                        <strong class="text-danger">Denied</strong>*@
                         <!--<strong class="text-secondary">Pending</strong>
-                        }-->
+                    }-->
                     </td>
-                    <td><button class="btn btn-danger" ng-click="CancelAppointmentByPatient(x.appointmentId,@Model.PatientId)" ng-show="x.status!=='Cancel'">Cancel</button></td>
-                    <button id="payment-button">Pay with Khalti</button>
+                    <td>
+                        <button class="btn btn-danger" ng-click="CancelAppointmentByPatient(x.appointmentId,@Model.PatientId)" ng-show="x.status!=='Cancel'">Cancel</button>
+                        <button id="payment-button" style="background-color: #5C2D91; cursor: pointer; color: #fff; border: none; padding: 5px 10px; border-radius: 2px">Pay with Khalti</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        <iframe src="https://www.w3schools.com" title="W3Schools Free Online Web Tutorials">
+        </iframe>
     </div>
 </div>
 @section scripts{
 
 
-        <script src="~/AngularServices/Controller/HomeController.js" asp-append-version="true"></script>
-    }
+    <script src="~/AngularServices/Controller/HomeController.js" asp-append-version="true"></script>
+    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+    <script>
+        $(document).ready(function () {
+            var config = {
+                "publicKey": "test_public_key_9f6cd792da90494785b6d7d6c30d99bd",
+                "productIdentity": "1234567890",
+                "productName": "Dragon",
+                "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+                "paymentPreference": [
+                    "KHALTI",
+                    "EBANKING",
+                    "MOBILE_BANKING",
+                    "CONNECT_IPS",
+                    "SCT",
+                ],
+                "eventHandler": {
+                    onSuccess(payload) {
+                        // hit merchant api for initiating verfication
+                        console.log(payload);
+                    },
+                    onError(error) {
+                        console.log(error);
+                    },
+                    onClose() {
+                        console.log('widget is closing');
+                    }
+                }
+            };
+
+            var checkout = new KhaltiCheckout(config);
+            console.log(checkout);
+            $('#payment-button').click(function () {
+                // minimum transaction amount must be 10, i.e 1000 in paisa.
+
+                checkout.show();
+            });;
+        });
+              
+    </script>
+}
