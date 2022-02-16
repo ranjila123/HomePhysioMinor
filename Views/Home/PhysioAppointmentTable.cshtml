@@ -36,7 +36,8 @@
                     <td>
 
                         @*<button onclick="window.location.reload();">Reload Page</button>*@
-                        <button ng-click="ConfirmAppointment(x.appointmentId,@Model.PhysiotherapistId)" class="btn btn-success btn-sm">Confirm</button>  <button class="btn btn-danger btn-sm">Cancel</button>
+                        <button ng-click="ConfirmAppointment(x.appointmentId,@Model.PhysiotherapistId)" ng-show="x.status=='Pending'" class="btn btn-success btn-sm" >Confirm</button>  
+                        <button class="btn btn-danger btn-sm" ng-click="CancelAppointment(x.appointmentId,@Model.PhysiotherapistId)" ng-show="x.status!=='Cancel'" >Cancel</button>
                     </td>
                 </tr>
             </tbody>

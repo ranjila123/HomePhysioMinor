@@ -23,10 +23,13 @@
                     <p class="p-0">Specialization: {{x.category}}</p>
                     <p class="p-0">Qualifications: {{x.qualification}}</p>
 
-                    <a asp-controller="Home" asp-action="Physio_info" class="btn btn-primary">See profile</a>
+                    <button type="button" class="btn btn-primary" ng-click="GetPhysioList(x.physiotherapistId)">
+                        See Profile
+                    </button>
+                    
                     @*<a asp-controller="Appointment" asp-action="TimeSlot" class="btn btn-primary">Book Appointment</a>*@
 
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0);" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
                         Book Appointment
                     </button>
 

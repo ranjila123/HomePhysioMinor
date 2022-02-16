@@ -50,8 +50,8 @@ namespace HomePhysio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AdminRegister(RegisterAdminViewModel model, string returnurl = null)
         {
-            ViewData["ReturnUrl"] = returnurl;
-            returnurl = returnurl ?? Url.Content("~/");
+           // ViewData["ReturnUrl"] = returnurl;
+            //returnurl = returnurl ?? Url.Content("~/");
             //server side validation
             if (ModelState.IsValid)
             {

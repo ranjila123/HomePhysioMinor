@@ -28,7 +28,7 @@
                         <!--<strong class="text-secondary">Pending</strong>
                         }-->
                     </td>
-                    <td><button class="btn btn-danger">Cancel</button></td>
+                    <td><button class="btn btn-danger" ng-click="CancelAppointmentByPatient(x.appointmentId,@Model.PatientId)" ng-show="x.status!=='Cancel'">Cancel</button></td>
                 </tr>
             </tbody>
         </table>

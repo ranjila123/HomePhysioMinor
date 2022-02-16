@@ -25,7 +25,7 @@ namespace HomePhysio.Controllers
             _userManager = userManager;
         }
 
-        [Authorize(Roles = "Patient")]
+        //[Authorize(Roles = "Patient")]
         public IActionResult Index(int categoryId)
         {
             ViewBag.Categories =new SelectList( _applicationDbContext.CategoryModel.ToList(),nameof(CategoryModel.CategoryId),nameof(CategoryModel.Name));
@@ -73,7 +73,7 @@ namespace HomePhysio.Controllers
                 PhysioTimeSlotsId = x.PhysioTimeSlotsId,
                 DateAndTime = x.DateTimeShift,
                 Date = x.DateTimeShift.Date.ToString("yyyy/MM/dd"),
-                Time = x.DateTimeShift.TimeOfDay.ToString(),
+                Time = x.DateTimeShift.ToShortTimeString(),
                 StatusCode = x.appointmentsModels.Count(y=>y.PatientId== patient.PatientId && y.PhysioTimeSlotsId==x.PhysioTimeSlotsId)> 0 ? "2" : "0"
             }).ToList();
 
@@ -133,6 +133,31 @@ namespace HomePhysio.Controllers
                 }
                 AppointmentsModel appointment = _applicationDbContext.AppointmentsModels.SingleOrDefault(x => x.AppointmentId == appointmentId);
                 appointment.StatusCode = "1";
+                _applicationDbContext.Update(appointment);
+                await _applicationDbContext.SaveChangesAsync();
+                return Json(new { result = true, msg = "Success" });
+
+             }
+            catch
+            {
+                return Json(new { result = false, msg = "Response False" });
+
+            }
+            
+        } 
+
+        [HttpPost]
+        public async Task<IActionResult> CancelAppointment(int appointmentId)
+        {
+           
+            try
+            {
+                if (appointmentId == null)
+                {
+                return Json(new { result = false, msg = "Response False" });
+                }
+                AppointmentsModel appointment = _applicationDbContext.AppointmentsModels.SingleOrDefault(x => x.AppointmentId == appointmentId);
+                appointment.StatusCode = "3";
                 _applicationDbContext.Update(appointment);
                 await _applicationDbContext.SaveChangesAsync();
                 return Json(new { result = true, msg = "Success" });

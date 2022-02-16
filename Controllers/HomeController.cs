@@ -131,7 +131,23 @@ namespace HomePhysio.Controllers
         public async Task<IActionResult> Patient_Profile_Page()
         {
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            var patient = await _applicationDbContext.PatientModel.Include(x=>x.GenderData).SingleOrDefaultAsync(o => o.UserId == user.Id);
+            //var pa = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            var patient = _applicationDbContext.PatientModel.Include(x => x.GenderData).Select(x => new PatientViewModel
+            {
+                UserId = x.UserId,
+                PatientId = x.PatientId,
+                Name1 = x.Name,
+                Age = x.Age,
+                GenderTypeName = x.GenderData.TypeName,
+                Email = x.Email,
+                PhoneNo = x.PhoneNo,
+                Address = x.Address
+            }).SingleOrDefault(x => x.UserId == user.Id);
+            var patientImg = _applicationDbContext.PatientImage.FirstOrDefault(x => x.ImgId == 1 && x.PatientId == patient.PatientId);
+            if (patientImg != null)
+                patient.PImg= patientImg.Image;
+                
+
             return View(patient);
         }
 
@@ -163,8 +179,27 @@ namespace HomePhysio.Controllers
         [HttpGet]
         public async Task<IActionResult> Physio_Profile_Page()
         {
+            //var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            //var physio = await _applicationDbContext.PhysiotherapistModel.Include(x=>x.GenderData).Include(x=>x.UserData).Include(x=>x.physioCategoryModels).ThenInclude(x=>x.Category).SingleOrDefaultAsync(o => o.UserId == user.Id);
+            //return View(physio);
+
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            var physio = await _applicationDbContext.PhysiotherapistModel.Include(x=>x.GenderData).Include(x=>x.UserData).Include(x=>x.physioCategoryModels).ThenInclude(x=>x.Category).SingleOrDefaultAsync(o => o.UserId == user.Id);
+
+            //var pa = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            var physio = await _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Select(x => new PhysiotherapistVM
+            {
+                UserId=x.UserId,
+                PhysiotherapistId = x.PhysiotherapistId,
+                Name = x.Name,
+                GenderTypeName = x.GenderData.TypeName,
+                ContactNo = x.ContactNo,
+                Address = x.Address
+            }).SingleOrDefault(x => x.UserId == user.Id);
+            var physioImg = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 1 && x.PhysiotherapistId == physio.PhysiotherapistId);
+            if (physioImg != null)
+                physio.PImg = physioImg.Image;
+
+
             return View(physio);
         }
 
@@ -195,19 +230,50 @@ namespace HomePhysio.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> UploadPatientImage(IFormFile file)
+        public async Task<JsonResult> UploadPatientImage(IFormFile file,string imageType)
         {
             var data = _fileUpload.ImageToByte(file);
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
-            var imageModel = new PatientImage
+            var imageModelDb = _applicationDbContext.PatientImage.SingleOrDefault(x => x.PatientId == patient.PatientId && x.ImgId == int.Parse(imageType));
+            if (imageModelDb != null)
             {
-                PatientId = patient.PatientId,
-                ImgId = 1,
-                Image = data,
-            };
-
-            _applicationDbContext.PatientImage.Add(imageModel);
+                imageModelDb.Image = data;
+            }
+            else
+            {
+                var imageModel = new PatientImage
+                {
+                    PatientId = patient.PatientId,
+                    ImgId = int.Parse(imageType),
+                    Image = data,
+                };
+                _applicationDbContext.PatientImage.Add(imageModel);
+            }
+            await _applicationDbContext.SaveChangesAsync();
+            return Json(new { });
+        }
+        [HttpPost]
+        public async Task<JsonResult> UploadPhysioImage(IFormFile file,string imageType)
+        {
+            var data = _fileUpload.ImageToByte(file);
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            var physio = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            var imageModelDb = _applicationDbContext.PhysioImage.SingleOrDefault(x => x.PhysiotherapistId == physio.PhysiotherapistId && x.ImgId == int.Parse(imageType));
+            if (imageModelDb != null)
+            {
+                imageModelDb.Image = data;
+            }
+            else
+            {
+                var imageModel = new PhysioImage
+                {
+                    PhysiotherapistId = physio.PhysiotherapistId,
+                    ImgId = int.Parse(imageType),
+                    Image = data,
+                };
+                _applicationDbContext.PhysioImage.Add(imageModel);
+            }
             await _applicationDbContext.SaveChangesAsync();
             return Json(new { });
         }
