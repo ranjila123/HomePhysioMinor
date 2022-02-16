@@ -4,15 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
+<div class="bg-primary" style="height:50px; text-align:center"><h3 class="text-white text-center" style="padding:10px"><strong>My Schedule</strong></h3></div>
+<br />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary btn-sm text-black">Create schedule</a>
 </p>
-
-<table class="table" id="TimeSlotsTable">
+<br />
+<table  class="table table-responsive" style="box-shadow: 0 0 0 5px rgba(0,0,0,0.05)" id="TimeSlotsTable">
     <thead>
-        <tr>
+        <tr class="bg-info">
             @*<th>
                     @Html.DisplayNameFor(model => model.PhysioTimeSlotsId)
                 </th>*@
@@ -34,24 +35,24 @@
             <th>Changes</th>
         </tr>
     </thead>
-   
+
 </table>
 @section scripts{
     <script>
-    $(document).ready(function () {
-        $('#TimeSlotsTable').DataTable({
-            scrollY: '50vh',
-            select: true,
-            keys: true,
-            colReorder: true,
-            serverSide: true,
-            dom: 'lrtip',
-            ajax: {
-                url: '/TimeSlot/GetTimeSlotsData',
-                type: 'post',
-                datatype:'json'
-            },
-            columns: [{ data: 'year', name: "Year", orderable:false },
+        $(document).ready(function () {
+            $('#TimeSlotsTable').DataTable({
+                scrollY: '50vh',
+                select: true,
+                keys: true,
+                colReorder: true,
+                serverSide: true,
+                dom: 'lrtip',
+                ajax: {
+                    url: '/TimeSlot/GetTimeSlotsData',
+                    type: 'post',
+                    datatype: 'json'
+                },
+                columns: [{ data: 'year', name: "Year", orderable: false },
                 { data: 'month', name: "Month", orderable: false },
                 { data: 'day', name: "Day", orderable: false },
                 { data: 'time', name: "Time", orderable: false },
@@ -59,16 +60,16 @@
                     "render": function (data, full, type, row) {
 
                         return `<a href='${window.location.href}/Edit/${type.physioTimeSlotsId}' class='btn btn-primary' >Edit</a>
-                                <a href='${window.location.href}/Delete/${type.physioTimeSlotsId}' class='btn btn-danger'>Delete</a>`;
-                                
+                                        <a href='${window.location.href}/Delete/${type.physioTimeSlotsId}' class='btn btn-danger'>Delete</a>`;
+
                         //return `<a href='${window.location.href}/Edit?physioId=${type.physioTimeSlotsId}' class='btn btn-danger' >Edit</a>`;
                     }
                 }
 
-            ]
+                ]
+
+            });
 
         });
-
-    });
     </script>
 }

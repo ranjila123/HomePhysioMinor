@@ -5,26 +5,29 @@
     <!--Appointment list viewed by physio-->
     <div clss="container-fluid">
 
-        <h3>Appointments</h3>
+        <div class="bg-primary" style="height:50px; text-align:center"><h3 class="text-white text-center" style="padding:10px"><strong>My appointments</strong></h3></div>
+        <br />
+        <br/>
         <input asp-for="PhysiotherapistId" hidden />
-        <table class="table table-striped table-bordered">
+        <table class="table table-responsive" style="box-shadow: 0 0 0 5px rgba(0,0,0,0.05)" >
 
 
             <thead>
-                <tr>
+                <tr class="bg-info">
                     <th>Name of patient</th>
                     @*<th>Address</th>
-                        <th>Contact no.</th>
-                        <th>Email</th>
-                        <th>Total Charge</th>
-                        <th>Response</th>*@
+                    <th>Contact no.</th>
+                    <th>Email</th>
+                    <th>Total Charge</th>
+                    <th>Response</th>*@
                     <th>Date</th>
                     <th>Time</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="x in Physioappoint">
+                <tr class="table-info" ng-repeat="x in Physioappoint">
 
                     <td>{{x.patientName}}</td>
                     <td>{{x.date}}</td>

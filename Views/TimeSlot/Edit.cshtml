@@ -18,7 +18,9 @@
     </form>*@
 <!--Time slots-->
 <form asp-action="Edit" method="post">
-    <h3 class="text-primary">Edit your schedule</h3>
+    <div class="bg-primary" style="height:50px"><h3 class="text-white" style="padding:10px"><strong>Edit your schedule</strong></h3></div>
+    <br />
+
     <input asp-for="PhysioTimeSlotsId" hidden />
     @using (Html.BeginForm())
     {
@@ -26,8 +28,8 @@
         @Html.EditorFor(model => model.DateTimeShift, new { htmlAttributes = new { @class = "datepicker" } })
         <button asp-action="Edit" formmethod="post" class="btn btn-primary">Submit</button>
         @*<div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
-        </div>*@
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>*@
     }
 
 </form>
