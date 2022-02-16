@@ -79,10 +79,10 @@ namespace HomePhysio.Controllers
         {
             return View();
         }
-
+       
         public IActionResult Physio_info(int physiotherapistId)
         {
-            var physio = _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Select(x => new PhysiotherapistVM
+            var physio = _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Include(x=>x.physioCategoryModels).ThenInclude(x=>x.Category).Select(x => new PhysiotherapistVM
             {
                 PhysiotherapistId = x.PhysiotherapistId,
                 Name = x.Name,
@@ -91,7 +91,13 @@ namespace HomePhysio.Controllers
                 GenderTypeName = x.GenderData.TypeName,
                 ContactNo = x.ContactNo,
                 Qualification = x.Qualification,
+                CategoryList = x.physioCategoryModels.ToList()
             }).SingleOrDefault(o=>o.PhysiotherapistId== physiotherapistId);
+            var physioImg = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 1 && x.PhysiotherapistId == physio.PhysiotherapistId);
+            if (physioImg != null)
+            {
+                physio.PImg = physioImg.Image;
+            }
             return View(physio);
         }
 

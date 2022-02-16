@@ -146,8 +146,8 @@
 
                     });
             };
-            $scope.PhysioProfile = function (physioId) {
-                window.location = `${document.location.origin}/Home/Physio_info/physiotherapistId=${physioId}`;
+            $scope.PhysioProfile = function (physiotherapistId) {
+                window.location = `${document.location.origin}/Home/Physio_info/physiotherapistId=${physiotherapistId}`;
             };
            
 

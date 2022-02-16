@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace HomePhysio.Models
 {
-    public class CategoryModel
+    public class CitizenshipTable
     {
         [Key]
-        public int CategoryId { get; set; }
+        public string CitizenShipNumber { get; set; }
         public string Name { get; set; }
-        public string CatInfo { get; set; }
     }
 }

@@ -36,7 +36,15 @@ namespace HomePhysio.Models
 
         public string Longitude { get; set; }
         public string Latitude { get; set; }
-        public IEnumerable<PhysioImage> PhysioImages { get; set; }//1 to many
+        public IEnumerable<PhysioImage> PhysioImages { get; set; }//1 to many\
+
+        [ForeignKey(nameof(CStatusData))]
+        public string CStatusModel { get; set; }
+        public virtual CStatusModel CStatusData { get; set; }
+
+        [ForeignKey(nameof(LStatusData))]
+        public string LStatusModel { get; set; }
+        public virtual LStatusModel LStatusData { get; set; }
 
     }
     //public class PhysiotherapistViewModel

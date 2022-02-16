@@ -42,22 +42,30 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-4">
                         <figure class="all_image-pic">
-                            <img class="img-fluid" width="300" height="300" src="~/img/Profile pic/PP.png" alt="PP">
-
+                            @if (Model.PImg != null)
+                            {
+                                <img src="data:image;base64,@System.Convert.ToBase64String(Model.PImg)" class="rounded-circle" width="150" />
+                            }
+                            else
+                            {
+                                <img class="rounded-circle" width="150" src="~/img/Profile pic/PP.png" alt="PP">
+                            }
                         </figure>
                     </div>
                     <div class="col-lg-7 col-md-8">
 
-                        <h3 class="text-primary">Dr.Aishwarya Shenoy</h3>
-                        <small class="text-secondary">Orthopedic Physiotherapist</small>
+                        <h3 class="text-primary">@Model.Name</h3>
+                        <ul>
+                            @foreach (var item in Model.CategoryList)
+                            {
+                                <li><small class="text-secondary">@item.Category.Name</small></li>
+                                <li><small class="text-secondary">@item.Experience</small></li>
+                            }
+                        </ul>
+                        @*<small class="text-secondary">Orthopedic Physiotherapist</small>*@
 
 
                         <ul class="contacts">
-                            <li>
-                                <h5>Physiotherapist in</h5>
-                                Doddakammanahalli, Bengaluru, Karnataka, 560076
-                                <br />
-                            </li>
                             <li>
                                 <h5>Consultation fee</h5>
                                 Rs. 500

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HomePhysio.Models
 {
-    public class CategoryModel
+    public class CStatusModel
     {
         [Key]
-        public int CategoryId { get; set; }
+        public string CStatusModelId { get; set; }
+
         public string Name { get; set; }
-        public string CatInfo { get; set; }
     }
 }

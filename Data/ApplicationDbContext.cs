@@ -35,6 +35,11 @@ namespace HomePhysio.Data
 
         public DbSet<PaymentTypeModel> PaymentTypeModel { get; set; }
         public DbSet<PaymentsModel> PaymentsModel { get; set; }
+        public DbSet<CStatusModel> CStatusModel { get; set; }
+        public DbSet<LStatusModel> LStatusModel { get; set; }
+        public DbSet<CitizenshipTable> CitizenshipTable { get; set; }
+        public DbSet<LicenseTable> LicenseTable { get; set; }
+
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
