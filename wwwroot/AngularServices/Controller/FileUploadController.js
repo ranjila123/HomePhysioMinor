@@ -9,7 +9,7 @@
                     $scope.PatientImgUpload($scope.file,$scope.imageType);
                 }
                 else {
-                    messageBox('error', 'File is not valid.');
+                    alert('error', 'File is not valid.');
                 }
             };
             $scope.PatientImgUpload = function (file,imageType) {
@@ -30,7 +30,7 @@
                     $scope.PhysioImgUpload($scope.file, $scope.imageType);
                 }
                 else {
-                    messageBox('error', 'File is not valid.');
+                    alert('error', 'File is not valid.');
                 }
             };
             $scope.PhysioImgUpload = function (file, imageType) {

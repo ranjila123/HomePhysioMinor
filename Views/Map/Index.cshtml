@@ -7,11 +7,11 @@
 <div ng-controller="MapController">
     @*@Model.Count()*@
     @*{{physiotherapist}}*@
-    <p>Search for physiotherapist</p>
+    <p ng-init="CallHttpPost()">Search for physiotherapist</p>
 
     @*<select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()" ng-init="searchType='@ViewBag.CategoryId';CallHttpPost();"></select>*@
-    <button type="button" class="btn btn-primary" ng-model="searchType" ng-click="CallHttpPost()">CLick me</button>
 
+<div ng-controller="AppointmentController">
     <div class=" jumbotron " ng-repeat="x in physiotherapist">
         <div class="container">
             <div class="media">
@@ -40,7 +40,7 @@
                             Book Appointment
                         </button>*@
 
-                    <div ng-controller="AppointmentController as appointment">
+                    <div>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0)" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
                             Book Appointment
                         </button>
@@ -51,12 +51,14 @@
             </div>
         </div>
     </div>
-    <div ng-controller="AppointmentController as appointment">
+    <div>
+
         <partial name="_bookAppointmentModal" />
 
     </div>
 </div>
-
+</div>
+   
 
 
 
@@ -64,5 +66,5 @@
 @section scripts{
     <script src="~/AngularServices/Controller/HomeController.js" asp-append-version="true"></script>
     <script src="~/AngularServices/Controller/AppointmentController.js" asp-append-version="true"></script>
-    <script src="~/AngularServices/Controller/MapController.js"></script>
+    <script src="~/AngularServices/Controller/MapController.js" asp-append-version="true"></script>
 }
