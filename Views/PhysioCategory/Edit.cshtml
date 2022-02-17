@@ -10,14 +10,20 @@
 <br />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"><strong class="text-primary">Specialization</strong></label>
-                <select asp-items="@ViewBag.Category" asp-for="CategoryId"></select>
+                @*<label asp-for="CategoryId" class="control-label"><strong class="text-primary">Specialization</strong></label>*@
+                @*<select asp-items="@ViewBag.Category" asp-for="CategoryId" ></select>*@
+                <input asp-for="CategoryId" type="hidden" />
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
+                <div>
+                    <label asp-for="Experience" class="control-label"><strong class="text-primary">Experience</strong></label>
+                    <input type="number" id="Experience" class="btn-secondary" asp-for="Experience" />
+
+                </div>
             </div>
 
             <div class="form-group">
@@ -25,6 +31,16 @@
             </div>
         </form>
     </div>
+        @*<div class="col-md-6">
+            <form asp-action="Edit">
+                <input type="hidden" asp-for="Id" />
+                <div >
+                    <label asp-for="Experience" class="control-label"><strong class="text-primary">Experience</strong></label>
+                    <input type="number" id="Experience" class="btn-secondary" asp-for="Experience" />
+                
+                </div>
+            </form>
+        </div>*@
 </div>
 
 <div>

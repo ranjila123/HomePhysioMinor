@@ -110,6 +110,7 @@ namespace HomePhysio.Controllers
                 if (physio.PhysiotherapistId == physioCategory.PhysiotherapistId)
                 {
                     physioCategory.CategoryId = physioCategoryModel.CategoryId;
+                    physioCategory.Experience = physioCategoryModel.Experience;
                     await _applicationDbContext.SaveChangesAsync();
                 }
 
