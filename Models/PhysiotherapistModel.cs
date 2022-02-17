@@ -38,6 +38,8 @@ namespace HomePhysio.Models
         public string Latitude { get; set; }
         public IEnumerable<PhysioImage> PhysioImages { get; set; }//1 to many
 
+        public decimal ConsultationCharge { get; set; }
+
     }
     //public class PhysiotherapistViewModel
     //{
