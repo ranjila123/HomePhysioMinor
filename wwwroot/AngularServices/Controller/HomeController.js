@@ -152,6 +152,11 @@
            
 
             $scope.products = 'aa';
+            $scope.PayKhalti = function (appointmentId) {
+                //console.log('test');
+                //console.log($('#payment-button'));
+                $('#payment-button').click();
+            };
         }]);
 
 })();
