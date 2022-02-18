@@ -46,6 +46,8 @@ namespace HomePhysio.Models
         public string LStatusModel { get; set; }
         public virtual LStatusModel LStatusData { get; set; }
 
+        public decimal ConsultationCharge { get; set; }
+
     }
     //public class PhysiotherapistViewModel
     //{

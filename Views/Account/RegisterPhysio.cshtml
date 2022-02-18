@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label asp-for="age" class="col-md-2">Age</label>
                 <div class="col-md-10">
-                    <input asp-for="age" class="form-control" min="0" max="100"/>
+                    <input asp-for="age" class="form-control" min="0" max="100" />
                     <span asp-validation-for="age" class="text-danger"></span>
                 </div>
             </div>
@@ -86,6 +86,14 @@
                 <div class="col-md-10">
                     <input asp-for="Experience" class="form-control" />
                     <span asp-validation-for="Experience" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="ConsultationCharge" class="col-md-6">Consultation Charge</label>
+                <div class="col-md-10">
+                    <input asp-for="ConsultationCharge" class="form-control" />
+                    <span asp-validation-for="ConsultationCharge" class="text-danger"></span>
                 </div>
             </div>
             <br />

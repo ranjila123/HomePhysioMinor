@@ -4,14 +4,16 @@ using HomePhysio.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HomePhysio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220217174110_AddedConsultationChargeInPhysioModel")]
+    partial class AddedConsultationChargeInPhysioModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,19 +48,6 @@ namespace HomePhysio.Migrations
                     b.ToTable("AppointmentsModels");
                 });
 
-            modelBuilder.Entity("HomePhysio.Models.CStatusModel", b =>
-                {
-                    b.Property<string>("CStatusModelId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CStatusModelId");
-
-                    b.ToTable("CStatusModel");
-                });
-
             modelBuilder.Entity("HomePhysio.Models.CategoryModel", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -75,19 +64,6 @@ namespace HomePhysio.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("CategoryModel");
-                });
-
-            modelBuilder.Entity("HomePhysio.Models.CitizenshipTable", b =>
-                {
-                    b.Property<string>("CitizenShipNumber")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CitizenShipNumber");
-
-                    b.ToTable("CitizenshipTable");
                 });
 
             modelBuilder.Entity("HomePhysio.Models.GenderModel", b =>
@@ -118,32 +94,6 @@ namespace HomePhysio.Migrations
                     b.HasKey("ImgId");
 
                     b.ToTable("ImageTypeModel");
-                });
-
-            modelBuilder.Entity("HomePhysio.Models.LStatusModel", b =>
-                {
-                    b.Property<string>("LStatusModelid")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("LStatusModelid");
-
-                    b.ToTable("LStatusModel");
-                });
-
-            modelBuilder.Entity("HomePhysio.Models.LicenseTable", b =>
-                {
-                    b.Property<string>("LicenseNumber")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("LicenseNumber");
-
-                    b.ToTable("LicenseTable");
                 });
 
             modelBuilder.Entity("HomePhysio.Models.PStatusModel", b =>
@@ -355,9 +305,6 @@ namespace HomePhysio.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CStatusModel")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("CitizenshipNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -372,9 +319,6 @@ namespace HomePhysio.Migrations
 
                     b.Property<int>("GenderId")
                         .HasColumnType("int");
-
-                    b.Property<string>("LStatusModel")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Latitude")
                         .HasColumnType("nvarchar(max)");
@@ -400,11 +344,7 @@ namespace HomePhysio.Migrations
 
                     b.HasKey("PhysiotherapistId");
 
-                    b.HasIndex("CStatusModel");
-
                     b.HasIndex("GenderId");
-
-                    b.HasIndex("LStatusModel");
 
                     b.HasIndex("UserId");
 
@@ -770,29 +710,17 @@ namespace HomePhysio.Migrations
 
             modelBuilder.Entity("HomePhysio.Models.PhysiotherapistModel", b =>
                 {
-                    b.HasOne("HomePhysio.Models.CStatusModel", "CStatusData")
-                        .WithMany()
-                        .HasForeignKey("CStatusModel");
-
                     b.HasOne("HomePhysio.Models.GenderModel", "GenderData")
                         .WithMany("Physiotherapists")
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HomePhysio.Models.LStatusModel", "LStatusData")
-                        .WithMany()
-                        .HasForeignKey("LStatusModel");
-
                     b.HasOne("HomePhysio.Models.ApplicationUser", "UserData")
                         .WithMany()
                         .HasForeignKey("UserId");
 
-                    b.Navigation("CStatusData");
-
                     b.Navigation("GenderData");
-
-                    b.Navigation("LStatusData");
 
                     b.Navigation("UserData");
                 });

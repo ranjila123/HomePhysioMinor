@@ -2,6 +2,7 @@ using HomePhysio.Data;
 using HomePhysio.Models;
 using HomePhysio.Services;
 using HomePhysio.Services.FileUpload;
+using HomePhysio.Services.Payment;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -56,7 +57,9 @@ namespace HomePhysio
                 options.AppSecret = "f4926f18111672a19fc81ef5c53e044f";
             });
             //Adding Services
-            services.AddAntiforgery(o => o.SuppressXFrameOptionsHeader = true);
+            services.AddHttpClient<IPaymentService, PaymentService>();
+            services.AddTransient<IPaymentService, PaymentService>();
+
             services.AddTransient<IFileUpload, FileUpload>();
             services.AddControllersWithViews();
             //         services.AddControllersWithViews().AddJsonOptions(x =>

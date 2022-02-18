@@ -93,6 +93,7 @@ namespace HomePhysio.ViewModel
         [Required]
         public string Address { get; set; }
 
+        public decimal ConsultationCharge { get; set; }
 
     }
 }

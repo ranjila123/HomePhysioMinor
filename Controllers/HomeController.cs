@@ -2,6 +2,7 @@
 using HomePhysio.Data;
 using HomePhysio.Models;
 using HomePhysio.Services.FileUpload;
+using HomePhysio.Services.Payment;
 using HomePhysio.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,15 +21,17 @@ namespace HomePhysio.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IPaymentService _paymentService;
         private readonly IFileUpload _fileUpload;
         private readonly ApplicationDbContext _applicationDbContext;
-        private readonly ILogger<HomeController>_logger;
+        private readonly ILogger<HomeController> _logger;
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager; //usermanager depend on identity user
 
 
-        public HomeController(IFileUpload fileUpload, ILogger<HomeController> logger,IMapper mapper, ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager)
+        public HomeController(IPaymentService paymentService, IFileUpload fileUpload, ILogger<HomeController> logger, IMapper mapper, ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager)
         {
+            _paymentService = paymentService;
             _fileUpload = fileUpload;
             _applicationDbContext = applicationDbContext;
             _logger = logger;
@@ -40,10 +43,10 @@ namespace HomePhysio.Controllers
         [HttpGet]
         public IActionResult Dropdown1()
         {
-           
+
             return View();
         }
-        
+
         public IActionResult DropDown1Test()
         {
             var physio = _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).ToList().Select(x => new PhysiotherapistVM
@@ -71,7 +74,7 @@ namespace HomePhysio.Controllers
         public IActionResult Dropdown2()
         {
             ViewBag.categoryList = _applicationDbContext.CategoryModel.ToList();
-            
+
             return View();
         }
 
@@ -101,7 +104,7 @@ namespace HomePhysio.Controllers
             return View(physio);
         }
 
-        public async Task <IActionResult> PhysioAppointmentTable()
+        public async Task<IActionResult> PhysioAppointmentTable()
         {
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             var physio = await _applicationDbContext.PhysiotherapistModel.Include(x => x.GenderData).Include(x => x.UserData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).SingleOrDefaultAsync(o => o.UserId == user.Id);
@@ -113,7 +116,7 @@ namespace HomePhysio.Controllers
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             var patient = await _applicationDbContext.PatientModel.Include(x => x.GenderData).Include(x => x.UserData).SingleOrDefaultAsync(o => o.UserId == user.Id);
             return View(patient);
-           
+
         }
 
         public IActionResult Payment()
@@ -123,7 +126,7 @@ namespace HomePhysio.Controllers
         public async Task<IActionResult> Profile_Page()
         {
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            var physio = await  _applicationDbContext.PhysiotherapistModel.AnyAsync(o=> o.UserId==user.Id );
+            var physio = await _applicationDbContext.PhysiotherapistModel.AnyAsync(o => o.UserId == user.Id);
             if (physio == false)
             {
                 return RedirectToAction("Patient_Profile_Page");
@@ -151,8 +154,8 @@ namespace HomePhysio.Controllers
             }).SingleOrDefault(x => x.UserId == user.Id);
             var patientImg = _applicationDbContext.PatientImage.FirstOrDefault(x => x.ImgId == 1 && x.PatientId == patient.PatientId);
             if (patientImg != null)
-                patient.PImg= patientImg.Image;
-                
+                patient.PImg = patientImg.Image;
+
 
             return View(patient);
         }
@@ -168,17 +171,17 @@ namespace HomePhysio.Controllers
             //}).ToList();
             //var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             //var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
-            var app = _applicationDbContext.AppointmentsModels.AsNoTracking().Where(x => x.PatientId == patientId).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).Include(x=>x.StatusData).ToList().Select(x => new PatientProfileVM
+            var app = _applicationDbContext.AppointmentsModels.AsNoTracking().Where(x => x.PatientId == patientId).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).Include(x => x.StatusData).ToList().Select(x => new PatientProfileVM
             {
                 DateAndTime = x.PhysioTimeSlotsData.DateTimeShift,
                 Date = x.PhysioTimeSlotsData.DateTimeShift.Date.ToString("yyyy/MM/dd"),
                 Time = x.PhysioTimeSlotsData.DateTimeShift.TimeOfDay.ToString(),
-                AppointmentId=x.AppointmentId,
-                Physiotherapist=x.PhysioTimeSlotsData.PhysiotherapistData.Name,
-                Status=x.StatusData.StatusType
-                
+                AppointmentId = x.AppointmentId,
+                Physiotherapist = x.PhysioTimeSlotsData.PhysiotherapistData.Name,
+                Status = x.StatusData.StatusType
+
             });
-            return Json(new { ad =app});
+            return Json(new { ad = app });
 
         }
 
@@ -200,7 +203,7 @@ namespace HomePhysio.Controllers
                 ContactNo = x.ContactNo,
                 Address = x.Address,
                 Qualification = x.Qualification,
-                CategoryList=x.physioCategoryModels.ToList()
+                CategoryList = x.physioCategoryModels.ToList()
 
             }).SingleOrDefaultAsync();
             var physioImg = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 1 && x.PhysiotherapistId == physio.PhysiotherapistId);
@@ -222,14 +225,14 @@ namespace HomePhysio.Controllers
             //}).ToList();
             //var user =await _userManager.FindByNameAsync(this.User.Identity.Name);
             //var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
-           
-            var Physioapp = _applicationDbContext.AppointmentsModels.AsNoTracking().Where(x => x.PhysioTimeSlotsData.PhysiotherapistId== physiotherapistId).Include(x => x.StatusData).Include(x=>x.PatientData).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).ToList().Select(x => new PhysiotherapistProfileVM
+
+            var Physioapp = _applicationDbContext.AppointmentsModels.AsNoTracking().Where(x => x.PhysioTimeSlotsData.PhysiotherapistId == physiotherapistId).Include(x => x.StatusData).Include(x => x.PatientData).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).ToList().Select(x => new PhysiotherapistProfileVM
             {
                 AppointmentId = x.AppointmentId,
                 DateAndTime = x.PhysioTimeSlotsData.DateTimeShift,
                 Date = x.PhysioTimeSlotsData.DateTimeShift.Date.ToString("yyyy/MM/dd"),
                 Time = x.PhysioTimeSlotsData.DateTimeShift.TimeOfDay.ToString(),
-                
+
                 PatientName = x.PatientData.Name,
                 Status = x.StatusData.StatusType
 
@@ -238,7 +241,7 @@ namespace HomePhysio.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> UploadPatientImage(IFormFile file,string imageType)
+        public async Task<JsonResult> UploadPatientImage(IFormFile file, string imageType)
         {
             var data = _fileUpload.ImageToByte(file);
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
@@ -262,7 +265,7 @@ namespace HomePhysio.Controllers
             return Json(new { });
         }
         [HttpPost]
-        public async Task<JsonResult> UploadPhysioImage(IFormFile file,string imageType)
+        public async Task<JsonResult> UploadPhysioImage(IFormFile file, string imageType)
         {
             var data = _fileUpload.ImageToByte(file);
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
@@ -290,7 +293,7 @@ namespace HomePhysio.Controllers
         {
             return View("~/Views/Public/About.cshtml");
         }
-        
+
         public IActionResult FAQ()
         {
             return View("~/Views/Public/FAQ.cshtml");
@@ -298,6 +301,19 @@ namespace HomePhysio.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+        public async Task<IActionResult> KhaltiConfirm(PayLoadVM payload)
+        {
+            var result = await _paymentService.KhaltiPay(new PayloadPostVM
+            {
+                amount = payload.amount,
+                token = payload.token
+            });
+            if (result.state != null && result.state.name == "Completed")
+                return Json(new { result = true, msg = "Payment Successful" });
+            else
+                return Json(new { result = false, msg = "Payment Error" });
+
         }
     }
 }
