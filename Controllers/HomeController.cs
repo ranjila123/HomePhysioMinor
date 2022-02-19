@@ -176,6 +176,7 @@ namespace HomePhysio.Controllers
             //}).ToList();
             //var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             //var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+            
             var app = _applicationDbContext.AppointmentsModels.AsNoTracking().Where(x => x.PatientId == patientId).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).Include(x => x.StatusData).ToList().Select(x => new PatientProfileVM
             {
                 DateAndTime = x.PhysioTimeSlotsData.DateTimeShift,
@@ -186,6 +187,7 @@ namespace HomePhysio.Controllers
                 Status = x.StatusData.StatusType
 
             });
+
             return Json(new { ad = app });
 
         }
