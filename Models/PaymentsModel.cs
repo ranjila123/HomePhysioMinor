@@ -29,6 +29,7 @@ namespace HomePhysio.Models
         public PaymentTypeModel PaymentTypeData { get; set; }
 
         public int Amount { get; set; }
+
         public int DistanceAmount { get; set; }
 
         [ForeignKey(nameof(PStatusData))]

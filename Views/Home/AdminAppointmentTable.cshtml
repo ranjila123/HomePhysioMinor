@@ -1,0 +1,81 @@
+﻿@model IEnumerable<HomePhysio.Models.AppointmentsModel>
+@{
+    ViewData["Title"] = "AdminAppointmentTable";
+}
+
+
+
+<div class="container-fluid" style="margin-top: 30px ;font-family: Poppins-Bold; src: url('../fonts/poppins/Poppins-Bold.ttf'); ">
+
+    <div style="height:50px; text-align:center">
+        <h3 class="text-center" style="padding:10px;font-family: Poppins-SemiBold;
+  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); ">
+            <strong>All the Appointments</strong>
+        </h3>
+    </div>
+
+    <br />
+    
+    <br />
+    <table class="table table-responsive" style="box-shadow: 0 0 0 5px rgba(0,0,0,0.05)" id="AllAppointmentTable">
+        <thead>
+            <tr style="background-color:#1977cc;color:white;">
+                <th>
+                    @Html.DisplayNameFor(model => model.AppointmentId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientData.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhysioTimeSlotsData.PhysiotherapistData.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhysioTimeSlotsData.DateTimeShift)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusData.StatusType)
+                </th>
+
+                <th>Changes</th>
+            </tr>
+        </thead>
+
+    </table>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#AllAppointmentTable').DataTable({
+                scrollY: '50vh',
+                select: true,
+                keys: true,
+                colReorder: true,
+                serverSide: true,
+                dom: 'lrtip',
+                ajax: {
+                    url: '/Home/GetAppointmentData',
+                    type: 'post',
+                    datatype: 'json'
+                },
+                columns: [{ data: 'AppointmentId', name: "AppointmentId", orderable: true },
+                { data: 'Patient', name: "Patient", orderable: false },
+                { data: 'Phyiotherapist', name: "Physiotherapist", orderable: false },
+                { data: 'DayTimeShift', name: "DayTimeShift", orderable: false },
+                { data: 'Status', name: "Status", orderable: false },
+                {
+                    "render": function (data, full, type, row) {
+
+                        return `<a href='${window.location.href}/Edit/${type.physioTimeSlotsId}' class='btn btn-primary text-white' >Edit</a>
+                                                <a href='${window.location.href}/Delete/${type.physioTimeSlotsId}' class='btn btn-danger text-white'>Delete</a>`;
+
+                        //return `<a href='${window.location.href}/Edit?physioId=${type.physioTimeSlotsId}' class='btn btn-danger' >Edit</a>`;
+                    }
+                }
+
+                ]
+
+            });
+
+        });
+    </script>
+}

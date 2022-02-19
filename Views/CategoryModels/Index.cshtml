@@ -3,12 +3,14 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
+<br />
+<h1>Assigned Categories</h1>
+<br />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary text-white">Create New</a>
 </p>
+<br />
+
 <table class="table" id="categoryTable">
     <thead>
         <tr>
@@ -22,55 +24,55 @@
         </tr>
     </thead>
     @*<tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CatInfo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoryId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CatInfo)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.CategoryId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
+                    </td>
+                </tr>
+        }
 
-    </tbody>*@
+            </tbody>*@
 </table>
 @section scripts{
-<script>
-    $(document).ready(function () {
-        $('#categoryTable').DataTable({
-            scrollY: '50vh',
-            select: true,
-            keys: true,
-            colReorder: true,
-            serverSide: true,
-            processing: true,
-            dom: 'lrtip',
-            ajax: {
-                url: '/CategoryModels/GetCategoryData',
-                type: 'post',
-                datatype:'json'
-            },
-            columns: [{ data: 'name', name: "Name"},
+    <script>
+        $(document).ready(function () {
+            $('#categoryTable').DataTable({
+                scrollY: '50vh',
+                select: true,
+                keys: true,
+                colReorder: true,
+                serverSide: true,
+                processing: true,
+                dom: 'lrtip',
+                ajax: {
+                    url: '/CategoryModels/GetCategoryData',
+                    type: 'post',
+                    datatype: 'json'
+                },
+                columns: [{ data: 'name', name: "Name" },
                 { data: 'catInfo', name: "CatInfo" },
                 {
                     "render": function (data, full, type, row) {
 
                         return `<a href='${document.location.origin}/CategoryModels/Edit/${type.categoryId}' class='btn btn-primary' >Edit</a>
-                                <a href='${document.location.origin}/CategoryModels/Delete/${type.categoryId}' class='btn btn-danger'>Delete</a>`;
+                                    <a href='${document.location.origin}/CategoryModels/Delete/${type.categoryId}' class='btn btn-danger'>Delete</a>`;
 
                     }
                 }
-               
-            ]
+
+                ]
+
+            });
 
         });
-      
-    });
-</script>
- }
+    </script>
+}
