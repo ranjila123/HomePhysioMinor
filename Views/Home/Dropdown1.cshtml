@@ -2,54 +2,62 @@
 @{
     ViewData["Title"] = "Dropdown1";
 }
-<h1>Index</h1>
 
-<div ng-controller="HomeController as home"  >
+<style>
+    .forinline {
+        display: inline;
+    }
+</style>
+<br />
+<h2>Physiotherapist List</h2>
+<br />
+<div ng-controller="HomeController as home">
     @*@Model.Count()*@
-   
-    <p>Search for physiotherapist</p>
 
     @*<select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()" ng-init="searchType='@ViewBag.CategoryId';CallHttpPost();"></select>*@
-<div ng-init="CallPlist()">
-    <div class="jumbotron" ng-repeat="x in AllPhysioList">
-        <div class="container">
-            <div class="media">
-                <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
-                <div class="media-body">
-                    <h5 class="mt-0">Name: {{x.name}}</h5>
-                    <p class="p-0">Address:{{x.address}}</p>
-                    <p class="p-0">Gender: {{x.genderTypeName}}</p>
-                    <p class="p-0">ContactNo: {{x.contactNo}}</p>
-                    <p class="p-0">Categories: {{x.category}}</p>
-                    <p class="p-0">Qualifications: {{x.qualification}}</p>
+<div ng-controller="AppointmentController">
+    <div ng-init="CallPlist()">
+        <div class="jumbotron" ng-repeat="x in AllPhysioList">
+            <div class="container">
+                <div class="media">
+                    <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
+                    <div class="media-body">
+                        <h5 class="mt-0">Name: {{x.name}}</h5>
+                        <p class="p-0">Address:{{x.address}}</p>
+                        <p class="p-0">Gender: {{x.genderTypeName}}</p>
+                        <p class="p-0">ContactNo: {{x.contactNo}}</p>
+                        <p class="p-0">Categories: {{x.category}}</p>
+                        <p class="p-0">Qualifications: {{x.qualification}}</p>
 
-                    <button ng-click="PhysioProfile(x.physiotherapistId)" class="btn btn-primary">See profile</button>
-                    @*<a asp-controller="Appointment" asp-action="TimeSlot" class="btn btn-primary">Book Appointment</a>*@
-                    
-                <div ng-controller="AppointmentController as appointment">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0)" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
-                        Book Appointment
-                    </button>
-                </div>
+                        <div class="forinline"> <button ng-click="PhysioProfile(x.physiotherapistId)" class="btn btn-primary">See profile</button></div>
+                        @*<a asp-controller="Appointment" asp-action="TimeSlot" class="btn btn-primary">Book Appointment</a>*@
 
-                    <br />
+                        <div class="forinline">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0)" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
+                                Book Appointment
+                            </button>
+                        </div>
+
+                        <br />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div ng-controller="AppointmentController as appointment">
+
         <partial name="_bookAppointmentModal" />
+
 
     </div>
 </div>
-    </div>
- 
+</div>
+
 
 
 
 @section scripts{
-    <script src="~/AngularServices/Controller/HomeController.js" asp-append-version="true"></script>
     <script src="~/AngularServices/Controller/AppointmentController.js" asp-append-version="true"></script>
+
+    <script src="~/AngularServices/Controller/HomeController.js" asp-append-version="true"></script>
 }
 
 

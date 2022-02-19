@@ -1,37 +1,44 @@
 ﻿@model HomePhysio.Models.PhysioCategoryModel
 
 
-<div class="bg-primary" style="height:50px"><h3 class="text-white" style="padding:10px"><strong>Select specialization</strong></h3></div>
 
+<div class="container-fluid" style="margin-top: 30px ;font-family: Poppins-Bold; src: url('../fonts/poppins/Poppins-Bold.ttf'); ">
 
-<br />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"><strong class="text-primary">Specialization</strong></label>
+    
+        <h3 style="font-family: Poppins-SemiBold;
+  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); ">
+            <strong>Select specialization</strong>
+        </h3>
+  
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="control-label"><strong class="text-primary">Specialization</strong></label>
 
-                <select asp-items="@ViewBag.Category" asp-for="CategoryId"></select>
+                    <select asp-items="@ViewBag.Category" asp-for="CategoryId"></select>
 
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Experience" class="control-label"><strong class="text-primary">Write Your Experience</strong></label>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Experience" class="control-label"><strong class="text-primary">Write Your Experience</strong></label>
 
-                <input asp-for="Experience" type="Text" class="form-control" />
+                    <input asp-for="Experience" type="Text" class="form-control" />
 
-                <span asp-validation-for="Experience" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Select" class="btn btn-primary btn-sm" />
-            </div>
-        </form>
+                    <span asp-validation-for="Experience" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Select" class="btn btn-primary btn-sm" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index" class="text-primary"><strong>Back to List</strong></a>
+    <div>
+        <a asp-action="Index" class="text-primary"><strong>Back to List</strong></a>
+    </div>
 </div>
 
 @section Scripts {

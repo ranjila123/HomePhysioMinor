@@ -71,8 +71,9 @@ namespace HomePhysio.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                   
-                    return LocalRedirect(returnurl);
+                    return RedirectToAction(nameof(CategoryModelsController.Index), "CategoryModels");
+
+                    //return LocalRedirect(returnurl);
                    
                 }
                 AddErrors(result);

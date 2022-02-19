@@ -26,10 +26,11 @@ namespace HomePhysio.Controllers
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly ILogger<HomeController> _logger;
         private readonly IMapper _mapper;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager; //usermanager depend on identity user
 
 
-        public HomeController(IPaymentService paymentService, IFileUpload fileUpload, ILogger<HomeController> logger, IMapper mapper, ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager)
+        public HomeController(IPaymentService paymentService, IFileUpload fileUpload, ILogger<HomeController> logger, IMapper mapper, ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole>roleManager)
         {
             _paymentService = paymentService;
             _fileUpload = fileUpload;
@@ -37,6 +38,7 @@ namespace HomePhysio.Controllers
             _logger = logger;
             _mapper = mapper;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [Authorize(Roles = "Patient")]
@@ -127,7 +129,10 @@ namespace HomePhysio.Controllers
         {
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             var physio = await _applicationDbContext.PhysiotherapistModel.AnyAsync(o => o.UserId == user.Id);
-            if (physio == false)
+            if (await _userManager.IsInRoleAsync(user,"Admin")){
+                return RedirectToAction(nameof(CategoryModelsController.Index), "CategoryModels");
+            }
+            else if (physio == false)
             {
                 return RedirectToAction("Patient_Profile_Page");
             }

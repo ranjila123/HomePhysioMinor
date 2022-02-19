@@ -3,59 +3,63 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1>Index</h1>
-<div ng-controller="MapController">
+<style>
+    .forinline {
+        display: inline;
+    }
+</style>
+<div ng-controller="MapController" style="margin-top: 30px ;font-family: Poppins-Bold; src: url('../fonts/poppins/Poppins-Bold.ttf'); ">
     @*@Model.Count()*@
     @*{{physiotherapist}}*@
-    <p ng-init="CallHttpPost()">Search for physiotherapist</p>
-
+    <h3 ng-init="CallHttpPost()">PhysioTherapist Within <strong>5km</strong> from you.</h3>
+    <br />
     @*<select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()" ng-init="searchType='@ViewBag.CategoryId';CallHttpPost();"></select>*@
 
-<div ng-controller="AppointmentController">
-    <div class=" jumbotron " ng-repeat="x in physiotherapist">
-        <div class="container">
-            <div class="media">
-                <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
-                <div class="media-body">
-                    <h5 class="mt-0">Name: {{x.name}}</h5>
-                    <p class="p-0">Address:{{x.address}}</p>
-                    <p class="p-0">Gender: {{x.genderTypeName}}</p>
-                    <p class="p-0">ContactNo: {{x.contactNo}}</p>
-                    <p class="p-0">Specialization: {{x.category}}</p>
-                    <p class="p-0">Qualifications: {{x.qualification}}</p>
+    <div ng-controller="AppointmentController">
+        <div class=" jumbotron " ng-repeat="x in physiotherapist">
+            <div class="container">
+                <div class="media">
+                    <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
+                    <div class="media-body">
+                        <h5 class="mt-0">Name: {{x.name}}</h5>
+                        <p class="p-0">Address:{{x.address}}</p>
+                        <p class="p-0">Gender: {{x.genderTypeName}}</p>
+                        <p class="p-0">ContactNo: {{x.contactNo}}</p>
+                        <p class="p-0">Specialization: {{x.category}}</p>
+                        <p class="p-0">Qualifications: {{x.qualification}}</p>
 
-                    @*<a class="btn btn-primary" ng-click="GetPhysioList({{x.physiotherapistId}})">See profile</a>*@
+                        @*<a class="btn btn-primary" ng-click="GetPhysioList({{x.physiotherapistId}})">See profile</a>*@
 
-                    @*<form id="logoutForm" method="post" class="form-inline" asp-controller="Home" asp-action="Physio_info">
-                        <input type="hidden" asp-for="PhysiotherapistId" />
-                        <button type="submit" class="btn btn-primary">See Profile</button>
+                        @*<form id="logoutForm" method="post" class="form-inline" asp-controller="Home" asp-action="Physio_info">
+                                <input type="hidden" asp-for="PhysiotherapistId" />
+                                <button type="submit" class="btn btn-primary">See Profile</button>
 
-                    </form>*@
-                    <div ng-controller="HomeController">
-                        <button ng-click="PhysioProfile(x.physiotherapistId)" class="btn btn-primary">See profile</button>
+                            </form>*@
+                        <div ng-controller="HomeController" class="forinline"> 
+                            <button ng-click="PhysioProfile(x.physiotherapistId)" class="btn btn-primary">See profile</button>
+                        </div>
+
+                        @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0)"  ng-click="AssignPhysiotherapist(x.physiotherapistId)">
+                                Book Appointment
+                            </button>*@
+
+                        <div class="forinline">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0)" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
+                                Book Appointment
+                            </button>
+                        </div>
+
+                        <br />
                     </div>
-
-                    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0)"  ng-click="AssignPhysiotherapist(x.physiotherapistId)">
-            Book Appointment
-        </button>*@
-
-                    <div>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0)" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
-                            Book Appointment
-                        </button>
-                    </div>
-
-                    <br />
                 </div>
             </div>
         </div>
-    </div>
-    <div>
+        <div>
 
-        <partial name="_bookAppointmentModal" />
+            <partial name="_bookAppointmentModal" />
 
+        </div>
     </div>
-</div>
 </div>
    
 
