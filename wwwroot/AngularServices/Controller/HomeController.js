@@ -37,7 +37,7 @@
                     type: 'green',
                     buttons: {
                         yes: {
-                            text: 'Ok',
+                            text: 'Yes',
                             keys: ['enter'],
                             btnClass: 'btn-blue',
                             action: function (scope, button) {
@@ -54,7 +54,7 @@
                             }
                         },
                          cancel: {
-                            text: 'Cancel',
+                            text: 'No',
                             keys: ['esc'],
                             btnClass: 'btn-red',
                             action: function (scope, button) {
