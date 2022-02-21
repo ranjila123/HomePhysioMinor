@@ -29,6 +29,7 @@ namespace HomePhysio.ViewModel
         [Required]
         public string Name { get; set; }
 
+        [Range(0,100)]
         [Required]
         public int Age { get; set; }
 
@@ -37,7 +38,7 @@ namespace HomePhysio.ViewModel
         [Display(Name = "Gender")]
         public int GenderId { get; set; }
         [Required]
-        [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
         public string ContactNumber { get; set; }
         [Required]
         public string Address { get; set; }
@@ -46,6 +47,11 @@ namespace HomePhysio.ViewModel
         public string Longitude { get; set; }
         public string Latitude { get; set; }
 
+        public string True { get; set; }
+
+        [Required]
+        [Compare("True", ErrorMessage = "You must agree to terms and conditions")]
+        public string terms { get; set; }
 
     }
     public class RegisterPhysioViewModel
@@ -68,6 +74,9 @@ namespace HomePhysio.ViewModel
 
         [Required]
         public string Name { get; set; }
+
+
+        [Range(18, 100)]
         [Required]
         public int age { get; set; }
 
@@ -76,6 +85,7 @@ namespace HomePhysio.ViewModel
 
         public int CategoryId { get; set; }
         [Required]
+        [StringLength(10, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
         public string ContactNo { get; set; }
         [Required]
         public string Qualification { get; set; }
@@ -94,6 +104,11 @@ namespace HomePhysio.ViewModel
         public string Address { get; set; }
 
         public decimal ConsultationCharge { get; set; }
+        [Required]
+        [Compare("True", ErrorMessage = "You must agree to terms and conditions")]
+        public string terms { get; set; }
+        public string True { get; set; }
+
 
     }
 }

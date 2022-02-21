@@ -121,6 +121,13 @@ namespace HomePhysio.Controllers
 
         }
 
+        public async Task<IActionResult> AdminAppointmentTable()
+        {
+           
+            return View(await _applicationDbContext.AppointmentsModels.Include(x=> x.PatientData).Include(x=>x.StatusData).Include(x=>x.PhysioTimeSlotsData).ThenInclude(x=>x.PhysiotherapistData).ToListAsync());
+
+        }
+
         public IActionResult Payment()
         {
             return View();
@@ -186,6 +193,7 @@ namespace HomePhysio.Controllers
                 Status = x.StatusData.StatusType
 
             });
+
             return Json(new { ad = app });
 
         }
@@ -319,6 +327,49 @@ namespace HomePhysio.Controllers
             else
                 return Json(new { result = false, msg = "Payment Error" });
 
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> GetData()
+        {
+            try
+            {
+                var draw = Request.Form["draw"].FirstOrDefault();
+                var start = Request.Form["start"].FirstOrDefault();
+                var length = Request.Form["length"].FirstOrDefault();
+                var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+                var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+                var searchValue = Request.Form["search[value]"].FirstOrDefault();
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int recordsTotal = 0;
+                var customerData = (from tempcustomer in _applicationDbContext.AppointmentsModels select tempcustomer);;
+
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    customerData = customerData.Where(m => m.PhysioTimeSlotsData.DateTimeShift.ToString().Contains(searchValue));
+                }
+                recordsTotal = customerData.Count();
+                var data = customerData.Skip(skip).Take(pageSize).ToList();
+                var jsonData = new
+                {
+                    draw = draw,
+                    recordsFiltered = recordsTotal,
+                    recordsTotal = recordsTotal,
+                    data = data.Select(x => new AllAppointmentView
+                    {
+                        PhysiotherapistName = x.PhysioTimeSlotsData.PhysiotherapistData.Name,
+                        PatientName = x.PatientData.Name,
+                        DateAndTime = x.PhysioTimeSlotsData.DateTimeShift,
+                        StatusType = x.StatusData.StatusType
+                    })
+                };
+                return Json(jsonData);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

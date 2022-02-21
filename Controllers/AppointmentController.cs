@@ -121,6 +121,7 @@ namespace HomePhysio.Controllers
 
            
         }
+
         [HttpPost]
         public async Task<IActionResult> ConfirmAppointment(int appointmentId)
         {

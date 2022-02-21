@@ -36,7 +36,7 @@
                     then(function (response) { //GetAppointmentInfo found successfully
                         console.log(response);
                         if (response.data.result)
-                            alert(`Appointment Pending.${response.data.msg}`);
+                            alert(`Your Appointment is pending ! .${response.data.msg}`);
                         else
                             alert(response.data.msg);
 

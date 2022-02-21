@@ -37,7 +37,7 @@
                     type: 'green',
                     buttons: {
                         yes: {
-                            text: 'Ok',
+                            text: 'Yes',
                             keys: ['enter'],
                             btnClass: 'btn-blue',
                             action: function (scope, button) {
@@ -45,7 +45,8 @@
                                 //$window.location.reload();
                                 $http({ method: 'post', url: `${document.location.origin}/Appointment/ConfirmAppointment`, params: { appointmentId: id } }).
                                     then(function (response) {
-                                        $scope.PhysioAppointmentList(physiotherapistId);
+                                        $scope.CreatePayment(id, physiotherapistId);
+                                       
 
                                     }, function (response) {
 
@@ -53,7 +54,7 @@
                             }
                         },
                          cancel: {
-                            text: 'Cancel',
+                            text: 'No',
                             keys: ['esc'],
                             btnClass: 'btn-red',
                             action: function (scope, button) {
@@ -61,8 +62,21 @@
                         }
                     }
                 });
+
+
+               
                            
                                
+            };
+
+            $scope.CreatePayment = function (id, physiotherapistId) {
+                $http({ method: 'post', url: `${document.location.origin}/Payment/Create`, params: { appointmentId: id } }).
+                    then(function (response) {
+                        $scope.PhysioAppointmentList(physiotherapistId);
+
+                    }, function (response) {
+
+                    });
             };
 
             $scope.CancelAppointment = function (id, physiotherapistId) {
