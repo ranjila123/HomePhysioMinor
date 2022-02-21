@@ -10,7 +10,7 @@
 
             //$scope.physiotherapits = [];
             $scope.CallHttpPost = function () {
-                $http({ method: 'post', url: $scope.url, params: { categoryId: $scope.searchType } }).
+                $http({ method: 'post', url: $scope.url, params: { categoryId: $scope.searchType, genderId: $scope.searchTypeGender, searchTypename: $scope.searchTypename } }).
                     then(function (response) {
                         $scope.physiotherapits = response.data.a;
                     }, function (response) {

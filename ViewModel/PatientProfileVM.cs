@@ -18,8 +18,9 @@ namespace HomePhysio.ViewModel
         public string Physiotherapist { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
-        public int Amount { get; set; }
-        public int DistanceAmount { get; set; }
+        public decimal Amount { get; set; }
+        public decimal DistanceAmount { get; set; }
+        public decimal ConsultationAmount { get; set; }
 
     }
 }

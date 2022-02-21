@@ -183,16 +183,18 @@ namespace HomePhysio.Controllers
             //}).ToList();
             //var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
             //var patient = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
-            var app = _applicationDbContext.AppointmentsModels.AsNoTracking().Where(x => x.PatientId == patientId).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).Include(x => x.StatusData).ToList().Select(x => new PatientProfileVM
+            var app = _applicationDbContext.AppointmentsModels.AsNoTracking().Where(x => x.PatientId == patientId).Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).Include(x => x.StatusData).Join(_applicationDbContext.PaymentsModel, x => x.AppointmentId, y => y.AppointmentId, (x, y) => new PatientProfileVM
             {
                 DateAndTime = x.PhysioTimeSlotsData.DateTimeShift,
                 Date = x.PhysioTimeSlotsData.DateTimeShift.Date.ToString("yyyy/MM/dd"),
                 Time = x.PhysioTimeSlotsData.DateTimeShift.TimeOfDay.ToString(),
                 AppointmentId = x.AppointmentId,
                 Physiotherapist = x.PhysioTimeSlotsData.PhysiotherapistData.Name,
-                Status = x.StatusData.StatusType
-
-            });
+                Status = x.StatusData.StatusType,
+                Amount = y.Amount + y.DistanceAmount,
+                DistanceAmount = y.DistanceAmount,
+                ConsultationAmount = y.Amount
+            }).ToList();
 
             return Json(new { ad = app });
 
@@ -315,7 +317,7 @@ namespace HomePhysio.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> KhaltiConfirm(PayLoadVM payload)
+        public async Task<IActionResult> KhaltiConfirm(PayLoadVM payload,int appointmentId)
         {
             var result = await _paymentService.KhaltiPay(new PayloadPostVM
             {
@@ -323,7 +325,13 @@ namespace HomePhysio.Controllers
                 token = payload.token
             });
             if (result.state != null && result.state.name == "Completed")
+            {
+                var appointment =await _applicationDbContext.AppointmentsModels.SingleOrDefaultAsync(x => x.AppointmentId == appointmentId);
+                appointment.PaidAmount = appointment.PaidAmount + payload.amount;
+                appointment.StatusCode = "4";
+                await _applicationDbContext.SaveChangesAsync();
                 return Json(new { result = true, msg = "Payment Successful" });
+            }
             else
                 return Json(new { result = false, msg = "Payment Error" });
 

@@ -11,12 +11,15 @@
         @*{{physiotherapits}}*@
         <h4>Select your required category of Physiotherapist</h4>
     </br>
-        <select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()" ng-init="searchType='@ViewBag.CategoryId';CallHttpPost();"></select>
+        <select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()" ng-init="searchType='@ViewBag.CategoryId';"></select>
+        <select asp-items="@ViewBag.GenderTypes" ng-model="searchTypeGender" ng-change="CallHttpPost()" ng-init="searchTypeGender='@ViewBag.GenderId';"></select>
+        <input type="text" class="form-control" ng-model="searchTypename" ng-change="CallHttpPost()" ng-init="searchTypename='';CallHttpPost();" ng-model-options="{updateOn:'blur'}" placeholder="Search"/>
 
         <div class=" jumbotron " ng-repeat="x in physiotherapits">
             <div class="container">
                 <div class="media">
-                    <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
+                    <img ng-show="x.pImg!==null" ng-src="data:image/JPEG;base64,{{x.pImg}}" class="align-self-start mr-3" alt="PP" height="100" width="100">
+                    <img ng-show="x.pImg===null"  src="~/img/Profile pic/PP.png" class="align-self-start mr-3" alt="PP" height="100" width="100">
                     <div class="media-body">
                         <h5 class="mt-0">Name: {{x.name}}</h5>
                         <p class="p-0">Address:{{x.address}}</p>

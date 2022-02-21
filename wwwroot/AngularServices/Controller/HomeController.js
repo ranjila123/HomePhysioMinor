@@ -166,10 +166,17 @@
            
 
             $scope.products = 'aa';
-            $scope.PayKhalti = function (appointmentId) {
+            $scope.PayKhalti = function (appointmentId,amount) {
                 //console.log('test');
                 //console.log($('#payment-button'));
-                $('#payment-button').click();
+                console.log(appointmentId);
+                $scope.khaltiAppointmentId = appointmentId;
+                $scope.khaltiAmount = amount * 100;
+                setTimeout(function () {
+                    $('#payment-button').click();
+                }, 100);
+               
+               
             };
         }]);
 

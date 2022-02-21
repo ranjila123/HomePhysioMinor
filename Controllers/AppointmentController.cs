@@ -29,7 +29,9 @@ namespace HomePhysio.Controllers
         public IActionResult Index(int categoryId)
         {
             ViewBag.Categories =new SelectList( _applicationDbContext.CategoryModel.ToList(),nameof(CategoryModel.CategoryId),nameof(CategoryModel.Name));
-            ViewBag.CategoryId = categoryId;
+            ViewBag.CategoryId = categoryId==0?_applicationDbContext.CategoryModel.FirstOrDefault().CategoryId:categoryId; 
+            ViewBag.GenderTypes =new SelectList( _applicationDbContext.GenderModel.ToList(),nameof(GenderModel.GenderId),nameof(GenderModel.TypeName));
+            ViewBag.GenderId = _applicationDbContext.GenderModel.FirstOrDefault().GenderId;
             return View();
         }
         [Authorize]
@@ -39,9 +41,9 @@ namespace HomePhysio.Controllers
         }
 
         [HttpPost]
-        public IActionResult GetPhysiotherapistList(int categoryId)
+        public IActionResult GetPhysiotherapistList(int categoryId,int genderId,string searchTypename)
         {
-            var physio = _applicationDbContext.PhysioCategoryModel.Where(x => x.CategoryId == categoryId).Include(x => x.Physiotherapist).ThenInclude(x => x.GenderData).ToList().Select(x => new PhysiotherapistVM
+            var physio = _applicationDbContext.PhysioCategoryModel.Where(x => x.CategoryId == categoryId && (genderId==0?x.Physiotherapist.GenderId!=genderId: x.Physiotherapist.GenderId==genderId) && x.Physiotherapist.Name.Contains(searchTypename??"")).Include(x => x.Physiotherapist).ThenInclude(x => x.GenderData).ToList().Select(x => new PhysiotherapistVM
             {
                 PhysiotherapistId = x.PhysiotherapistId,
                 Name = x.Physiotherapist.Name,
@@ -49,8 +51,7 @@ namespace HomePhysio.Controllers
                 //GenderTypeName=new GenderModel { TypeName = x.Physiotherapist.GenderData.TypeName },
                 GenderTypeName = x.Physiotherapist.GenderData.TypeName,
                 ContactNo = x.Physiotherapist.ContactNo,
-                Qualification=x.Physiotherapist.Qualification,
-
+                Qualification=x.Physiotherapist.Qualification
             }).ToList();
             foreach (var item in physio)
             {
@@ -59,6 +60,9 @@ namespace HomePhysio.Controllers
                 {
                     item.Category = item.Category +$", {catItem.Category.Name} {catItem.Experience}";
                 }
+                var imageProfile = _applicationDbContext.PhysioImage.Where(x => x.ImgId == 1 && x.PhysiotherapistId == item.PhysiotherapistId).FirstOrDefault();
+                if (imageProfile != null)
+                    item.PImg = imageProfile.Image;
             }
             return Json(new { a = physio });
 
@@ -128,7 +132,7 @@ namespace HomePhysio.Controllers
            
             try
             {
-                if (appointmentId == null)
+                if (appointmentId == 0)
                 {
                 return Json(new { result = false, msg = "Response False" });
                 }
@@ -153,7 +157,7 @@ namespace HomePhysio.Controllers
            
             try
             {
-                if (appointmentId == null)
+                if (appointmentId == 0)
                 {
                 return Json(new { result = false, msg = "Response False" });
                 }

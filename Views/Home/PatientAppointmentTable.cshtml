@@ -17,6 +17,8 @@
                     <th>Date</th>
                     <th>Time</th>
                     <th>Response</th>
+                    <th>Consultation Charge</th>
+                    <th>Distance Charge</th>
                     <th>Cancel</th>
                 </tr>
             </thead>
@@ -33,16 +35,23 @@
                         <!--<strong class="text-secondary">Pending</strong>
                     }-->
                     </td>
+                    <td>{{x.consultationAmount}}</td>
+                    <td>{{x.distanceAmount}}</td>
+
                     <td>
-                        <button class="btn btn-danger" ng-click="CancelAppointmentByPatient(x.appointmentId,@Model.PatientId)" ng-show="x.status!=='Cancel'" style=" cursor: pointer; color: #fff; border: none; padding: 7px 10px; border-radius: 2px">Cancel</button>
-                        <button ng-click="PayKhalti(x.appointmentId)" style="background-color: #5C2D91; cursor: pointer; color: #fff; border: none; padding: 5px 10px; border-radius: 2px">Pay with Khalti</button>
+                        <button class="btn btn-danger" ng-click="CancelAppointmentByPatient(x.appointmentId,@Model.PatientId)" ng-show="x.status!=='Cancel' && x.status!=='Booked'" style=" cursor: pointer; color: #fff; border: none; padding: 7px 10px; border-radius: 2px">Cancel</button>
+                        <button ng-show="x.status!=='Booked'" ng-click="PayKhalti(x.appointmentId,x.amount)" style="background-color: #5C2D91; cursor: pointer; color: #fff; border: none; padding: 5px 10px; border-radius: 2px">Pay with Khalti</button>
+
 
                     </td>
                 </tr>
             </tbody>
         </table>
+        <input type="number" ng-model="khaltiAmount" style="display:none" id="khaltiAmount" ng-init="khaltiAmount=0" />
+        <input type="number" ng-model="khaltiAppointmentId" style="display:none" id="khaltiAppointmentId" ng-init="khaltiAppointmentId=0" />
 
     </div>
+
 </div>
 <button id="payment-button" style="display:none" >Pay with Khalti</button>
 @section scripts{
@@ -68,10 +77,12 @@
                 onSuccess(payload) {
                     // hit merchant api for initiating verfication
                     //call ajax
+                    var appointmentId = $('#khaltiAppointmentId').val();
+                    console.log(appointmentId);
                     $.ajax({
                         url: document.location.origin + "/Home/KhaltiConfirm",
                         type: 'post',
-                        data: { payload:payload },
+                        data: { payload: payload, appointmentId: appointmentId },
                         success: function (result) {
                             alert(result.msg);
                         },
@@ -94,7 +105,7 @@
         var btn = document.getElementById("payment-button");
         btn.onclick = function () {
             // minimum transaction amount must be 10, i.e 1000 in paisa.
-            checkout.show({ amount: 20000 });
+            checkout.show({ amount: $('#khaltiAmount').val() });
         }
     </script>
 

@@ -25,8 +25,7 @@ namespace HomePhysio.Models
         [ForeignKey(nameof(StatusData))]
         public string StatusCode { get; set; }
         public virtual StatusModel StatusData { get; set; }
-
-
+        public decimal PaidAmount { get; set; }
         //[ForeignKey(nameof(PStatusData))]
         //public string PStatusCode { get; set; }
         //public PStatusModel PStatusData { get; set; }
