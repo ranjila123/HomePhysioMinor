@@ -15,7 +15,7 @@ namespace HomePhysio.ViewModel
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        //public int PatientId { get; set; }
+        public int PatientId { get; set; }
 
         [Required]
         public string Name { get; set; }

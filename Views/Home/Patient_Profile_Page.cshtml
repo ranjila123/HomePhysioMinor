@@ -19,19 +19,23 @@
         <div class="container-fluid">
 
             <div class="box_general_3">
-                <div class="profile">
-                    <div class="row align-items-center">
-                        <div class="col-2 mx-auto">
-                            <figure class="all_image-pic">
-                                @if (Model.PImg != null)
-                                {
-                                    <img src="data:image;base64,@System.Convert.ToBase64String(Model.PImg)" class="rounded-circle" width="150" />
-                                }
-                                else
-                                {
-                                    <img class="rounded-circle" width="150" src="~/img/Profile pic/PP.png" alt="PP">
-                                }
-                            </figure>
+                <div class="">
+                    <a asp-controller="account" asp-route-id="@Model.PatientId" asp-action="EditPatient">Edit</a>
+
+                    <div class="profile">
+                        <div class="row align-items-center">
+                            <div class="col-2 mx-auto">
+                                <figure class="all_image-pic">
+                                    @if (Model.PImg != null)
+                                    {
+                                        <img src="data:image;base64,@System.Convert.ToBase64String(Model.PImg)" class="rounded-circle" width="150" />
+                                    }
+                                    else
+                                    {
+                                        <img class="rounded-circle" width="150" src="~/img/Profile pic/PP.png" alt="PP">
+                                    }
+                                </figure>
+                            </div>
                         </div>
                     </div>
                 </div>

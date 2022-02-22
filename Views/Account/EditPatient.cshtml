@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-md-6" >
-        <form asp-controller="Account" asp-action="EditPhysio" method="post" role="form">
+        <form asp-controller="Account" asp-action="EditPatient" method="post" role="form">
             <h3 class="text-primary">Edit Profile</h3>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
@@ -10,7 +10,7 @@
                 <label asp-for="Name" class="col-md-2">Name*</label>
                 <div class="col-md-10">
                     <input asp-for="Name" class="form-control" />
-                    <input asp-for="PhysiotherapistId" hidden class="form-control" />
+                    <input asp-for="PatientId" hidden class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
@@ -34,10 +34,10 @@
             </div>
             <br />
             <div class="form-group">
-                <label asp-for="age" class="col-md-2">Age</label>
+                <label asp-for="Age" class="col-md-2">Age</label>
                 <div class="col-md-10">
-                    <input asp-for="age" class="form-control" min="0" max="100" />
-                    <span asp-validation-for="age" class="text-danger"></span>
+                    <input asp-for="Age" class="form-control" min="0" max="100" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
                 </div>
             </div>
             <br />
@@ -51,44 +51,14 @@
 
             <br />
             <div class="form-group">
-                <label asp-for="ContactNo" class="col-md-6">Contact no.*</label>
+                <label asp-for="ContactNumber" class="col-md-6">Contact no.*</label>
                 <div class="col-md-10">
-                    <input asp-for="ContactNo" class="form-control" />
-                    <span asp-validation-for="ContactNo" class="text-danger"></span>
+                    <input asp-for="ContactNumber" class="form-control" />
+                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
                 </div>
             </div>
             <br />
-            @*<div class="form-group">
-                <label asp-for="CitizenshipNumber" class="col-md-6">Citizenshio no.*</label>
-                <div class="col-md-10">
-                    <input asp-for="CitizenshipNumber" class="form-control" />
-                    <span asp-validation-for="CitizenshipNumber" class="text-danger"></span>
-                </div>
-            </div>
-            <br />
-            <div class="form-group">
-                <label asp-for="LicenseNo" class="col-md-6">License no.*</label>
-                <div class="col-md-10">
-                    <input asp-for="LicenseNo" class="form-control" />
-                    <span asp-validation-for="LicenseNo" class="text-danger"></span>
-                </div>
-            </div>*@
             
-            @*<div class="form-group">
-                <label asp-for="Password" class="col-md-2">Password</label>
-                <div class="col-md-10">
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-            </div>
-            <br />
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="col-md-6">Confirm Password</label>
-                <div class="col-md-10">
-                    <input asp-for="ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                </div>
-            </div>*@
             <hr />
             <div class="form-group">
                 <div class="col-md-5">
