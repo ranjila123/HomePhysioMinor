@@ -16,13 +16,13 @@
 
     <div class="container-fluid">
         <div class="box_general_3">
-            <div class=""><a asp-controller="account" asp-route-id="@Model.PhysiotherapistId" asp-action="EditPhysio">Edit</a></div>
+            @*<div class=""><a asp-controller="account" asp-route-id="@Model.PhysiotherapistId" asp-action="EditPhysio">Edit</a></div>*@
             <div class="profile">
 
                 <div class="row align-items-center">
 
                     <div class="col-4 mx-auto">
-                        <div class="card shadow-lg border-4" ">
+                        <div class="card shadow-lg border-2" ">
                             <div class="card-body">
 
                                 <div class="d-flex flex-column align-items-center text-center">
@@ -56,7 +56,7 @@
     <div class="container">
         <div class="row align-items-center vh-100">
             <div class="col-6 mx-auto">
-                <div class="card shadow border-4">
+                <div class="card shadow border-2">
                     <input asp-for="PhysiotherapistId" hidden />
                     <div class="card-body">
                         <div class="row">
@@ -159,24 +159,24 @@
     <div>
         <!-- profile pic of physio-->
         <!--<div class="container-fluid">
-            <div class="box_general_3">
-                <div class="profile">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-4">
-                            <figure class="all_image-pic">
-                                <img class="img-fluid align-content-center" width="200" height="200" src="~/img/Profile pic/PP.png" alt="PP">
+        <div class="box_general_3">
+            <div class="profile">
+                <div class="row">
+                    <div class="col-lg-5 col-md-4">
+                        <figure class="all_image-pic">
+                            <img class="img-fluid align-content-center" width="200" height="200" src="~/img/Profile pic/PP.png" alt="PP">
 
-                            </figure>
-                        </div>
+                        </figure>
                     </div>
                 </div>
             </div>
-        </div>-->
+        </div>
+    </div>-->
         <!--Table info-->
 
 
         <br />
-
+        <div class=""><a asp-controller="account" asp-route-id="@Model.PhysiotherapistId" asp-action="EditPhysio">Edit</a></div>
         @*My Documents*@
         <h3>My Documents</h3>
         <div class="row">
@@ -206,115 +206,115 @@
         <!--Appointment list viewed by physio-->
         <!--<div clss="container-fluid">
 
-            <h3>Appointments</h3>
-            <input asp-for="PhysiotherapistId" hidden />
-            <table class="table table-striped table-bordered">
+        <h3>Appointments</h3>
+        <input asp-for="PhysiotherapistId" hidden />
+        <table class="table table-striped table-bordered">
 
 
-                <thead>
-                    <tr>
-                        <th>Name of patient</th>-->
+            <thead>
+                <tr>
+                    <th>Name of patient</th>-->
         @*<th>Address</th>
-            <th>Contact no.</th>
-            <th>Email</th>
-            <th>Total Charge</th>
-            <th>Response</th>*@
+        <th>Contact no.</th>
+        <th>Email</th>
+        <th>Total Charge</th>
+        <th>Response</th>*@
         <!--<th>Date</th>
-                <th>Time</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="x in Physioappoint">
+            <th>Time</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="x in Physioappoint">
 
-                <td>{{x.patientName}}</td>
-                <td>{{x.date}}</td>
-                <td>{{x.time}}</td>
-                <td>
-                    {{x.status}}
+            <td>{{x.patientName}}</td>
+            <td>{{x.date}}</td>
+            <td>{{x.time}}</td>
+            <td>
+                {{x.status}}
 
-                </td>
-                <td>-->
+            </td>
+            <td>-->
         @*<button onclick="window.location.reload();">Reload Page</button>*@
         <!--<button ng-click="ConfirmAppointment(x.appointmentId,@Model.PhysiotherapistId)" class="btn btn-success btn-sm">Confirm</button>  <button class="btn btn-danger btn-sm">Cancel</button>
-                        </td>
-                    </tr>
-                </tbody>
+                    </td>
+                </tr>
+            </tbody>
 
-            </table>
-        </div>-->
+        </table>
+    </div>-->
         @*<br />
-            <br />*@
+        <br />*@
         <!--Patients treated-->
         <!--<div class="container-fluid">
-            <h3>Patients treated</h3>
-            <div class=" jumbotron ">
-                <div class="container">
-                    <div class="media">
-                        <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
-                        <div class="media-body">
-                            <h5 class="mt-0"> Ranjila Shrestha</h5>
-                            <p>Address:Lalitpur</p>
-                            <p>Email:ranjila@gmail.com</p>
-                            <p>Rating :4.5</p>
-                            <br />
-                        </div>
+        <h3>Patients treated</h3>
+        <div class=" jumbotron ">
+            <div class="container">
+                <div class="media">
+                    <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
+                    <div class="media-body">
+                        <h5 class="mt-0"> Ranjila Shrestha</h5>
+                        <p>Address:Lalitpur</p>
+                        <p>Email:ranjila@gmail.com</p>
+                        <p>Rating :4.5</p>
+                        <br />
                     </div>
                 </div>
             </div>
+        </div>
 
 
 
-        </div>-->
+    </div>-->
         <!--Time slots-->
         @*<h3 class="text-primary">Select your schedule</h3>
 
-            <a asp-controller="TimeSlot" asp-action="Index" class="appointment-btn scrollto">Manage Schedule</a>*@
+        <a asp-controller="TimeSlot" asp-action="Index" class="appointment-btn scrollto">Manage Schedule</a>*@
 
         <!--Income-->
         <!--<h3 class="text-primary">My Incomes</h3>
-        <div class="container-fluid">
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Pending Amount</th>
-                        <th>Paid Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Rs.700</td>
-                        <td>Rs.400</td>
+    <div class="container-fluid">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Pending Amount</th>
+                    <th>Paid Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Rs.700</td>
+                    <td>Rs.400</td>
 
-                    </tr>
-                    <tr>
-                        <td>Rs.700</td>
-                        <td>Rs.400</td>
+                </tr>
+                <tr>
+                    <td>Rs.700</td>
+                    <td>Rs.400</td>
 
-                    </tr>
-                    <tr>
-                        <td>Rs.700</td>
-                        <td>Rs.400</td>
+                </tr>
+                <tr>
+                    <td>Rs.700</td>
+                    <td>Rs.400</td>
 
-                    </tr>
-                    <tr>
-                        <td>Rs.70000</td>
-                    </tr>
-                    <tr>
-                        <td>Total:Rs.70000</td>
-                        <td>Total:Rs.7000</td>
+                </tr>
+                <tr>
+                    <td>Rs.70000</td>
+                </tr>
+                <tr>
+                    <td>Total:Rs.70000</td>
+                    <td>Total:Rs.7000</td>
 
-                    </tr>
+                </tr>
 
 
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td>Grand Total:600000</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>-->
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Grand Total:600000</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>-->
         <div class="container-fluid">
             <div>
                 <form ng-controller="FileUploadController" name="form">
@@ -376,9 +376,9 @@
                         <div class="gal-detail thumb">
                             <img ng-src="data:image/JPEG;base64,{{imag.img}}" class="thumb-img" alt="work-thumbnail">
                             @*<div class="middle">
-                                    <button ng-click="ImageSelectCustomer(imag.img)">View</button>
-                                    <button ng-click="DeleteCustomerImage(imag.imagesId,imag.fromBackup,imag.cusCidNo)">Delete</button>
-                                </div>*@
+                                <button ng-click="ImageSelectCustomer(imag.img)">View</button>
+                                <button ng-click="DeleteCustomerImage(imag.imagesId,imag.fromBackup,imag.cusCidNo)">Delete</button>
+                            </div>*@
                         </div>
                     </div>
                 </div>
