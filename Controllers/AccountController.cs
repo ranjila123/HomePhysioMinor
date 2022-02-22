@@ -160,8 +160,8 @@ namespace HomePhysio.Controllers
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(model.Email, "Confirm your account - Identity Manager",
-                        "Please confirm your account by clicking here: <a class=\"btn btn-primary\" href=\"" + callbackurl + "\">link</a>");
+                    await _emailSender.SendEmailAsync(model.Email, "Confirm your account - HomePhysio",
+                        "Hey new User!.<br> Please confirm your account by clicking here: <a class=\"btn btn-primary\" href=\"" + callbackurl + "\">Back to HomePhysio</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     //return LocalRedirect(returnurl);
                     return RedirectToAction(nameof(HomeController.Profile_Page), "Home");
@@ -211,8 +211,8 @@ namespace HomePhysio.Controllers
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
-                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account - Identity Manager",
-                    //    "Please confirm your account by clicking here: <a href=\"" + callbackurl + "\">link</a>");
+                    // await _emailSender.SendEmailAsync(model.Email, "Confirm your account - HomePhysio",
+                    //    "Hey new User!.<br> Please confirm your account by clicking here: <a class=\"btn btn-primary\" href=\"" + callbackurl + "\">Back to HomePhysio</a>");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     //return LocalRedirect(returnurl);
@@ -367,7 +367,7 @@ namespace HomePhysio.Controllers
                 var callbackurl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
                 await _emailSender.SendEmailAsync(model.Email,"Reset Password - Identity Manager",
-                    "Please reset your password by clicking here: <a href=\"" + callbackurl + "\">link</a>");
+                    "Please reset your password by clicking here: <a href=\"" + callbackurl + "\">Back to the Website.</a>");
                 //"Please reset your password by clicking here: <a href=\"" + callbackurl+ "\">link</a>");
 
                 return RedirectToAction("ForgotPasswordConfirmation");
