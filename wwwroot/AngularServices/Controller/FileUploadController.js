@@ -4,9 +4,9 @@
     angular
         .module('startapp')
         .controller('FileUploadController', ['$scope', 'Upload',function FileUploadController($scope, Upload) {
-            $scope.PatientImgSubmit = function () {
+            $scope.PatientImgSubmit = function (imageType) {
                 if ($scope.form.file.$valid && $scope.file) {
-                    $scope.PatientImgUpload($scope.file,$scope.imageType);
+                    $scope.PatientImgUpload($scope.file,imageType);
                 }
                 else {
                     alert('error', 'File is not valid.');
@@ -25,9 +25,9 @@
                    
                 });
             };
-            $scope.PhysioImgSubmit = function () {
+            $scope.PhysioImgSubmit = function (imageType) {
                 if ($scope.form.file.$valid && $scope.file) {
-                    $scope.PhysioImgUpload($scope.file, $scope.imageType);
+                    $scope.PhysioImgUpload($scope.file,imageType);
                 }
                 else {
                     alert('error', 'File is not valid.');

@@ -254,7 +254,7 @@ namespace HomePhysio.Controllers
                 ConsultationCharge = physio.ConsultationCharge,
                 Longitude =physio.Longitude,
                 Latitude = physio.Latitude,
-                
+                PhysiotherapistId=physio.PhysiotherapistId
 
             };
             if(physio != null)
@@ -271,15 +271,22 @@ namespace HomePhysio.Controllers
             {
                 var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
                 var physioexiting = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
-                var physioin = _mapper.Map<PhysiotherapistModel>(model);
-                //if(physioin.PhysiotherapistId == physioexiting.PhysiotherapistId)
-                //{
-                physioin.PhysiotherapistId = physioexiting.PhysiotherapistId;
-                    _applicationDbContext.Update(physioin);
+                if (model.PhysiotherapistId == physioexiting.PhysiotherapistId)
+                {
+                    physioexiting.ConsultationCharge = model.ConsultationCharge;
+                    physioexiting.Name = model.Name;
+                    physioexiting.Address = model.Address;
+                    physioexiting.age = model.age;
+                    physioexiting.ContactNo = model.ContactNo;
+                    physioexiting.Qualification = model.Qualification;
+                    physioexiting.Experience = model.Experience;
+                    physioexiting.Latitude = model.Latitude;
+                    physioexiting.Longitude = model.Longitude;
+                    physioexiting.UserData.Email = model.Email;
                     await _applicationDbContext.SaveChangesAsync();
                     return RedirectToAction(nameof(HomeController.Physio_Profile_Page), "Home");
 
-                 //}
+                }
                 return View(model);
             }
             ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId), nameof(GenderModel.TypeName));

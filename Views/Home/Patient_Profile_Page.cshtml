@@ -235,28 +235,68 @@
         <br />
         <br />
         <!--Images checker -->
-        <h3 class="text-primary">Images <img src="~/img/Profile pic/PP.png" style="height:50px;width:50px" id="previewimage" /></h3>
+        @*<h3 class="text-primary">Images <img src="~/img/Profile pic/PP.png" style="height:50px;width:50px" id="previewimage" /></h3>*@
         <div class="container-fluid">
             <div>
                 <form ng-controller="FileUploadController" name="form">
                     <div style="display:inline-block">
-                        <input type="radio" id="imageType1" name="imageType" value="1" ng-model="imageType" ng-init="imageType='1'" />
-                        <label for="imageType1">Profile Photo</label><br>
-                        <input type="radio" id="imageType2" name="imageType" value="2" ng-model="imageType" />
-                        <label for="imageType2">Citizenship Front</label><br>
-                        <input type="radio" id="imageType3" name="imageType" value="3" ng-model="imageType" />
-                        <label for="imageType3">Citizenship Back</label><br>
-                        <input type="radio" id="imageType4" name="imageType" value="4" ng-model="imageType" />
-                        <label for="imageType4">LicenseFront</label><br>
-                        <input type="radio" id="imageType5" name="imageType" value="5" ng-model="imageType" />
-                        <label for="imageType5">License  Back</label><br>
+                        <div>
+                            @*<input type="radio" id="imageType1" name="imageType" value="1" ng-model="imageType" ng-init="imageType='1'" id="previewimage" />*@
+                            <label for="imageType1">Profile Photo<img src="~/img/Profile pic/PP.png" style="height:50px;width:50px" id="previewimage" /></label>
+
+                            <input type="file" ngf-select ng-model="file" name="file" ngf-max-size="150KB" ngf-pattern="'image/*'"
+                                   ngf-accept="'image/*'"
+                                   onchange="$('#previewimage')[0].src = window.URL.createObjectURL(this.files[0])" />
+
+                            <button type="button" ng-click="PhysioImgSubmit('1');" class="btn btn-primary">Submit</button>
+                        </div>
+                        <div>
+                            @*<input type="radio" id="imageType2" name="imageType" value="2" ng-model="imageType" id="previewimage1"/>*@
+                            <label for="imageType2">Citizenship Front<img src="~/img/Profile pic/PP.png" style="height:50px;width:50px" id="previewimage1" /></label>
+
+                            <input type="file" ngf-select ng-model="file" name="file" ngf-max-size="150KB" ngf-pattern="'image/*'"
+                                   ngf-accept="'image/*'"
+                                   onchange="$('#previewimage1')[0].src = window.URL.createObjectURL(this.files[0])" />
+
+                            <button type="button" ng-click="PhysioImgSubmit('2');" class="btn btn-primary">Submit</button>
+                        </div>
+                        <div>
+                           @* <input type="radio" id="imageType3" name="imageType" value="3" ng-model="imageType" id="previewimage2" />*@
+                            <label for="imageType3">Citizenship Back<img src="~/img/Profile pic/PP.png" style="height:50px;width:50px" id="previewimage2" /></label>
+
+                            <input type="file" ngf-select ng-model="file" name="file" ngf-max-size="150KB" ngf-pattern="'image/*'"
+                                   ngf-accept="'image/*'"
+                                   onchange="$('#previewimage2')[0].src = window.URL.createObjectURL(this.files[0])" />
+
+                            <button type="button" ng-click="PhysioImgSubmit('3');" class="btn btn-primary">Submit</button>
+                        </div>
+                        <div>
+                            @*<input type="radio" id="imageType4" name="imageType" value="4" ng-model="imageType" id="previewimage3" />*@
+                            <label for="imageType4">LicenseFront<img src="~/img/Profile pic/PP.png" style="height:50px;width:50px" id="previewimage3" /></label>
+
+                            <input type="file" ngf-select ng-model="file" name="file" ngf-max-size="150KB" ngf-pattern="'image/*'"
+                                   ngf-accept="'image/*'"
+                                   onchange="$('#previewimage3')[0].src = window.URL.createObjectURL(this.files[0])" />
+
+                            <button type="button" ng-click="PhysioImgSubmit('4');" class="btn btn-primary">Submit</button>
+                        </div>
+                        <div>
+                            @*<input type="radio" id="imageType5" name="imageType" value="5" ng-model="imageType" id="previewimage4" />*@
+                            <label for="imageType5">License  Back<img src="~/img/Profile pic/PP.png" style="height:50px;width:50px" id="previewimage4" /></label>
+
+                            <input type="file" ngf-select ng-model="file" name="file" ngf-max-size="150KB" ngf-pattern="'image/*'"
+                                   ngf-accept="'image/*'"
+                                   onchange="$('#previewimage4')[0].src = window.URL.createObjectURL(this.files[0])" />
+
+                            <button type="button" ng-click="PhysioImgSubmit('4');" class="btn btn-primary">Submit</button>
+                        </div>
                     </div>
-                    Single Image with validations
+                    @*Single Image with validations
                     <input type="file" ngf-select ng-model="file" name="file" ngf-max-size="150KB" ngf-pattern="'image/*'"
                            ngf-accept="'image/*'"
                            onchange="$('#previewimage')[0].src = window.URL.createObjectURL(this.files[0])" />
 
-                    <button type="button" ng-click="PatientImgSubmit()" class="btn btn-primary">Submit</button>
+                    <button type="button" ng-click="PatientImgSubmit()" class="btn btn-primary">Submit</button>*@
                 </form>
                 <div class="row">
                     <div class="col-md-4" ng-repeat="imag in ImageListCust">
