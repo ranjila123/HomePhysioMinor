@@ -293,6 +293,66 @@ namespace HomePhysio.Controllers
             return View(model);
         }
 
+        [HttpGet]
+
+        public async Task<IActionResult> EditPatient(int? id)
+        {
+            if (id == null)
+            {
+                return View("Error");
+            }
+            var patient = await _applicationDbContext.PatientModel.FindAsync(id);
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId), nameof(GenderModel.TypeName));
+            var patientviewmodel = new EditPatientViewModel
+            {
+                Email = user.Email,
+                Name = patient.Name,
+                Address = patient.Address,
+                Age = patient.Age,
+                GenderId = patient.GenderId,
+                ContactNumber = patient.PhoneNo,
+                //CitizenshipNumber = physio.CitizenshipNumber,
+                //LicenseNo = physio.LicenseNo,
+                
+                Longitude = patient.Longitude,
+                Latitude = patient.Latitude,
+                PatientId = patient.PatientId
+
+            };
+            if (patient != null)
+            {
+                return View(patientviewmodel);
+            }
+            return RedirectToAction(nameof(HomeController.Patient_Profile_Page), "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPatient(EditPatientViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+                var patientexiting = await _applicationDbContext.PatientModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+                if (model.PatientId == patientexiting.PatientId)
+                {
+                    patientexiting.Name = model.Name;
+                    patientexiting.Address = model.Address;
+                    patientexiting.Age = model.Age;
+                    patientexiting.PhoneNo = model.ContactNumber;
+                    patientexiting.Latitude = model.Latitude;
+                    patientexiting.Longitude = model.Longitude;
+                    patientexiting.UserData.Email = model.Email;
+                    await _applicationDbContext.SaveChangesAsync();
+                    return RedirectToAction(nameof(HomeController.Patient_Profile_Page), "Home");
+
+                }
+                return View(model);
+            }
+            ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId), nameof(GenderModel.TypeName));
+            return View(model);
+        }
+
         public IActionResult RegisterOption()
         {
             return View();

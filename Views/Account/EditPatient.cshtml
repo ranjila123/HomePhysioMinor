@@ -1,0 +1,84 @@
+﻿@model HomePhysio.ViewModel.EditPatientViewModel
+
+<div class="row">
+    <div class="col-md-6" >
+        <form asp-controller="Account" asp-action="EditPatient" method="post" role="form">
+            <h3 class="text-primary">Edit Profile</h3>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="col-md-2">Name*</label>
+                <div class="col-md-10">
+                    <input asp-for="Name" class="form-control" />
+                    <input asp-for="PatientId" hidden class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Address" class="col-md-6">Address*(Pls enter your address)</label>
+                <div class="col-md-10">
+                    <input asp-for="Address" class="form-control" />
+                    <input id="latitude" type="text" asp-for="Latitude" class="form-control" hidden />
+                    <input id="longitude" type="text" asp-for="Longitude" class="form-control" hidden />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Email" class="col-md-2">Email</label>
+                <div class="col-md-10">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Age" class="col-md-2">Age</label>
+                <div class="col-md-10">
+                    <input asp-for="Age" class="form-control" min="0" max="100" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="GenderId" class="col-md-2">Gender*</label>
+                <div class="col-md-10">
+                    <select asp-for="GenderId" class="form-control" asp-items="@ViewBag.Gender"></select>
+                    <span asp-validation-for="GenderId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <label asp-for="ContactNumber" class="col-md-6">Contact no.*</label>
+                <div class="col-md-10">
+                    <input asp-for="ContactNumber" class="form-control" />
+                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            
+            <hr />
+            <div class="form-group">
+                <div class="col-md-5">
+                    <button type="submit" class="btn btn-primary form-control">Edit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <br /><br />
+        <span asp-validation-for="Longitude" class="text-danger"></span>
+        </br>
+        <strong>Please place the marker in your currrent location!</strong>
+        <br />
+        <button onclick="getLocation()">Place Marker</button>
+        <p id="demo" hidden></p>
+        <div id="map"></div>
+    </div>
+</div>
+
+@section scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
