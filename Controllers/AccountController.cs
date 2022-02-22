@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -159,8 +160,8 @@ namespace HomePhysio.Controllers
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
-                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account - Identity Manager",
-                        //"Please confirm your account by clicking here: <a href=\"" + callbackurl + "\">link</a>");
+                    await _emailSender.SendEmailAsync(model.Email, "Confirm your account - Identity Manager",
+                        "Please confirm your account by clicking here: <a class=\"btn btn-primary\" href=\"" + callbackurl + "\">link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     //return LocalRedirect(returnurl);
                     return RedirectToAction(nameof(HomeController.Profile_Page), "Home");
@@ -225,6 +226,63 @@ namespace HomePhysio.Controllers
             ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId), nameof(GenderModel.TypeName));
 
 
+            return View(model);
+        }
+        [HttpGet]
+
+        public async Task<IActionResult> EditPhysio(int? id)
+        {   
+            if(id ==null)
+            {
+                return View("Error");
+            }
+            var physio = await _applicationDbContext.PhysiotherapistModel.FindAsync(id);
+            var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+            ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId), nameof(GenderModel.TypeName));
+            var physioviewmodel = new EditPhysioViewModel
+            {
+                Email = user.Email,
+                Name = physio.Name,
+                Address = physio.Address,
+                age = physio.age,
+                GenderId = physio.GenderId,
+                ContactNo = physio.ContactNo,
+                //CitizenshipNumber = physio.CitizenshipNumber,
+                //LicenseNo = physio.LicenseNo,
+                Qualification = physio.Qualification,
+                Experience = physio.Experience,
+                ConsultationCharge = physio.ConsultationCharge,
+                Longitude =physio.Longitude,
+                Latitude = physio.Latitude,
+                
+
+            };
+            if(physio != null)
+            {
+                return View(physioviewmodel);
+            }
+            return RedirectToAction(nameof(HomeController.Physio_Profile_Page), "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPhysio(EditPhysioViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
+                var physioexiting = await _applicationDbContext.PhysiotherapistModel.SingleOrDefaultAsync(x => x.UserId == user.Id);
+                var physioin = _mapper.Map<PhysiotherapistModel>(model);
+                //if(physioin.PhysiotherapistId == physioexiting.PhysiotherapistId)
+                //{
+                physioin.PhysiotherapistId = physioexiting.PhysiotherapistId;
+                    _applicationDbContext.Update(physioin);
+                    await _applicationDbContext.SaveChangesAsync();
+                    return RedirectToAction(nameof(HomeController.Physio_Profile_Page), "Home");
+
+                 //}
+                return View(model);
+            }
+            ViewBag.Gender = new SelectList(_applicationDbContext.GenderModel.ToList(), nameof(GenderModel.GenderId), nameof(GenderModel.TypeName));
             return View(model);
         }
 

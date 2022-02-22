@@ -1,15 +1,16 @@
-﻿@model HomePhysio.ViewModel.RegisterPhysioViewModel
+﻿@model HomePhysio.ViewModel.EditPhysioViewModel
 
 <div class="row">
     <div class="col-md-6" >
-        <form asp-controller="Account" asp-action="RegisterPhysio" method="post" role="form">
-            <h3 class="text-primary">Create a new account</h3>
+        <form asp-controller="Account" asp-action="EditPhysio" method="post" role="form">
+            <h3 class="text-primary">Edit Profile</h3>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="col-md-2">Name*</label>
                 <div class="col-md-10">
                     <input asp-for="Name" class="form-control" />
+                    @*<input asp-for="PhysiotherapistId" class="form-control" />*@
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
@@ -57,7 +58,7 @@
                 </div>
             </div>
             <br />
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="CitizenshipNumber" class="col-md-6">Citizenshio no.*</label>
                 <div class="col-md-10">
                     <input asp-for="CitizenshipNumber" class="form-control" />
@@ -71,7 +72,7 @@
                     <input asp-for="LicenseNo" class="form-control" />
                     <span asp-validation-for="LicenseNo" class="text-danger"></span>
                 </div>
-            </div>
+            </div>*@
             <br />
             <div class="form-group">
                 <label asp-for="Qualification" class="col-md-6">Qualification*</label>
@@ -97,7 +98,7 @@
                 </div>
             </div>
             <br />
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Password" class="col-md-2">Password</label>
                 <div class="col-md-10">
                     <input asp-for="Password" class="form-control" />
@@ -111,7 +112,7 @@
                     <input asp-for="ConfirmPassword" class="form-control" />
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
-            </div>
+            </div>*@
             <hr />
             <div class="form-group">
                 <div class="col-md-5">
