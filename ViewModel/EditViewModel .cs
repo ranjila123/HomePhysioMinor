@@ -50,6 +50,7 @@ namespace HomePhysio.ViewModel
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        public int PhysiotherapistId { get; set; }
     
 
         [Required]
