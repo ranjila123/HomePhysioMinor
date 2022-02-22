@@ -10,7 +10,7 @@
         @*@Model.Count()*@
         @*{{physiotherapits}}*@
         <h4>Select your required category of Physiotherapist</h4>
-    </br>
+    <br/>
         <select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()" ng-init="searchType='@ViewBag.CategoryId';"></select>
         <select asp-items="@ViewBag.GenderTypes" ng-model="searchTypeGender" ng-change="CallHttpPost()" ng-init="searchTypeGender='@ViewBag.GenderId';"></select>
         <input type="text" class="form-control" ng-model="searchTypename" ng-change="CallHttpPost()" ng-init="searchTypename='';CallHttpPost();" ng-model-options="{updateOn:'blur'}" placeholder="Search"/>
