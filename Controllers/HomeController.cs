@@ -96,7 +96,10 @@ namespace HomePhysio.Controllers
                 GenderTypeName = x.GenderData.TypeName,
                 ContactNo = x.ContactNo,
                 Qualification = x.Qualification,
-                CategoryList = x.physioCategoryModels.ToList()
+                CategoryList = x.physioCategoryModels.ToList(),
+                ConsultationCharge = x.ConsultationCharge,
+                Email = x.UserData.Email,
+                Age = x.age
             }).SingleOrDefault(o=>o.PhysiotherapistId== physiotherapistId);
             var physioImg = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 1 && x.PhysiotherapistId == physio.PhysiotherapistId);
             if (physioImg != null)
