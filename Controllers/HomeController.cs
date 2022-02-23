@@ -187,13 +187,14 @@ namespace HomePhysio.Controllers
             {
                 DateAndTime = x.PhysioTimeSlotsData.DateTimeShift,
                 Date = x.PhysioTimeSlotsData.DateTimeShift.Date.ToString("yyyy/MM/dd"),
-                Time = x.PhysioTimeSlotsData.DateTimeShift.TimeOfDay.ToString(),
+                Time = x.PhysioTimeSlotsData.DateTimeShift.ToShortTimeString(),
                 AppointmentId = x.AppointmentId,
                 Physiotherapist = x.PhysioTimeSlotsData.PhysiotherapistData.Name,
                 Status = x.StatusData.StatusType,
                 Amount = y.Amount + y.DistanceAmount,
                 DistanceAmount = y.DistanceAmount,
-                ConsultationAmount = y.Amount
+                ConsultationAmount = y.Amount,
+                PContactNo=x.PhysioTimeSlotsData.PhysiotherapistData.ContactNo,
             }).ToList();
 
             return Json(new { ad = app });
@@ -246,11 +247,13 @@ namespace HomePhysio.Controllers
                 AppointmentId = x.AppointmentId,
                 DateAndTime = x.PhysioTimeSlotsData.DateTimeShift,
                 Date = x.PhysioTimeSlotsData.DateTimeShift.Date.ToString("yyyy/MM/dd"),
-                Time = x.PhysioTimeSlotsData.DateTimeShift.TimeOfDay.ToString(),
-
+                Time = x.PhysioTimeSlotsData.DateTimeShift.ToShortTimeString(),
+                PAddress=x.PatientData.Address,
                 PatientName = x.PatientData.Name,
-                Status = x.StatusData.StatusType
-
+                Status = x.StatusData.StatusType,
+                PLongitude=x.PatientData.Longitude,
+                PLatitude=x.PatientData.Latitude,
+                PContactNo=x.PatientData.PhoneNo,
             });
             return Json(new { ap = Physioapp });
         }

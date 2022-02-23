@@ -19,6 +19,12 @@ namespace HomePhysio.ViewModel
         public string Longitude { get; set; }
         public string Latitude { get; set; }
         public string Address { get; set; }
+        public string PAddress { get; set; }
+
+        public string PLongitude { get; set; }
+        public string PLatitude { get; set; }
+
+        public string PContactNo { get; set; }
 
     }
 }
