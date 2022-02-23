@@ -20,7 +20,8 @@
         <div class="jumbotron" ng-repeat="x in AllPhysioList">
             <div class="container">
                 <div class="media">
-                    <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
+                    <img ng-show="x.pImg!==null" ng-src="data:image/JPEG;base64,{{x.pImg}}" class="align-self-start mr-3" alt="PP" height="100" width="100">
+                    <img ng-show="x.pImg===null" src="~/img/Profile pic/PP.png" class="align-self-start mr-3" alt="PP" height="100" width="100">
                     <div class="media-body">
                         <h5 class="mt-0">Name: {{x.name}}</h5>
                         <p class="p-0">Address:{{x.address}}</p>
@@ -31,7 +32,7 @@
 
                         <div class="forinline"> <button ng-click="PhysioProfile(x.physiotherapistId)" class="btn btn-primary">See profile</button></div>
                         @*<a asp-controller="Appointment" asp-action="TimeSlot" class="btn btn-primary">Book Appointment</a>*@
-                        
+
                         <div class="forinline">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0)" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
                                 Book Appointment

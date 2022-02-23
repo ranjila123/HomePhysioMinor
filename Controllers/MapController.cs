@@ -77,9 +77,12 @@ namespace HomePhysio.Controllers
                 {
                     item.Category = item.Category + $", {catItem.Category.Name} {catItem.Experience}";
                 }
+                var imageProfile = _applicationDbContext.PhysioImage.Where(x => x.ImgId == 1 && x.PhysiotherapistId == item.PhysiotherapistId).FirstOrDefault();
+                if (imageProfile != null)
+                    item.PImg = imageProfile.Image;
             }
+          
 
-            
             return Json(new { p = physioList });
 
         }
