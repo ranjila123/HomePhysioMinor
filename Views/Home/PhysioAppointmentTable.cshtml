@@ -15,9 +15,9 @@
             <thead style="background-color:#1977cc; color:white; ">
                 <tr>
                     <th>Name of patient</th>
-                    @*<th>Address</th>
-            <th>Contact no.</th>
-            <th>Email</th>
+                    <th>Address</th>
+                    <th>Contact no.</th>
+            @*<th>Email</th>
             <th>Total Charge</th>
             <th>Response</th>*@
                     <th>Date</th>
@@ -30,6 +30,8 @@
                 <tr ng-repeat="x in Physioappoint">
 
                     <td>{{x.patientName}}</td>
+                    <td>{{x.pAddress}}</td>
+                    <td>{{x.pContactNo}}</td>
                     <td>{{x.date}}</td>
                     <td>{{x.time}}</td>
                     <td>

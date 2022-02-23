@@ -22,5 +22,8 @@ namespace HomePhysio.ViewModel
         public decimal DistanceAmount { get; set; }
         public decimal ConsultationAmount { get; set; }
 
+        public string PAddress { get; set; }
+        public string PContactNo { get; set; }
+
     }
 }
