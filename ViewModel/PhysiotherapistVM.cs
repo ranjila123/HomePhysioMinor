@@ -28,6 +28,10 @@ namespace HomePhysio.ViewModel
         public string Longitude { get; set; }
         public string Latitude { get; set; }
         public byte[] PImg { get; set; }
+        public byte[] PImg1 { get; set; }
+        public byte[] PImg2 { get; set; }
+        public byte[] PImg3 { get; set; }
+        public byte[] PImg4 { get; set; }
 
     }
 }

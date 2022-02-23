@@ -226,7 +226,27 @@ namespace HomePhysio.Controllers
             if (physioImg != null)
             {
                 physio.PImg = physioImg.Image;
-            }
+            } 
+            var physioImg1 = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 2 && x.PhysiotherapistId == physio.PhysiotherapistId);
+            if (physioImg1 != null)
+            {
+                physio.PImg1 = physioImg1.Image;
+            } 
+            var physioImg2 = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 3 && x.PhysiotherapistId == physio.PhysiotherapistId);
+            if (physioImg2 != null)
+            {
+                physio.PImg2 = physioImg2.Image;
+            } 
+            var physioImg3 = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 4 && x.PhysiotherapistId == physio.PhysiotherapistId);
+            if (physioImg3 != null)
+            {
+                physio.PImg3 = physioImg3.Image;
+            } 
+            var physioImg4 = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 5 && x.PhysiotherapistId == physio.PhysiotherapistId);
+            if (physioImg4 != null)
+            {
+                physio.PImg4 = physioImg4.Image;
+            } 
             return View(physio);
         }
 
