@@ -162,12 +162,12 @@ namespace HomePhysio.Controllers
 
                     await _emailSender.SendEmailAsync(model.Email, "Confirm your account - HomePhysio",
                         "Hey new User!.<br> Please confirm your account by clicking here: <a class=\"btn btn-primary\" href=\"" + callbackurl + "\">Back to HomePhysio</a>");
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
                     //return LocalRedirect(returnurl);
-                    return RedirectToAction(nameof(HomeController.Profile_Page), "Home");
+                    //return RedirectToAction(nameof(HomeController.Profile_Page), "Home");
 
 
-                    //return View("ConfirmEmailConfirmation");
+                    return View("ConfirmEmailConfirmation");
                 }
                 AddErrors(result);
             }
@@ -211,14 +211,14 @@ namespace HomePhysio.Controllers
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
-                    // await _emailSender.SendEmailAsync(model.Email, "Confirm your account - HomePhysio",
-                    //    "Hey new User!.<br> Please confirm your account by clicking here: <a class=\"btn btn-primary\" href=\"" + callbackurl + "\">Back to HomePhysio</a>");
+                    await _emailSender.SendEmailAsync(model.Email, "Confirm your account - HomePhysio",
+                        "Hey new User!.<br> Please confirm your account by clicking here: <a class=\"btn btn-primary\" href=\"" + callbackurl + "\">Back to HomePhysio</a>");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                   // await _signInManager.SignInAsync(user, isPersistent: false);
                     //return LocalRedirect(returnurl);
-                    return RedirectToAction(nameof(HomeController.Profile_Page), "Home");
+                    //return RedirectToAction(nameof(HomeController.Profile_Page), "Home");
 
-                    //return View("ConfirmEmailConfirmation");
+                    return View("ConfirmEmailConfirmation");
                 }
                 AddErrors(result);
             }

@@ -311,7 +311,7 @@
                                         <figure class="all_image-pic">
                                             @if (Model.PImg1 != null)
                                             {
-                                                <img src="data:image;base64,@System.Convert.ToBase64String(Model.PImg1)" class="rounded-circle" width="150" />
+                                                <img src="data:image;base64,@System.Convert.ToBase64String(Model.PImg1)"  width="150" />
                                             }
                                             else
                                             {
@@ -326,7 +326,7 @@
                                                ngf-accept="'image/*'"
                                                onchange="$('#previewimage1')[0].src = window.URL.createObjectURL(this.files[0])" />
 
-                                        <button type="button" ng-click="PhysioImgSubmit('2');" class="btn btn-primary">Submit</button>
+                                        <button type="button" ng-click="PhysioImgSubmit('2');"  class="btn btn-primary">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -340,7 +340,7 @@
 
                                             @if (Model.PImg2 != null)
                                             {
-                                                <img src="data:image;base64,@System.Convert.ToBase64String(Model.PImg2)" class="rounded-circle" width="150" />
+                                                <img src="data:image;base64,@System.Convert.ToBase64String(Model.PImg2)" width="150" />
                                             }
                                             else
                                             {
@@ -366,7 +366,7 @@
                                         <figure class="all_image-pic">
                                             @if (Model.PImg3 != null)
                                             {
-                                                <img src="data:image;base64,@System.Convert.ToBase64String(Model.PImg3)" class="rounded-circle" width="150" />
+                                                <img src="data:image;base64,@System.Convert.ToBase64String(Model.PImg3)"  width="150" />
                                             }
                                             else
                                             {

@@ -18,7 +18,9 @@
                     data: { file: file,imageType:imageType }
                 }).then(function (resp) {
                     $scope.file = undefined;
-                    $('#previewimage').attr("src","/img/Profile pic/PP.png");
+                    $('#previewimage').attr("src", "/img/Profile pic/PP.png");
+                    alert('Upload successful');
+                    window.location.reload();
                 }, function (resp) {
                     console.log('Error status: ' + resp.status);
                 }, function (evt) {
@@ -39,7 +41,9 @@
                     data: { file: file,imageType:imageType }
                 }).then(function (resp) {
                     $scope.file = undefined;
-                    $('#previewimage').attr("src","/img/Profile pic/PP.png");
+                    $('#previewimage').attr("src", "/img/Profile pic/PP.png");
+                    alert('Upload successful');
+                    window.location.reload();
                 }, function (resp) {
                     console.log('Error status: ' + resp.status);
                 }, function (evt) {
