@@ -13,8 +13,8 @@
         <br />
 
         <h2 class="text-primary text-center">My Profile</h2>
-        <br />
 
+        <br />
         @*profile pic of patient*@
         <div class="container-fluid">
 
@@ -109,13 +109,13 @@
                             @Model.CitizenshipNumber
                             </div>*@
                             <!--</div>-->
+                            <a asp-controller="account" class="btn btn-success text-white" asp-route-id="@Model.PatientId" asp-action="EditPatient">Edit</a>
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <a asp-controller="account" asp-route-id="@Model.PatientId" asp-action="EditPatient">Edit</a>
 
         @*My Documents*@
         <!--<h3 class="text-primary">My Documents</h3>
