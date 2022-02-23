@@ -3,79 +3,87 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<style>
+    .forinline {
+        display: inline;
+    }
+</style>
 <div ng-controller="AppointmentController" style="margin-top: 30px ;font-family: Poppins-Bold; src: url('../fonts/poppins/Poppins-Bold.ttf'); ">
 
     @*<div ng-controller="AppointmentController">*@
-        @*@Model.Count()*@
-        @*{{physiotherapits}}*@
-        <h4>Select your required category of Physiotherapist</h4>
-    <br/>
-        <select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()" ng-init="searchType='@ViewBag.CategoryId';"></select>
-        <select asp-items="@ViewBag.GenderTypes" ng-model="searchTypeGender" ng-change="CallHttpPost()" ng-init="searchTypeGender='@ViewBag.GenderId';"></select>
-        <input type="text" class="form-control" ng-model="searchTypename" ng-change="CallHttpPost()" ng-init="searchTypename='';CallHttpPost();" ng-model-options="{updateOn:'blur'}" placeholder="Search"/>
+    @*@Model.Count()*@
+    @*{{physiotherapits}}*@
+    <h4>Select your required category of Physiotherapist</h4>
+    <br />
+    <select asp-items="@ViewBag.Categories" ng-model="searchType" ng-change="CallHttpPost()" ng-init="searchType='@ViewBag.CategoryId';"></select>
+    <select asp-items="@ViewBag.GenderTypes" ng-model="searchTypeGender" ng-change="CallHttpPost()" ng-init="searchTypeGender='@ViewBag.GenderId';"></select>
+    <input type="text" class="form-control" ng-model="searchTypename" ng-change="CallHttpPost()" ng-init="searchTypename='';CallHttpPost();" ng-model-options="{updateOn:'blur'}" placeholder="Search" />
 
-        <div class=" jumbotron " ng-repeat="x in physiotherapits">
-            <div class="container">
-                <div class="media">
-                    <img ng-show="x.pImg!==null" ng-src="data:image/JPEG;base64,{{x.pImg}}" class="align-self-start mr-3" alt="PP" height="100" width="100">
-                    <img ng-show="x.pImg===null"  src="~/img/Profile pic/PP.png" class="align-self-start mr-3" alt="PP" height="100" width="100">
-                    <div class="media-body">
-                        <h5 class="mt-0">Name: {{x.name}}</h5>
-                        <p class="p-0">Address:{{x.address}}</p>
-                        <p class="p-0">Gender: {{x.genderTypeName}}</p>
-                        <p class="p-0">ContactNo: {{x.contactNo}}</p>
-                        <p class="p-0">Specialization: {{x.category}}</p>
-                        <p class="p-0">Qualifications: {{x.qualification}}</p>
+    <div class=" jumbotron " ng-repeat="x in physiotherapits">
+        <div class="container">
+            <div class="media">
+                <img ng-show="x.pImg!==null" ng-src="data:image/JPEG;base64,{{x.pImg}}" class="align-self-start mr-3" alt="PP" height="100" width="100">
+                <img ng-show="x.pImg===null" src="~/img/Profile pic/PP.png" class="align-self-start mr-3" alt="PP" height="100" width="100">
+                <div class="media-body">
+                    <h5 class="mt-0">Name: {{x.name}}</h5>
+                    <p class="p-0">Address:{{x.address}}</p>
+                    <p class="p-0">Gender: {{x.genderTypeName}}</p>
+                    <p class="p-0">ContactNo: {{x.contactNo}}</p>
+                    <p class="p-0">Specialization: {{x.category}}</p>
+                    <p class="p-0">Qualifications: {{x.qualification}}</p>
 
-                        <button type="button" class="btn btn-primary" ng-click="GetPhysioList(x.physiotherapistId)">
-                            See Profile
-                        </button>
-
-                        @*<a asp-controller="Appointment" asp-action="TimeSlot" class="btn btn-primary">Book Appointment</a>*@
-
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0);" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
-                            Book Appointment
-                        </button>
-
-                        <br />
+                    <div ng-controller="HomeController" class="forinline">
+                        <button ng-click="PhysioProfile(x.physiotherapistId)" class="btn btn-primary">See profile</button>
                     </div>
+
+                    @*<a asp-controller="Appointment" asp-action="TimeSlot" class="btn btn-primary">Book Appointment</a>*@
+
+                <div class="forinline">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="window.scrollTo(0,0);" ng-click="AssignPhysiotherapist(x.physiotherapistId)">
+                        Book Appointment
+                    </button>
+                </div>
+
+                    <br />
                 </div>
             </div>
         </div>
-
-        @*@foreach (var item in Model)
-            {
-                <div class=" jumbotron ">
-                    <div class="container">
-                        <div class="media">
-                            <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
-                            <div class="media-body">
-                                <h5 class="mt-0"> @Html.DisplayFor(modelItem => item.PhysiotherapistId)</h5>
-                                <h5 class="mt-0">Dr. @Html.DisplayFor(modelItem => item.Name)</h5>
-
-                                <p class="p-0">Specialization: @item.</p>
-                                <p class="p-0">Experience:5yrs</p>
-                                <p class="p-0">Consultation fee:Rs.500</p>
-                                <p class="p-0">Ratings:4.5</p>
-                                <a asp-controller="Appointment" asp-action="Physio_info" class="btn btn-primary">See profile</a>
-                                <a asp-controller="Appointment" asp-action="Book_appointment" class="btn btn-primary">Book Appointment</a>
-                                <br />
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
-        @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            < a asp - action = "Details" asp - route - id = "@item.Id" > Details </ a > |
-
-            < a asp - action = "Delete" asp - route - id = "@item.Id" > Delete </ a >*@
-
-        <!-- Modal -->
-        <partial name="_bookAppointmentModal" />
     </div>
 
+    @*@foreach (var item in Model)
+        {
+            <div class=" jumbotron ">
+                <div class="container">
+                    <div class="media">
+                        <img class="align-self-start mr-3" src="~/img/Profile pic/PP.png" alt="PP" height="100" width="100">
+                        <div class="media-body">
+                            <h5 class="mt-0"> @Html.DisplayFor(modelItem => item.PhysiotherapistId)</h5>
+                            <h5 class="mt-0">Dr. @Html.DisplayFor(modelItem => item.Name)</h5>
+
+                            <p class="p-0">Specialization: @item.</p>
+                            <p class="p-0">Experience:5yrs</p>
+                            <p class="p-0">Consultation fee:Rs.500</p>
+                            <p class="p-0">Ratings:4.5</p>
+                            <a asp-controller="Appointment" asp-action="Physio_info" class="btn btn-primary">See profile</a>
+                            <a asp-controller="Appointment" asp-action="Book_appointment" class="btn btn-primary">Book Appointment</a>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        < a asp - action = "Details" asp - route - id = "@item.Id" > Details </ a > |
+
+        < a asp - action = "Delete" asp - route - id = "@item.Id" > Delete </ a >*@
+
+    <!-- Modal -->
+    <partial name="_bookAppointmentModal" />
+</div>
 
 
-    @section scripts{
-        <script src="~/AngularServices/Controller/AppointmentController.js" asp-append-version="true"></script>
-    }
+
+@section scripts{
+    <script src="~/AngularServices/Controller/AppointmentController.js" asp-append-version="true"></script>
+    <script src="~/AngularServices/Controller/HomeController.js" asp-append-version="true"></script>
+
+}

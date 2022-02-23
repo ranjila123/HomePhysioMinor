@@ -3,13 +3,130 @@
     ViewData["Title"] = "Physio_info";
 }
 
-<link href="~/css/site.css" rel="stylesheet" />
-<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-<link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
-<link href="~/lib/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />
+@*<link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-grid.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-reboot.css" rel="stylesheet" />*@
 
 
-<div class="container-fluid">
+
+<section>
+    <div class="rt-container">
+        <div class="col-rt-12">
+            <div class="Scriptcontent">
+
+                <!-- Student Profile -->
+                <div class="student-profile py-4">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-transparent text-center">
+                                        <figure class="all_image-pic">
+                                            @if (Model.PImg != null)
+                                            {
+                                                <img src="data:image;base64,@System.Convert.ToBase64String(Model.PImg)" class="rounded-circle" width="150" />
+                                            }
+                                            else
+                                            {
+                                                <img class="rounded-circle" width="150" src="~/img/Profile pic/PP.png" alt="PP">
+                                            }
+                                        </figure>
+                                        <h3><strong>@Model.Name</strong></h3>
+                                    </div>
+                                    @*<div class="card-body" style="align-items:center;">
+
+                                    
+            
+                                    </div>*@
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-transparent border-0">
+                                        <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <th width="30%">Age</th>
+                                                <td width="2%">:</td>
+                                                <td>@Model.Age</td>
+                                            </tr>
+                                            <tr>
+                                                <th width="30%">Address	</th>
+                                                <td width="2%">:</td>
+                                                <td>@Model.Address</td>
+                                            </tr>
+                                            <tr>
+                                                <th width="30%">Gender</th>
+                                                <td width="2%">:</td>
+                                                <td>@Model.GenderTypeName</td>
+                                            </tr>
+                                            <tr>
+                                                <th width="30%">Qualification</th>
+                                                <td width="2%">:</td>
+                                                <td>@Model.Qualification</td>
+                                            </tr>
+                                     
+                                            <tr>
+                                                <th width="30%">Consultation Charge</th>
+                                                <td width="2%">:</td>
+                                                <td>@Model.ConsultationCharge</td>
+                                            </tr>
+                                            <tr>
+                                                <th width="30%">Email</th>
+                                                <td width="2%">:</td>
+                                                <td>@Model.Email</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div style="height: 26px"></div>
+
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-transparent border-0">
+                                        <h4> Specialization</h4>
+                                    </div>
+                                    <div class="card-body pt-0">
+
+                                        <table class="table table-bordered table-striped">
+                                            <tr>
+                                                <th>Categories</th>
+                                                <th>Experience</th>
+                                            </tr>
+                                            @foreach(var item in Model.CategoryList)
+                                            {
+                                            <tr>
+                                                <td>@item.Category.Name</td>
+                                                <td>@item.Experience</td>
+                                            </tr>
+                                            }
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- partial -->
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<!--<div class="container-fluid">
     <div class="row">
 
         <div class="col-xl-8 col-lg-8">
@@ -22,20 +139,19 @@
                         <li class="nav-item active"><a class="nav-link text-white" href="#general_info_section"><strong>General info</strong></a></li>
                         <li class="nav-item active"><a class="nav-link text-white" href="#about_section"><strong>About Me</strong></a></li>
                         <!---<li class="nav-item active"><a class="nav-link text-white" href="#therapies"><strong>Therapies</strong></a></li>-->
-                        <li class="nav-item active"><a class="nav-link text-white" href="#education_section"><strong>Education</strong></a></li>
-                        <li class="nav-item active"><a class="nav-link text-white" href="#experience_section"><strong>Experience</strong></a></li>
-                        <!----<li class="nav-item active"><a class="nav-link text-white" href="#certifications_section"><strong>Certifications</strong></a></li>-->
-                    </ul>
+<!--<li class="nav-item active"><a class="nav-link text-white" href="#education_section"><strong>Education</strong></a></li>
+<li class="nav-item active"><a class="nav-link text-white" href="#experience_section"><strong>Experience</strong></a></li>-->
+<!----<li class="nav-item active"><a class="nav-link text-white" href="#certifications_section"><strong>Certifications</strong></a></li>-->
+<!--</ul>
                 </div>
             </nav>
         </div>
     </div>
 </div>
 
-<br />
-
+<br />-->
 <!-- General Info -->
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div id="general_info_section">
         <div class="box_general_3">
             <div class="profile">
@@ -61,30 +177,30 @@
                                 <li><small class="text-secondary">@item.Category.Name</small></li>
                                 <li><small class="text-secondary">@item.Experience</small></li>
                             }
-                        </ul>
-                        @*<small class="text-secondary">Orthopedic Physiotherapist</small>*@
+                        </ul>-->
+@*<small class="text-secondary">Orthopedic Physiotherapist</small>*@
 
 
-                        <ul class="contacts">
-                            <li>
-                                <h5>Consultation fee</h5>
-                                Rs. 500
-                                <br />
-                            </li>
-                        </ul>
+@*<ul class="contacts">
+                                <li>
+                                    <h5>Consultation fee</h5>
+                                    Rs. 500
+                                    <br />
+                                </li>
+                            </ul>
 
-                        <a asp-controller="Home" asp-action="Book_appointment" class="btn btn-primary">Book Appointment</a>
+                            <a asp-controller="Home" asp-action="Book_appointment" class="btn btn-primary">Book Appointment</a>
 
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-</div>
+    </div>-->*@
 
 <!-- About Us -->
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div id="about_section">
         <div class="box_general_3">
             <div class="indent_title_in">
@@ -98,11 +214,7 @@
         </div>
     </div>
 </div>
-<br />
-
-
-
-
+<br />-->
 <!-- Therapies
 <div class="container-fluid">
     <div id="therapies">
@@ -118,7 +230,7 @@
 </div>
 <br />-->
 <!-- Education / Qualification -->
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div id="education_section">
         <div class="box_general_3">
             <div class="indent_title_in">
@@ -155,9 +267,9 @@
     </div>
 </div>
 
-<br />
+<br />-->
 <!-- Experience -->
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div id="experience_section">
         <div class="box_general_3">
             <div class="indent_title_in">
@@ -181,7 +293,7 @@
     </div>
 </div>
 
-<br />
+<br />-->
 <!-- Awards / Associations / Certifications -
 <div class="container-fluid">
     <div id="certifications_section">
@@ -208,13 +320,10 @@
             </div>
         </div>
     </div>-->
-
-<script src="~/js/site.js"></script>
+<!--<script src="~/js/site.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-
-
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>-->
