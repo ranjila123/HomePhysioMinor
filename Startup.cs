@@ -44,6 +44,7 @@ namespace HomePhysio
                 opt.Password.RequireLowercase = true;
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(30);
                 opt.Lockout.MaxFailedAccessAttempts = 5;
+                opt.SignIn.RequireConfirmedEmail = true;
             });
             services.ConfigureApplicationCookie(opt =>
             {
