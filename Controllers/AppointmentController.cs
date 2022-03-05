@@ -82,7 +82,7 @@ namespace HomePhysio.Controllers
                 DateAndTime = x.DateTimeShift,
                 Date = x.DateTimeShift.Date.ToString("yyyy/MM/dd"),
                 Time = x.DateTimeShift.ToShortTimeString(),
-                StatusCode = x.appointmentsModels.Count(y=>y.PatientId== patient.PatientId && y.PhysioTimeSlotsId==x.PhysioTimeSlotsId)> 0 ? "2" : "0"
+                StatusCode = x.appointmentsModels.Count(y=>y.PatientId== patient.PatientId && y.PhysioTimeSlotsId==x.PhysioTimeSlotsId && y.StatusCode!="3")> 0 ? "2" : "0"
             }).ToList();
 
             //var appointment = _applicationDbContext.AppointmentsModels.ToList();
@@ -117,7 +117,7 @@ namespace HomePhysio.Controllers
                 }
                 else
                 {
-                    return Json(new { result = false, msg = $"Appoinment alread booked." });
+                    return Json(new { result = false, msg = $"Appoinment already booked." });
 
                 }
             }
