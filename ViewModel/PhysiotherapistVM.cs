@@ -35,6 +35,9 @@ namespace HomePhysio.ViewModel
         public byte[] PImg2 { get; set; }
         public byte[] PImg3 { get; set; }
         public byte[] PImg4 { get; set; }
-
+        public string CStatusModel { get; set; }
+        public string LStatusModel { get; set; }
+        public string LicenseNo { get; set; }
+        public string CitizenshipNumber { get; set; }
     }
 }

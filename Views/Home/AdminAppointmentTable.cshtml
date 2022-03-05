@@ -57,11 +57,11 @@
                     type: 'post',
                     datatype: 'json'
                 },
-                columns: [{ data: 'AppointmentId', name: "AppointmentId", orderable: true },
-                { data: 'Patient', name: "Patient", orderable: false },
-                { data: 'Phyiotherapist', name: "Physiotherapist", orderable: false },
-                { data: 'DayTimeShift', name: "DayTimeShift", orderable: false },
-                { data: 'Status', name: "Status", orderable: false },
+                columns: [{ data: 'appointmentId', name: "AppointmentId", orderable: true },
+                    { data: 'patientName', name: "Patient", orderable: false },
+                    { data: 'physiotherapistName', name: "Physiotherapist", orderable: false },
+                    { data: 'dateAndTime', name: "DayTimeShift", orderable: false },
+                    { data: 'statusType', name: "Status", orderable: false },
                 {
                     "render": function (data, full, type, row) {
 

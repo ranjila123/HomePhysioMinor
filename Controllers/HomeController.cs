@@ -216,19 +216,38 @@ namespace HomePhysio.Controllers
             //return View(physio);
 
             var user = await _userManager.FindByNameAsync(this.User.Identity.Name);
-            var physio = await _applicationDbContext.PhysiotherapistModel.Where(x => x.UserId == user.Id).Include(x => x.GenderData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).Select(x => new PhysiotherapistVM
+            var physioOrg = await _applicationDbContext.PhysiotherapistModel.Where(x => x.UserId == user.Id).Include(x => x.GenderData).Include(x => x.physioCategoryModels).ThenInclude(x => x.Category).SingleOrDefaultAsync();
+            if(physioOrg.CStatusModel=="0")
+            {
+                if(_applicationDbContext.CitizenshipTable.Where(x=>x.CitizenShipNumber==physioOrg.CitizenshipNumber).Count()>0)
+                {
+                    physioOrg.CStatusModel = "1";
+                }
+            }
+            if (physioOrg.LStatusModel == "0")
+            {
+                if (_applicationDbContext.LicenseTable.Where(x => x.LicenseNumber == physioOrg.LicenseNo).Count() > 0)
+                {
+                    physioOrg.CStatusModel = "1";
+                }
+            }
+            await _applicationDbContext.SaveChangesAsync();
+            var physio =  new PhysiotherapistVM
             {
                 UserId = user.Id,
-                PhysiotherapistId = x.PhysiotherapistId,
-                GenderTypeName = x.GenderData.TypeName,
-                Name = x.Name,
-                Age = x.age,
-                ContactNo = x.ContactNo,
-                Address = x.Address,
-                Qualification = x.Qualification,
-                CategoryList = x.physioCategoryModels.ToList()
-
-            }).SingleOrDefaultAsync();
+                PhysiotherapistId = physioOrg.PhysiotherapistId,
+                GenderTypeName = physioOrg.GenderData.TypeName,
+                Name = physioOrg.Name,
+                Age = physioOrg.age,
+                ContactNo = physioOrg.ContactNo,
+                Address = physioOrg.Address,
+                Qualification = physioOrg.Qualification,
+                CategoryList = physioOrg.physioCategoryModels.ToList(),
+                CStatusModel = physioOrg.CStatusModel,
+                LStatusModel = physioOrg.LStatusModel,
+                CitizenshipNumber = physioOrg.CitizenshipNumber,
+                LicenseNo = physioOrg.LicenseNo
+            });
             var physioImg = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 1 && x.PhysiotherapistId == physio.PhysiotherapistId);
             if (physioImg != null)
             {
@@ -368,7 +387,7 @@ namespace HomePhysio.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> GetData()
+        public async Task<JsonResult> GetAppointmentData()
         {
             try
             {
@@ -381,12 +400,8 @@ namespace HomePhysio.Controllers
                 int pageSize = length != null ? Convert.ToInt32(length) : 0;
                 int skip = start != null ? Convert.ToInt32(start) : 0;
                 int recordsTotal = 0;
-                var customerData = (from tempcustomer in _applicationDbContext.AppointmentsModels select tempcustomer);;
-
-                if (!string.IsNullOrEmpty(searchValue))
-                {
-                    customerData = customerData.Where(m => m.PhysioTimeSlotsData.DateTimeShift.ToString().Contains(searchValue));
-                }
+                var customerData = _applicationDbContext.AppointmentsModels.Include(x => x.PhysioTimeSlotsData).ThenInclude(x => x.PhysiotherapistData).Include(x => x.PatientData).Include(x=>x.StatusData).Where(m => m.PhysioTimeSlotsData.DateTimeShift.ToString().Contains(searchValue)).ToList();
+               
                 recordsTotal = customerData.Count();
                 var data = customerData.Skip(skip).Take(pageSize).ToList();
                 var jsonData = new
@@ -396,6 +411,7 @@ namespace HomePhysio.Controllers
                     recordsTotal = recordsTotal,
                     data = data.Select(x => new AllAppointmentView
                     {
+                        AppointmentId = x.AppointmentId,
                         PhysiotherapistName = x.PhysioTimeSlotsData.PhysiotherapistData.Name,
                         PatientName = x.PatientData.Name,
                         DateAndTime = x.PhysioTimeSlotsData.DateTimeShift,
