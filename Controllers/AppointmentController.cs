@@ -4,6 +4,7 @@ using HomePhysio.ViewModel;
 using HomePhysio.ViewModel.DataTablesVM;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace HomePhysio.Controllers
     {
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IEmailSender _emailSender;
 
         public AppointmentController(ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager)
         {
@@ -53,6 +55,7 @@ namespace HomePhysio.Controllers
                 ContactNo = x.Physiotherapist.ContactNo,
                 Qualification=x.Physiotherapist.Qualification
             }).ToList();
+
             foreach (var item in physio)
             {
                 var catList = _applicationDbContext.PhysioCategoryModel.Where(x => x.PhysiotherapistId == item.PhysiotherapistId).Include(x => x.Category);
@@ -140,6 +143,12 @@ namespace HomePhysio.Controllers
                 appointment.StatusCode = "1";
                 _applicationDbContext.Update(appointment);
                 await _applicationDbContext.SaveChangesAsync();
+
+                var patientEmail = appointment.PatientData.UserData.Email;
+
+                await _emailSender.SendEmailAsync(patientEmail, "Appointment Approved - HomePhysio",
+                   "Your appointment has been confirmed.");
+
                 return Json(new { result = true, msg = "Success" });
 
              }
@@ -165,6 +174,8 @@ namespace HomePhysio.Controllers
                 appointment.StatusCode = "3";
                 _applicationDbContext.Update(appointment);
                 await _applicationDbContext.SaveChangesAsync();
+                await _emailSender.SendEmailAsync(patientEmail, "Appointment Approved - HomePhysio",
+          "Your appointment has been Cancelled.");
                 return Json(new { result = true, msg = "Success" });
 
              }

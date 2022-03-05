@@ -158,6 +158,7 @@ namespace HomePhysio.Controllers
                     await _applicationDbContext.SaveChangesAsync();
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
                     var callbackurl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
                     await _emailSender.SendEmailAsync(model.Email, "Confirm your account - HomePhysio",
