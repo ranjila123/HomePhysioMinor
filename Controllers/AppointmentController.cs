@@ -174,8 +174,8 @@ namespace HomePhysio.Controllers
                 appointment.StatusCode = "3";
                 _applicationDbContext.Update(appointment);
                 await _applicationDbContext.SaveChangesAsync();
-                await _emailSender.SendEmailAsync(patientEmail, "Appointment Approved - HomePhysio",
-          "Your appointment has been Cancelled.");
+          //      await _emailSender.SendEmailAsync(patientEmail, "Appointment Approved - HomePhysio",
+          //"Your appointment has been Cancelled.");
                 return Json(new { result = true, msg = "Success" });
 
              }
