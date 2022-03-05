@@ -39,24 +39,44 @@
                 <th>Changes</th>
             </tr>
         </thead>
-        <tbody>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            }
-        </tbody>
     </table>
 </div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#AllAppointmentTable').DataTable({
+                scrollY: '50vh',
+                select: true,
+                keys: true,
+                colReorder: true,
+                serverSide: true,
+                dom: 'lrtip',
+                ajax: {
+                    url: '/Home/GetAppointmentData',
+                    type: 'post',
+                    datatype: 'json'
+                },
+                columns: [{ data: 'AppointmentId', name: "AppointmentId", orderable: true },
+                { data: 'Patient', name: "Patient", orderable: false },
+                { data: 'Phyiotherapist', name: "Physiotherapist", orderable: false },
+                { data: 'DayTimeShift', name: "DayTimeShift", orderable: false },
+                { data: 'Status', name: "Status", orderable: false },
+                {
+                    "render": function (data, full, type, row) {
+
+                        return `<a href='${window.location.href}/Edit/${type.physioTimeSlotsId}' class='btn btn-primary text-white' >Edit</a>
+                                                    <a href='${window.location.href}/Delete/${type.physioTimeSlotsId}' class='btn btn-danger text-white'>Delete</a>`;
+
+                        //return `<a href='${window.location.href}/Edit?physioId=${type.physioTimeSlotsId}' class='btn btn-danger' >Edit</a>`;
+                    }
+                }
+
+                ]
+
+            });
+
+        });
+    </script>
+}
+
