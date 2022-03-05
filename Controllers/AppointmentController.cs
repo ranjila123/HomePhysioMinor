@@ -21,10 +21,11 @@ namespace HomePhysio.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public AppointmentController(ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager)
+        public AppointmentController(ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _applicationDbContext = applicationDbContext;
             _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         //[Authorize(Roles = "Patient")]
@@ -139,7 +140,7 @@ namespace HomePhysio.Controllers
                 {
                 return Json(new { result = false, msg = "Response False" });
                 }
-                AppointmentsModel appointment = _applicationDbContext.AppointmentsModels.SingleOrDefault(x => x.AppointmentId == appointmentId);
+                AppointmentsModel appointment = _applicationDbContext.AppointmentsModels.Include(x=>x.PatientData).ThenInclude(x=>x.UserData).SingleOrDefault(x => x.AppointmentId == appointmentId);
                 appointment.StatusCode = "1";
                 _applicationDbContext.Update(appointment);
                 await _applicationDbContext.SaveChangesAsync();
@@ -170,12 +171,16 @@ namespace HomePhysio.Controllers
                 {
                 return Json(new { result = false, msg = "Response False" });
                 }
-                AppointmentsModel appointment = _applicationDbContext.AppointmentsModels.SingleOrDefault(x => x.AppointmentId == appointmentId);
+                AppointmentsModel appointment = _applicationDbContext.AppointmentsModels.Include(x => x.PatientData).ThenInclude(x => x.UserData).SingleOrDefault(x => x.AppointmentId == appointmentId);
                 appointment.StatusCode = "3";
                 _applicationDbContext.Update(appointment);
                 await _applicationDbContext.SaveChangesAsync();
-          //      await _emailSender.SendEmailAsync(patientEmail, "Appointment Approved - HomePhysio",
-          //"Your appointment has been Cancelled.");
+                var patientEmail = appointment.PatientData.UserData.Email;
+
+                await _emailSender.SendEmailAsync(patientEmail, "Appointment Cancelled - HomePhysio",
+                   "Your appointment has been cancelled.");
+                //      await _emailSender.SendEmailAsync(patientEmail, "Appointment Approved - HomePhysio",
+                //"Your appointment has been Cancelled.");
                 return Json(new { result = true, msg = "Success" });
 
              }
