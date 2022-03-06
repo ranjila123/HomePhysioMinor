@@ -43,7 +43,7 @@
 
                     <td>
                         <button class="btn btn-danger" ng-click="CancelAppointmentByPatient(x.appointmentId,@Model.PatientId)" ng-show="x.status!=='Cancel' && x.status!=='Booked'" style=" cursor: pointer; color: #fff; border: none; padding: 7px 10px; border-radius: 2px">Cancel</button>
-                        <button ng-show="x.status!=='Booked'" ng-click="PayKhalti(x.appointmentId,x.amount)" style="background-color: #5C2D91; cursor: pointer; color: #fff; border: none; padding: 5px 10px; border-radius: 2px">Pay with Khalti</button>
+                        <button ng-show="x.status!=='Booked' && x.status !== 'Cancel'" ng-click="PayKhalti(x.appointmentId,x.amount)" style="background-color: #5C2D91; cursor: pointer; color: #fff; border: none; padding: 5px 10px; border-radius: 2px">Pay with Khalti</button>
 
 
                     </td>
@@ -56,6 +56,7 @@
     </div>
 
 </div>
+
 <button id="payment-button" style="display:none" >Pay with Khalti</button>
 @section scripts{
 
