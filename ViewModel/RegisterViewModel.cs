@@ -27,6 +27,7 @@ namespace HomePhysio.ViewModel
         public string ConfirmPassword { get; set; }
 
         [Required]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string Name { get; set; }
 
         [Range(0,100)]
@@ -73,6 +74,8 @@ namespace HomePhysio.ViewModel
         public string ConfirmPassword { get; set; }
 
         [Required]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+
         public string Name { get; set; }
 
 

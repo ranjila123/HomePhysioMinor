@@ -247,7 +247,7 @@ namespace HomePhysio.Controllers
                 LStatusModel = physioOrg.LStatusModel,
                 CitizenshipNumber = physioOrg.CitizenshipNumber,
                 LicenseNo = physioOrg.LicenseNo
-            });
+            };
             var physioImg = _applicationDbContext.PhysioImage.FirstOrDefault(x => x.ImgId == 1 && x.PhysiotherapistId == physio.PhysiotherapistId);
             if (physioImg != null)
             {
