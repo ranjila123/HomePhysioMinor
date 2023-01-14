@@ -46,7 +46,6 @@ namespace HomePhysio.Controllers
         {
             return View();
         }
-
-       
+        
     }
 }

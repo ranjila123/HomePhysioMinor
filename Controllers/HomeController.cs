@@ -76,6 +76,12 @@ namespace HomePhysio.Controllers
             return Json(new { pList = physio });
         }
 
+        //[HttpPost]
+        //public IActionResult PredictionTest()
+        //{
+        //    var pred
+        //}
+
         [Authorize(Roles = "Patient")]
         public IActionResult Dropdown2()
         {
@@ -425,5 +431,15 @@ namespace HomePhysio.Controllers
                 throw;
             }
         }
+
+        
+
+        public IActionResult PredictionDropdown()
+        {
+            return View();
+        }
+
+        
+
     }
 }

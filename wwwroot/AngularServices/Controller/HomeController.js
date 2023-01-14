@@ -5,12 +5,12 @@
 
     angular
         .module('startapp')
-        .controller('HomeController', ['$scope', '$http','$ngConfirm', function HomeController($scope, $http,$ngConfirm) {
+        .controller('HomeController', ['$scope', '$http', '$ngConfirm', function HomeController($scope, $http, $ngConfirm) {
             $scope.url = `${document.location.origin}/Home/AppointmentList`;
 
             $scope.appoint = [];
             $scope.AppointmentList = function (id) {
-                $http({ method: 'post', url: $scope.url, params: { patientId:id} }).
+                $http({ method: 'post', url: $scope.url, params: { patientId: id } }).
                     then(function (response) {
                         $scope.appoint = response.data.ad;
                     }, function (response) {
@@ -27,6 +27,7 @@
 
                     });
             };
+
 
 
             $scope.ConfirmAppointment = function (id, physiotherapistId) {
@@ -46,14 +47,14 @@
                                 $http({ method: 'post', url: `${document.location.origin}/Appointment/ConfirmAppointment`, params: { appointmentId: id } }).
                                     then(function (response) {
                                         $scope.CreatePayment(id, physiotherapistId);
-                                       
+
 
                                     }, function (response) {
 
                                     });
                             }
                         },
-                         cancel: {
+                        cancel: {
                             text: 'No',
                             keys: ['esc'],
                             btnClass: 'btn-red',
@@ -64,9 +65,9 @@
                 });
 
 
-               
-                           
-                               
+
+
+
             };
 
             $scope.CreatePayment = function (id, physiotherapistId) {
@@ -74,6 +75,25 @@
                     then(function (response) {
                         $scope.PhysioAppointmentList(physiotherapistId);
 
+                    }, function (response) {
+
+                    });
+            };
+
+            $scope.DiseasePredict = function () {
+                $scope.PredictValues = [];
+                var i = 0;
+                $(" .dual-listbox__selected li").each(function () {
+                    i++;
+                    $scope.PredictValues.push(
+                        $(this).text()
+                    );
+                });
+                console.log($scope.PredictValues);
+                $http({ method: 'get', url: `http://127.0.0.1:5000/predict`, params: { symptoms: $scope.PredictValues } }).
+                    then(function (response) {
+                        var data = response.data;
+                        console.log(data)
                     }, function (response) {
 
                     });
@@ -163,10 +183,10 @@
             $scope.PhysioProfile = function (physiotherapistId) {
                 window.location = `${document.location.origin}/Home/Physio_info/?physiotherapistId=${physiotherapistId}`;
             };
-           
+
 
             $scope.products = 'aa';
-            $scope.PayKhalti = function (appointmentId,amount) {
+            $scope.PayKhalti = function (appointmentId, amount) {
                 //console.log('test');
                 //console.log($('#payment-button'));
                 console.log(appointmentId);
@@ -175,8 +195,21 @@
                 setTimeout(function () {
                     $('#payment-button').click();
                 }, 100);
-               
-               
+
+
+            };
+
+            //Predict
+            $scope.PredictValues = [];
+            $scope.Predict = function () {
+                $scope.PredictValues = [];
+                var i = 0;
+                $(" .dual-listbox__selected li").each(function () {
+                    i++;
+                    $scope.PredictValues.push(
+                         $(this).text()
+                    );
+                });
             };
         }]);
 
